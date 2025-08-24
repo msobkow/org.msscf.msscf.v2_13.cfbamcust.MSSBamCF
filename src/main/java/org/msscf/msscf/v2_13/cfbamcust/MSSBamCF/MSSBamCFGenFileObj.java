@@ -164,7 +164,8 @@ public class MSSBamCFGenFileObj extends MssCFGenFileObj {
 	            + "\" )");
 		}
 
-		projectDirName = subproject.getObjName().toLowerCase() + "_" + majorVersion.getObjName() + "_" + minorVersion.getObjName();
+//		projectDirName = subproject.getObjName().toLowerCase() + "_" + majorVersion.getObjName() + "_" + minorVersion.getObjName();
+		projectDirName = "";//subproject.getObjName().toLowerCase();// + "_" + majorVersion.getObjName() + "_" + minorVersion.getObjName();
 
 	    return( projectDirName );
 	}
