@@ -27,6 +27,7 @@
 package org.msscf.msscf.v2_13.cfbamcust.MSSBamCF;
 
 import org.msscf.msscf.v2_13.cflib.CFLib.*;
+import org.msscf.msscf.v2_13.cfsec.CFSecObj.ICFSecTenantObj;
 import org.msscf.msscf.v2_13.cfcore.MssCF.*;
 import org.msscf.msscf.v2_13.cfcore.CFGenKbObj.*;
 import org.msscf.msscf.v2_13.cfbam.CFBam.*;
@@ -205,14 +206,45 @@ extends MssCFGelCompiler
 		}
 
 		public String expand( MssCFGenContext genContext ) {
-			String ret = null;
-
 			ICFBamSchemaDefObj manufacturingSchema = MSSBamCFGenContext.getManufacturingSchema();
 			ICFLibAnyObj projectDef = MSSBamCFAnyObj.getProject( manufacturingSchema );
-			if (projectDef != null) {
-				ret = MSSBamCFAnyObj.getModelName(projectDef);
+			String ret = null;
+			ICFLibAnyObj scopeDef = manufacturingSchema.getObjScope();
+			while (scopeDef != null) {
+				if (scopeDef instanceof ICFBamMajorVersionObj) {
+					ret = "v" + scopeDef.getObjName();
+					scopeDef = scopeDef.getObjScope();
+				}
+				else if (scopeDef instanceof ICFBamMinorVersionObj) {
+					ret = "v" + scopeDef.getObjScope().getObjName() + "_" + scopeDef.getObjName();
+					scopeDef = scopeDef.getObjScope().getObjScope();
+				}
+				else if (scopeDef instanceof ICFBamSubProjectObj) {
+					ret = scopeDef.getObjName() + ((ret == null) ? "" : ("." + ret));
+					scopeDef = scopeDef.getObjScope();
+				}
+				else if (scopeDef instanceof ICFBamTopProjectObj) {
+					ret = scopeDef.getObjName() + ((ret == null) ? "" : ("." + ret));
+					scopeDef = scopeDef.getObjScope();
+				}
+				else if (scopeDef instanceof ICFBamTopDomainObj) {
+					ret = scopeDef.getObjName() + ((ret == null) ? "" : ("." + ret));
+					scopeDef = scopeDef.getObjScope();
+				}
+				else if (scopeDef instanceof ICFBamTldObj) {
+					ret = scopeDef.getObjName() + ((ret == null) ? "" : ("." + ret));
+					scopeDef = null;
+				}
+				else if (scopeDef instanceof ICFSecTenantObj) {
+					scopeDef = null;
+				}
 			}
-			return( ret );
+			if (ret != null) {
+				return (ret + "." + manufacturingSchema.getObjName()).toLowerCase();
+			}
+			else {
+				return manufacturingSchema.getObjName().toLowerCase();
+			}
 		}
 	}
 
