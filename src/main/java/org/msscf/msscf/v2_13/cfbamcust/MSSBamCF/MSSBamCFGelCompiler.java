@@ -207,44 +207,104 @@ extends MssCFGelCompiler
 
 		public String expand( MssCFGenContext genContext ) {
 			ICFBamSchemaDefObj manufacturingSchema = MSSBamCFGenContext.getManufacturingSchema();
-			ICFLibAnyObj projectDef = MSSBamCFAnyObj.getProject( manufacturingSchema );
+			ICFBamMinorVersionObj minorVersion = null;
+			ICFBamMajorVersionObj majorVersion = null;
+			ICFBamSubProjectObj subProject = null;
+			ICFBamTopProjectObj topProject = null;
+			ICFBamTopDomainObj topDomain = null;
+			ICFBamTldObj tld = null;
+
 			String ret = null;
 			ICFLibAnyObj scopeDef = manufacturingSchema.getObjScope();
 			while (scopeDef != null) {
 				if (scopeDef instanceof ICFBamMajorVersionObj) {
-					ret = "v" + scopeDef.getObjName();
+					if (majorVersion == null) {
+						majorVersion = (ICFBamMajorVersionObj)scopeDef;
+					}
+					else {
+						throw new CFLibRuntimeException("MssCFBuiltinJavaPackage.expand() - Found multiple major version objects in scope chain.");
+					}
 					scopeDef = scopeDef.getObjScope();
 				}
 				else if (scopeDef instanceof ICFBamMinorVersionObj) {
-					ret = "v" + scopeDef.getObjScope().getObjName() + "_" + scopeDef.getObjName();
-					scopeDef = scopeDef.getObjScope().getObjScope();
+					if (minorVersion == null) {
+						minorVersion = (ICFBamMinorVersionObj)scopeDef;
+					}
+					else {
+						throw new CFLibRuntimeException("MssCFBuiltinJavaPackage.expand() - Found multiple minor version objects in scope chain.");
+					}
+					scopeDef = scopeDef.getObjScope();
 				}
 				else if (scopeDef instanceof ICFBamSubProjectObj) {
-					ret = scopeDef.getObjName() + ((ret == null) ? "" : ("." + ret));
+					if (subProject == null) {
+						subProject = (ICFBamSubProjectObj)scopeDef;
+					}
+					else {
+						throw new CFLibRuntimeException("MssCFBuiltinJavaPackage.expand() - Found multiple sub-project objects in scope chain.");
+					}
 					scopeDef = scopeDef.getObjScope();
 				}
 				else if (scopeDef instanceof ICFBamTopProjectObj) {
-					ret = scopeDef.getObjName() + ((ret == null) ? "" : ("." + ret));
+					if (topProject == null) {
+						topProject = (ICFBamTopProjectObj)scopeDef;
+					}
+					else {
+						throw new CFLibRuntimeException("MssCFBuiltinJavaPackage.expand() - Found multiple top-project objects in scope chain.");
+					}
 					scopeDef = scopeDef.getObjScope();
 				}
 				else if (scopeDef instanceof ICFBamTopDomainObj) {
-					ret = scopeDef.getObjName() + ((ret == null) ? "" : ("." + ret));
+					if (topDomain == null) {
+						topDomain = (ICFBamTopDomainObj)scopeDef;
+					}
+					else {
+						throw new CFLibRuntimeException("MssCFBuiltinJavaPackage.expand() - Found multiple top-domain objects in scope chain.");
+					}
 					scopeDef = scopeDef.getObjScope();
 				}
 				else if (scopeDef instanceof ICFBamTldObj) {
-					ret = scopeDef.getObjName() + ((ret == null) ? "" : ("." + ret));
+					if (tld == null) {
+						tld = (ICFBamTldObj)scopeDef;
+					}
+					else {
+						throw new CFLibRuntimeException("MssCFBuiltinJavaPackage.expand() - Found multiple TLD objects in scope chain.");
+					}
 					scopeDef = null;
 				}
 				else if (scopeDef instanceof ICFSecTenantObj) {
 					scopeDef = null;
 				}
 			}
-			if (ret != null) {
-				return (ret + "." + manufacturingSchema.getObjName()).toLowerCase();
+			if (tld == null) {
+				throw new CFLibRuntimeException("MssCFBuiltinJavaPackage.expand() - Failed to find TLD object in scope chain.");
+			}
+			if (topDomain == null) {
+				throw new CFLibRuntimeException("MssCFBuiltinJavaPackage.expand() - Failed to find top-domain object in scope chain.");
+			}
+			String versionString;
+			if (majorVersion != null) {
+				if (minorVersion != null) {
+					versionString = ".v" + majorVersion.getObjName().toLowerCase() + "_" + minorVersion.getObjName().toLowerCase();
+				}
+				else {
+					versionString = ".v" + majorVersion.getObjName().toLowerCase();
+				}
 			}
 			else {
-				return manufacturingSchema.getObjName().toLowerCase();
+				versionString = "";
 			}
+			if (topProject != null) {
+				if (subProject != null) {
+					ret = tld.getObjName().toLowerCase() + "." + topDomain.getObjName().toLowerCase() + "." + topProject.getObjName().toLowerCase() + versionString + "." + subProject.getObjName().toLowerCase();
+				}
+				else {
+					ret = tld.getObjName().toLowerCase() + "." + topDomain.getObjName().toLowerCase() + "." + topProject.getObjName().toLowerCase() + versionString;
+				}
+			}
+			else {
+				ret = tld.getObjName().toLowerCase() + "." + topDomain.getObjName().toLowerCase() + versionString;
+			}
+			return( ret );
 		}
 	}
 
