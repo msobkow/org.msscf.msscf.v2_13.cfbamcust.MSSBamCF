@@ -94,6 +94,27 @@ public class MSSBamCFGenBindBaseModelAtomClass
 			else if (genDef instanceof ICFBamId64GenObj) {
 				ret = "Id64Gen";
 			}
+			else if (genDef instanceof ICFBamDbKeyHash128GenObj) {
+				ret = "DbKeyHash128Gen";
+			}
+			else if (genDef instanceof ICFBamDbKeyHash160GenObj) {
+				ret = "DbKeyHash160Gen";
+			}
+			else if (genDef instanceof ICFBamDbKeyHash224GenObj) {
+				ret = "DbKeyHash224Gen";
+			}
+			else if (genDef instanceof ICFBamDbKeyHash256GenObj) {
+				ret = "DbKeyHash256Gen";
+			}
+			else if (genDef instanceof ICFBamDbKeyHash384GenObj) {
+				ret = "DbKeyHash384Gen";
+			}
+			else if (genDef instanceof ICFBamDbKeyHash512GenObj) {
+				ret = "DbKeyHash512Gen";
+			}
+			else if (genDef instanceof ICFBamUuid6GenObj) {
+				ret = "Uuid6Gen";
+			}
 			else if (genDef instanceof ICFBamUuidGenObj) {
 				ret = "UuidGen";
 			}
@@ -160,6 +181,27 @@ public class MSSBamCFGenBindBaseModelAtomClass
 			}
 			else if (genDef instanceof ICFBamTZTimestampDefObj) {
 				ret = "TZTimestampDef";
+			}
+			else if (genDef instanceof ICFBamDbKeyHash128DefObj) {
+				ret = "DbKeyHash128Def";
+			}
+			else if (genDef instanceof ICFBamDbKeyHash160DefObj) {
+				ret = "DbKeyHash160Def";
+			}
+			else if (genDef instanceof ICFBamDbKeyHash224DefObj) {
+				ret = "DbKeyHash224Def";
+			}
+			else if (genDef instanceof ICFBamDbKeyHash256DefObj) {
+				ret = "DbKeyHash256Def";
+			}
+			else if (genDef instanceof ICFBamDbKeyHash384DefObj) {
+				ret = "DbKeyHash384Def";
+			}
+			else if (genDef instanceof ICFBamDbKeyHash512DefObj) {
+				ret = "DbKeyHash512Def";
+			}
+			else if (genDef instanceof ICFBamUuid6DefObj) {
+				ret = "Uuid6Def";
 			}
 			else if( genDef instanceof ICFBamUuidDefObj ) {
 				ret = "UuidDef";
