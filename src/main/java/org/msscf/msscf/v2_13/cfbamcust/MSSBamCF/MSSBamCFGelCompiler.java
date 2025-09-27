@@ -30,7 +30,6 @@ import org.msscf.msscf.v2_13.cflib.CFLib.*;
 import org.msscf.msscf.v2_13.cfsec.CFSecObj.ICFSecTenantObj;
 import org.msscf.msscf.v2_13.cfcore.MssCF.*;
 import org.msscf.msscf.v2_13.cfcore.CFGenKbObj.*;
-import org.msscf.msscf.v2_13.cfbam.CFBam.*;
 import org.msscf.msscf.v2_13.cfbam.CFBamObj.*;
 
 public class MSSBamCFGelCompiler
@@ -606,7 +605,9 @@ extends MssCFGelCompiler
 			ret = super.compileMacro( macro );
 			noSuperCompiler = false;
 		}
-
+		if( ( ret == null ) && noSuperCompiler ) {
+			ret = super.compileMacro( macro );
+		}
 		return( ret );
 	}
 }

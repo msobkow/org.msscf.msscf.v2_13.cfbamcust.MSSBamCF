@@ -26,12 +26,9 @@
 
 package org.msscf.msscf.v2_13.cfbamcust.MSSBamCF;
 
-import java.math.*;
-import java.text.*;
 import java.util.*;
 
 import org.msscf.msscf.v2_13.cflib.CFLib.*;
-import org.msscf.msscf.v2_13.cfbam.CFBam.*;
 import org.msscf.msscf.v2_13.cfbam.CFBamObj.*;
 
 public class MSSBamCFAnyObj
@@ -459,8 +456,6 @@ public class MSSBamCFAnyObj
 			curDef = defSchema;
    		}
 
-    	ICFLibAnyObj scopeDef;
-
         for (; curDef != null; curDef = curDef.getObjScope()) {
             if (curDef instanceof ICFBamTopProjectObj) {
                 return (curDef);
@@ -470,6 +465,9 @@ public class MSSBamCFAnyObj
             }
             else if (curDef instanceof ICFBamTenantObj) {
                 return (null);
+            }
+            else {
+                curDef = curDef.getObjScope();
             }
         }
         return (null);
