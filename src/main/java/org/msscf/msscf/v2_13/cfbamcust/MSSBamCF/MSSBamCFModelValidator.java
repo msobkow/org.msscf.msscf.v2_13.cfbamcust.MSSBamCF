@@ -1049,6 +1049,27 @@ public class MSSBamCFModelValidator
 					else if( col instanceof ICFBamUuidColObj ) {
 						colDbName = ((ICFBamUuidColObj)col).getOptionalDbName();
 					}
+					else if( col instanceof ICFBamUuid6ColObj ) {
+						colDbName = ((ICFBamUuid6ColObj)col).getOptionalDbName();
+					}
+					else if( col instanceof ICFBamDbKeyHash128ColObj ) {
+						colDbName = ((ICFBamDbKeyHash128ColObj)col).getOptionalDbName();
+					}
+					else if( col instanceof ICFBamDbKeyHash160ColObj ) {
+						colDbName = ((ICFBamDbKeyHash160ColObj)col).getOptionalDbName();
+					}
+					else if( col instanceof ICFBamDbKeyHash224ColObj ) {
+						colDbName = ((ICFBamDbKeyHash224ColObj)col).getOptionalDbName();
+					}
+					else if( col instanceof ICFBamDbKeyHash256ColObj ) {
+						colDbName = ((ICFBamDbKeyHash256ColObj)col).getOptionalDbName();
+					}
+					else if( col instanceof ICFBamDbKeyHash384ColObj ) {
+						colDbName = ((ICFBamDbKeyHash384ColObj)col).getOptionalDbName();
+					}
+					else if( col instanceof ICFBamDbKeyHash512ColObj ) {
+						colDbName = ((ICFBamDbKeyHash512ColObj)col).getOptionalDbName();
+					}
 					else {
 						throw new CFLibUnsupportedClassException( getClass(),
 							S_ProcName,
