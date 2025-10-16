@@ -311,6 +311,38 @@ public class MSSBamCFEngine
         editBind.create();
         editBind = null;
 
+        bind = new MSSBamCFGenBindDefDomainName( this, 
+	        "any", null, "Object", "DefDomainName" );
+        editBind = (ICFGenKbGenBindEditObj)(bind.beginEdit());
+        editBind.setRequiredContainerCartridge( ruleCart );
+        editBind.setRequiredLookupRuleType( ruleTypeBind );
+        editBind.create();
+        editBind = null;
+
+        bind = new MSSBamCFGenBindTopDomainName( this, 
+	        "any", null, "Object", "TopDomainName" );
+        editBind = (ICFGenKbGenBindEditObj)(bind.beginEdit());
+        editBind.setRequiredContainerCartridge( ruleCart );
+        editBind.setRequiredLookupRuleType( ruleTypeBind );
+        editBind.create();
+        editBind = null;
+
+        bind = new MSSBamCFGenBindDefTopProjectName( this, 
+	        "any", null, "Object", "DefTopProjectName" );
+        editBind = (ICFGenKbGenBindEditObj)(bind.beginEdit());
+        editBind.setRequiredContainerCartridge( ruleCart );
+        editBind.setRequiredLookupRuleType( ruleTypeBind );
+        editBind.create();
+        editBind = null;
+
+        bind = new MSSBamCFGenBindDefProjectName( this, 
+	        "any", null, "Object", "DefProjectName" );
+        editBind = (ICFGenKbGenBindEditObj)(bind.beginEdit());
+        editBind.setRequiredContainerCartridge( ruleCart );
+        editBind.setRequiredLookupRuleType( ruleTypeBind );
+        editBind.create();
+        editBind = null;
+
         bind = new MSSBamCFGenBindHasScope( this, 
 	        "any", null, "Object", "HasScope" );
         editBind = (ICFGenKbGenBindEditObj)(bind.beginEdit());

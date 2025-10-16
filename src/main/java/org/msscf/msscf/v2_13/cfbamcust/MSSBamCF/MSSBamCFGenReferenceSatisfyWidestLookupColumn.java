@@ -26,21 +26,15 @@
 
 package org.msscf.msscf.v2_13.cfbamcust.MSSBamCF;
 
-import java.util.Iterator;
-import java.util.SortedMap;
-
 import org.msscf.msscf.v2_13.cflib.CFLib.*;
-import org.msscf.msscf.v2_13.cfbam.CFBam.CFBamChainPKey;
-import org.msscf.msscf.v2_13.cfbam.CFBamObj.ICFBamChainObj;
 import org.msscf.msscf.v2_13.cfbam.CFBamObj.ICFBamIndexColObj;
-import org.msscf.msscf.v2_13.cfbam.CFBamObj.ICFBamRelationObj;
-import org.msscf.msscf.v2_13.cfbam.CFBamObj.ICFBamTableObj;
 import org.msscf.msscf.v2_13.cfbam.CFBamObj.ICFBamValueObj;
 import org.msscf.msscf.v2_13.cfcore.MssCF.*;
 
 public class MSSBamCFGenReferenceSatisfyWidestLookupColumn
 	extends MssCFGenReferenceObj
 {
+	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
 
 	public MSSBamCFGenReferenceSatisfyWidestLookupColumn() {

@@ -38,6 +38,7 @@ import org.msscf.msscf.v2_13.cfcore.MssCF.*;
 public class MSSBamCFGenReferenceChainContainerComponents
 	extends MssCFGenReferenceObj
 {
+	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
 
 	public MSSBamCFGenReferenceChainContainerComponents() {

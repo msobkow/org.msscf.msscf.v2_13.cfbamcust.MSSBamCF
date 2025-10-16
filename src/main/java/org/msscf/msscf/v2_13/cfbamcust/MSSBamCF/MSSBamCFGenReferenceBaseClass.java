@@ -34,6 +34,7 @@ import org.msscf.msscf.v2_13.cfcore.MssCF.*;
 public class MSSBamCFGenReferenceBaseClass
 	extends MssCFGenReferenceObj
 {
+	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
 
 	public MSSBamCFGenReferenceBaseClass() {

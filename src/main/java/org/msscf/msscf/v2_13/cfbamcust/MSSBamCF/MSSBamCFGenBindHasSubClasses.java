@@ -36,6 +36,7 @@ import org.msscf.msscf.v2_13.cfcore.MssCF.*;
 public class MSSBamCFGenBindHasSubClasses
 	extends MssCFGenBindObj
 {
+	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
 
 	public MSSBamCFGenBindHasSubClasses() {

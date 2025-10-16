@@ -34,6 +34,7 @@ import org.msscf.msscf.v2_13.cfbam.CFBamObj.ICFBamTableObj;
 public class MSSBamCFGenReferencePrimaryKeyIndex
 	extends MssCFGenReferenceObj
 {
+	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
 
 	public MSSBamCFGenReferencePrimaryKeyIndex() {

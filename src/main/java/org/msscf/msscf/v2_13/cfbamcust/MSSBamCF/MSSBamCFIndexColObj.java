@@ -26,8 +26,6 @@
 
 package org.msscf.msscf.v2_13.cfbamcust.MSSBamCF;
 
-import java.math.*;
-import java.text.*;
 import java.util.*;
 
 import org.msscf.msscf.v2_13.cflib.CFLib.*;

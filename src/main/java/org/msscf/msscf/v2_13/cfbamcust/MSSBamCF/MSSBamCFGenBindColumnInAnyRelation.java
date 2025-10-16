@@ -35,6 +35,7 @@ import org.msscf.msscf.v2_13.cfbam.CFBamObj.*;
 public class MSSBamCFGenBindColumnInAnyRelation
 	extends MssCFGenBindObj
 {
+	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
 
 	public MSSBamCFGenBindColumnInAnyRelation() {

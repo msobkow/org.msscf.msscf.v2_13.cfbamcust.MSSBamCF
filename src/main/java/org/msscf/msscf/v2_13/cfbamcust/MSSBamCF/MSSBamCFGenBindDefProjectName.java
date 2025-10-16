@@ -27,21 +27,19 @@
 package org.msscf.msscf.v2_13.cfbamcust.MSSBamCF;
 
 import org.msscf.msscf.v2_13.cflib.CFLib.*;
-import org.msscf.msscf.v2_13.cfbam.CFBamObj.ICFBamRelationObj;
-import org.msscf.msscf.v2_13.cfbam.CFBamObj.ICFBamTableObj;
 import org.msscf.msscf.v2_13.cfcore.MssCF.*;
 
-public class MSSBamCFGenBindHasSuperClassRelation
+public class MSSBamCFGenBindDefProjectName
 	extends MssCFGenBindObj
 {
 	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
 
-	public MSSBamCFGenBindHasSuperClassRelation() {
+	public MSSBamCFGenBindDefProjectName() {
 		super();
 	}
 
-	public MSSBamCFGenBindHasSuperClassRelation(
+	public MSSBamCFGenBindDefProjectName(
 		MSSBamCFEngine argSchema,
 		String toolset,
 		String scopeDefClassName,
@@ -70,21 +68,14 @@ public class MSSBamCFGenBindHasSuperClassRelation
 				"genContext.GenDef" );
 		}
 
-		if( ! ( genDef instanceof ICFBamTableObj ) ) { 
-			throw new CFLibUnsupportedClassException( getClass(),
+		String retval = MSSBamCFAnyObj.getDefProjectName(genDef);
+		if (retval == null || retval.isEmpty() || retval.isBlank()) {
+			throw new CFLibNullArgumentException( getClass(),
 				S_ProcName,
-				"genDef",
-				genDef,
-				"ICFBamTableObj" );
+				0,
+				"getDefProjectName(genContext.GenDef)" );
 		}
-		ICFBamTableObj tableObj = (ICFBamTableObj)genDef;
 
-		ICFBamRelationObj superClassRelation = MSSBamCFTableObj.getSuperClassRelation( tableObj );
-		if( superClassRelation != null ) {
-			return ("yes");
-		}
-		else {
-			return ("no");
-		}
+		return (retval);
 	}
 }

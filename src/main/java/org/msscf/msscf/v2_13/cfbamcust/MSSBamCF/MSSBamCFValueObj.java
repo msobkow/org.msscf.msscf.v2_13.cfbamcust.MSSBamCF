@@ -26,13 +26,12 @@
 
 package org.msscf.msscf.v2_13.cfbamcust.MSSBamCF;
 
-import java.math.*;
-import java.text.*;
 import java.util.*;
 
-import org.msscf.msscf.v2_13.cflib.CFLib.*;
 import org.msscf.msscf.v2_13.cfbam.CFBam.*;
 import org.msscf.msscf.v2_13.cfbam.CFBamObj.*;
+import org.msscf.msscf.v2_13.cflib.CFLib.CFLibNullArgumentException;
+import org.msscf.msscf.v2_13.cflib.CFLib.CFLibUnsupportedClassException;
 
 public class MSSBamCFValueObj
 {
@@ -73,25 +72,24 @@ public class MSSBamCFValueObj
 
     public static List<ICFBamRelationObj> getColumnInComponentsRelations(ICFBamValueObj valueDef)
     {
-        final String S_ProcName = "RMValueDefObj.getColumnInComponentsRelations() ";
+        final String S_ProcName = "getColumnInComponentsRelations";
 
         ICFBamScopeObj container = valueDef.getRequiredContainerScope();
         ICFBamTableObj tableDef = null;
         if( container == null ) {
-            throw new RuntimeException("RMValueDefObj.getColumnInComponentsRelations() RequiredContainerVContainer has no value");
+            throw new CFLibNullArgumentException(MSSBamCFValueObj.class, S_ProcName, 0, "valueDef.getRequiredContainerScope()");
         }
         else if( container instanceof ICFBamTableObj ) {
         	tableDef = (ICFBamTableObj)container;
         }
         else {
-        	throw new RuntimeException( "RMValueDefObj.getColumnInComponentsRelations() RequiredContainerVContainer is not an ICFBamTableObj");
+            throw new CFLibUnsupportedClassException(MSSBamCFValueObj.class, S_ProcName, "valueDef.getRequiredContainerScope()", container, "ICFBamTableObj");
         }
 
         ICFBamRelationColObj relationCol;
         ICFBamRelationObj relation;
         ICFBamIndexColObj indexCol;
         Iterator<ICFBamRelationColObj> relationColumns;
-        String relationTypeName;
         List<ICFBamRelationObj> list = new LinkedList<ICFBamRelationObj>();
         Iterator<ICFBamRelationObj> relations = tableDef.getOptionalComponentsRelation().iterator();
 

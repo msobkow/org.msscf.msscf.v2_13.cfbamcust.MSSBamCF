@@ -26,17 +26,15 @@
 
 package org.msscf.msscf.v2_13.cfbamcust.MSSBamCF;
 
-import java.util.Iterator;
-
 import org.msscf.msscf.v2_13.cflib.CFLib.*;
 import org.msscf.msscf.v2_13.cfcore.CFGenKbObj.ICFGenKbGelExecutableObj;
-import org.msscf.msscf.v2_13.cfbam.CFBam.CFBamChainPKey;
 import org.msscf.msscf.v2_13.cfcore.MssCF.*;
 import org.msscf.msscf.v2_13.cfbam.CFBamObj.*;
 
 public class MSSBamCFGenBindCPlusDb2LUWTableMembers
 	extends MssCFGenBindObj
 {
+	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
 
 	public MSSBamCFGenBindCPlusDb2LUWTableMembers() {

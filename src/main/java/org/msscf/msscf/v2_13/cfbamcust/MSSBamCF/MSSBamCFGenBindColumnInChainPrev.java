@@ -27,8 +27,6 @@
 package org.msscf.msscf.v2_13.cfbamcust.MSSBamCF;
 
 import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
 
 import org.msscf.msscf.v2_13.cflib.CFLib.*;
 import org.msscf.msscf.v2_13.cfcore.MssCF.*;
@@ -37,6 +35,7 @@ import org.msscf.msscf.v2_13.cfbam.CFBamObj.*;
 public class MSSBamCFGenBindColumnInChainPrev
 	extends MssCFGenBindObj
 {
+	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
 
 	public MSSBamCFGenBindColumnInChainPrev() {
@@ -103,7 +102,6 @@ public class MSSBamCFGenBindColumnInChainPrev
 			chain = optionalChildrenChains.next();
 		}
 
-		String ret;
 		if( chain != null ) {
 			ICFBamRelationObj prevRelation = chain.getRequiredLookupPrevRel();
 			ICFBamIndexObj prevIndex = prevRelation.getRequiredLookupFromIndex();
