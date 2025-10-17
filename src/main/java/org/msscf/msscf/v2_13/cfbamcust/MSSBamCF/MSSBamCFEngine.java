@@ -335,6 +335,14 @@ public class MSSBamCFEngine
         editBind.create();
         editBind = null;
 
+        bind = new MSSBamCFGenBindDefSubProjectName( this, 
+	        "any", null, "Object", "DefSubProjectName" );
+        editBind = (ICFGenKbGenBindEditObj)(bind.beginEdit());
+        editBind.setRequiredContainerCartridge( ruleCart );
+        editBind.setRequiredLookupRuleType( ruleTypeBind );
+        editBind.create();
+        editBind = null;
+
         bind = new MSSBamCFGenBindDefProjectName( this, 
 	        "any", null, "Object", "DefProjectName" );
         editBind = (ICFGenKbGenBindEditObj)(bind.beginEdit());

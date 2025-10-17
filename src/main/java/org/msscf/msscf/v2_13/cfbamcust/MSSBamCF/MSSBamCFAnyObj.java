@@ -157,15 +157,15 @@ public class MSSBamCFAnyObj
             curDef = curDef.getObjScope();
             while (curDef != null) {
                 if (curDef instanceof ICFBamTldObj) {
-                    s = s + "." + curDef.getObjName();
+                    s = curDef.getObjName() + "." + s;
                     curDef = null;
                 }
                 else if (curDef instanceof ICFBamTopDomainObj) {
-                    s = s + "." + curDef.getObjName();
+                    s = curDef.getObjName() + "." + s;
                     curDef = curDef.getObjScope();
                 }
                 else if (curDef instanceof ICFBamSubDomainObj) {
-                    s = s + "." + curDef.getObjName();
+                    s = curDef.getObjName() + "." + s;
                     curDef = curDef.getObjScope();
                 }
                 else if (curDef instanceof ICFBamTenantObj) {
@@ -241,6 +241,37 @@ public class MSSBamCFAnyObj
 		return( null );
 	}
 
+    public static ICFLibAnyObj getDefSubProject(ICFLibAnyObj anyDef)
+    {
+		final String S_ProcName = "MSSBamCFAnyObj.getDefSubProject";
+    	ICFLibAnyObj curDef = anyDef;
+    	ICFBamSchemaDefObj defSchema;
+		if( curDef != null ) {
+    		defSchema = getDefSchema( curDef );
+		}
+		else {
+			throw new CFLibNullArgumentException( MSSBamCFAnyObj.class,
+				S_ProcName,
+				0,
+				"curDef" );
+		}
+
+   		if( defSchema != null ) {
+			curDef = defSchema;
+   		}
+
+        for ( ; curDef != null; curDef = curDef.getObjScope() ) {
+			if (curDef instanceof ICFBamSubProjectObj) {
+				return (curDef);
+			}
+			else if (curDef instanceof ICFBamTenantObj) {
+				return (null);
+			}
+		}
+
+		return( null );
+	}
+
     public static String getDefProjectName(ICFLibAnyObj anyDef)
     {
     	ICFLibAnyObj curDef = getDefProject(anyDef);
@@ -250,23 +281,23 @@ public class MSSBamCFAnyObj
             curDef = curDef.getObjScope();
             while (curDef != null) {
                 if (curDef instanceof ICFBamTldObj) {
-                    s = s + "." + curDef.getObjName();
+                    s = curDef.getObjName() + "." + s;
                     curDef = null;
                 }
                 else if (curDef instanceof ICFBamTopDomainObj) {
-                    s = s + "." + curDef.getObjName();
+                    s = curDef.getObjName() + "." + s;
                     curDef = curDef.getObjScope();
                 }
                 else if (curDef instanceof ICFBamSubDomainObj) {
-                    s = s + "." + curDef.getObjName();
+                    s = curDef.getObjName() + "." + s;
                     curDef = curDef.getObjScope();
                 }
                 else if (curDef instanceof ICFBamTopProjectObj) {
-                    s = s + "." + curDef.getObjName();
+                    s = curDef.getObjName() + "." + s;
                     curDef = curDef.getObjScope();
                 }
                 else if (curDef instanceof ICFBamSubProjectObj) {
-                    s = s + "." + curDef.getObjName();
+                    s = curDef.getObjName() + "." + s;
                     curDef = curDef.getObjScope();
                 }
                 else if (curDef instanceof ICFBamTenantObj) {
@@ -292,19 +323,19 @@ public class MSSBamCFAnyObj
             curDef = curDef.getObjScope();
             while (curDef != null) {
                 if (curDef instanceof ICFBamTldObj) {
-                    s = s + "." + curDef.getObjName();
+                    s = curDef.getObjName() + "." + s;
                     curDef = null;
                 }
                 else if (curDef instanceof ICFBamTopDomainObj) {
-                    s = s + "." + curDef.getObjName();
+                    s = curDef.getObjName() + "." + s;
                     curDef = curDef.getObjScope();
                 }
                 else if (curDef instanceof ICFBamSubDomainObj) {
-                    s = s + "." + curDef.getObjName();
+                    s = curDef.getObjName() + "." + s;
                     curDef = curDef.getObjScope();
                 }
                 else if (curDef instanceof ICFBamTopProjectObj) {
-                    s = s + "." + curDef.getObjName();
+                    s = curDef.getObjName() + "." + s;
                     curDef = curDef.getObjScope();
                 }
                 else if (curDef instanceof ICFBamTenantObj) {
@@ -314,6 +345,19 @@ public class MSSBamCFAnyObj
                     curDef = curDef.getObjScope();
                 }
             }
+            return( s );
+        }
+        else {
+            return( null );
+        }
+	}
+
+    public static String getDefSubProjectName(ICFLibAnyObj anyDef)
+    {
+    	ICFLibAnyObj curDef = getDefSubProject(anyDef);
+		if( curDef != null ) {
+            String s = null;
+            s = curDef.getObjName();
             return( s );
         }
         else {
@@ -415,11 +459,11 @@ public class MSSBamCFAnyObj
             curDef = curDef.getObjScope();
             while (curDef != null) {
                 if (curDef instanceof ICFBamTldObj) {
-                    s = s + "." + curDef.getObjName();
+                    s = curDef.getObjName() + "." + s;
                     curDef = null;
                 }
                 else if (curDef instanceof ICFBamTopDomainObj) {
-                    s = s + "." + curDef.getObjName();
+                    s = curDef.getObjName() + "." + s;
                     curDef = curDef.getObjScope();
                 }
                 else if (curDef instanceof ICFBamTenantObj) {
