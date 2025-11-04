@@ -126,12 +126,7 @@ public class MSSBamCFGenBindIsCandidateRelation
 				case Lookup:
 				case Owner:
 				case Parent:
-					if (fromTable == toTable) {
-						return false;
-					}
-					else {
-						return true;
-					}
+					return true;
 				case Superclass:
 					return false;
 				default:
