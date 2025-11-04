@@ -36,6 +36,161 @@ public class MSSBamCFAnyObj
 	public MSSBamCFAnyObj() {
 	}
 
+    public static boolean inCandidateRelation(ICFBamValueObj valueDef) {
+        final String S_ProcName = "MSSCFBamCFAnyObj.inCandidateRelation";
+		if( valueDef == null ) {
+			throw new CFLibNullArgumentException( MSSBamCFAnyObj.class,
+				S_ProcName,
+				0,
+				"valueDef" );
+		}
+        if (!isValidTableColumn(valueDef)) {
+            return false;
+        }
+        ICFLibAnyObj scopeDef = valueDef.getObjScope();
+        if (scopeDef == null) {
+            throw new CFLibNullArgumentException( MSSBamCFAnyObj.class,
+            S_ProcName,
+            0,
+            "valueDef.scopeDef" );
+        }
+        else if(scopeDef instanceof ICFBamTableObj) {
+            ICFBamTableObj tableDef = (ICFBamTableObj)scopeDef;
+            List<ICFLibAnyObj> candidateRelations = MSSBamCFGenIterateCandidateRelations.getCandidateRelations(tableDef);
+            if (candidateRelations != null) {
+                for(ICFLibAnyObj curObj : candidateRelations) {
+                    ICFBamRelationObj relationDef = (CFBamRelationObj)curObj;
+                    for(ICFBamRelationColObj relationCol : relationDef.getOptionalComponentsColumns()) {
+                        if(relationCol.getRequiredLookupFromCol() == valueDef) {
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+        else {
+            return false;
+        }
+    }
+    
+    public static boolean inNonCandidateRelation(ICFBamValueObj valueDef) {
+        final String S_ProcName = "MSSCFBamCFAnyObj.inNonCandidateRelation";
+		if( valueDef == null ) {
+			throw new CFLibNullArgumentException( MSSBamCFAnyObj.class,
+				S_ProcName,
+				0,
+				"valueDef" );
+		}
+        if (!isValidTableColumn(valueDef)) {
+            return false;
+        }
+        ICFLibAnyObj scopeDef = valueDef.getObjScope();
+        if (scopeDef == null) {
+            throw new CFLibNullArgumentException( MSSBamCFAnyObj.class,
+            S_ProcName,
+            0,
+            "valueDef.scopeDef" );
+        }
+        else if(scopeDef instanceof ICFBamTableObj) {
+            ICFBamTableObj tableDef = (ICFBamTableObj)scopeDef;
+            List<ICFLibAnyObj> nonCandidateRelations = MSSBamCFGenIterateNonCandidateRelations.getNonCandidateRelations(tableDef);
+            if (nonCandidateRelations != null) {
+                for(ICFLibAnyObj curObj : nonCandidateRelations) {
+                    ICFBamRelationObj relationDef = (CFBamRelationObj)curObj;
+                    for(ICFBamRelationColObj relationCol : relationDef.getOptionalComponentsColumns()) {
+                        if(relationCol.getRequiredLookupFromCol() == valueDef) {
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+        else {
+            return false;
+        }
+    }
+    
+    public static boolean inSuperClassRelation(ICFBamValueObj valueDef) {
+        final String S_ProcName = "MSSCFBamCFAnyObj.inSuperClassRelationn";
+		if( valueDef == null ) {
+			throw new CFLibNullArgumentException( MSSBamCFAnyObj.class,
+				S_ProcName,
+				0,
+				"valueDef" );
+		}
+        if (!isValidTableColumn(valueDef)) {
+            return false;
+        }
+        ICFLibAnyObj scopeDef = valueDef.getObjScope();
+        if (scopeDef == null) {
+            throw new CFLibNullArgumentException( MSSBamCFAnyObj.class,
+            S_ProcName,
+            0,
+            "valueDef.scopeDef" );
+        }
+        else if(scopeDef instanceof ICFBamTableObj) {
+            ICFBamTableObj tableDef = (ICFBamTableObj)scopeDef;
+            ICFBamRelationObj superClassRelation = tableDef.getSuperClassRelation();
+            if (superClassRelation == null) {
+                return false;
+            }
+            for(ICFBamRelationColObj relationCol : superClassRelation.getOptionalComponentsColumns()) {
+                if(relationCol.getRequiredLookupFromCol() == valueDef) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public static boolean isValidTableColumn(ICFBamValueObj valueDef) {
+        if (valueDef == null) {
+            return false;
+        }
+        else if( valueDef instanceof ICFBamTableColObj
+            || valueDef instanceof ICFBamBlobColObj
+            || valueDef instanceof ICFBamBoolColObj
+            || valueDef instanceof ICFBamDbKeyHash128ColObj
+            || valueDef instanceof ICFBamDbKeyHash160ColObj
+            || valueDef instanceof ICFBamDbKeyHash224ColObj
+            || valueDef instanceof ICFBamDbKeyHash256ColObj
+            || valueDef instanceof ICFBamDbKeyHash384ColObj
+            || valueDef instanceof ICFBamDbKeyHash512ColObj
+            || valueDef instanceof ICFBamDoubleColObj
+            || valueDef instanceof ICFBamFloatColObj
+            || valueDef instanceof ICFBamInt16ColObj
+            || valueDef instanceof ICFBamInt32ColObj
+            || valueDef instanceof ICFBamInt64ColObj
+            || valueDef instanceof ICFBamUInt16ColObj
+            || valueDef instanceof ICFBamUInt32ColObj
+            || valueDef instanceof ICFBamUInt64ColObj
+            || valueDef instanceof ICFBamDateColObj
+            || valueDef instanceof ICFBamTimeColObj
+            || valueDef instanceof ICFBamTimestampColObj
+            || valueDef instanceof ICFBamTZDateColObj
+            || valueDef instanceof ICFBamTZTimeColObj
+            || valueDef instanceof ICFBamTZTimestampColObj
+            || valueDef instanceof ICFBamUuidColObj
+            || valueDef instanceof ICFBamUuid6ColObj
+            || valueDef instanceof ICFBamStringColObj
+            || valueDef instanceof ICFBamNmTokenColObj
+            || valueDef instanceof ICFBamNmTokensColObj
+            || valueDef instanceof ICFBamTokenColObj
+            || valueDef instanceof ICFBamTextColObj
+            || valueDef instanceof ICFBamNumberColObj )
+        {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
     public static ICFBamSchemaDefObj getDefSchema(ICFLibAnyObj anyDef)
     {
 		final String S_ProcName = "MSSBamCFAnyObj.getDefSchema";
