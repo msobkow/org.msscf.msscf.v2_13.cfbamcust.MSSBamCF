@@ -27,19 +27,21 @@
 package org.msscf.msscf.v2_13.cfbamcust.MSSBamCF;
 
 import org.msscf.msscf.v2_13.cflib.CFLib.*;
+import org.msscf.msscf.v2_13.cfbam.CFBamObj.ICFBamRelationObj;
+import org.msscf.msscf.v2_13.cfbam.CFBamObj.ICFBamTableObj;
 import org.msscf.msscf.v2_13.cfcore.MssCF.*;
-import org.msscf.msscf.v2_13.cfbam.CFBamObj.*;
-public class MSSBamCFGenBindInCandidateRelation
+
+public class MSSBamCFGenBindIsSuperiorCandidateRelation
 	extends MssCFGenBindObj
 {
 	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
 
-	public MSSBamCFGenBindInCandidateRelation() {
+	public MSSBamCFGenBindIsSuperiorCandidateRelation() {
 		super();
 	}
 
-	public MSSBamCFGenBindInCandidateRelation(
+	public MSSBamCFGenBindIsSuperiorCandidateRelation(
 		MSSBamCFEngine argSchema,
 		String toolset,
 		String scopeDefClassName,
@@ -68,8 +70,10 @@ public class MSSBamCFGenBindInCandidateRelation
 				"genContext.GenDef" );
 		}
 
-		if (genDef instanceof ICFBamValueObj) {
-			if(MSSBamCFAnyObj.inCandidateRelation((ICFBamValueObj)genDef)) {
+		ICFBamRelationObj relnToCheck;
+		if( genDef instanceof ICFBamRelationObj ) {
+			relnToCheck = (ICFBamRelationObj)genDef;
+			if (isSuperiorCandidateRelation(relnToCheck)) {
 				return( "yes" );
 			}
 			else {
@@ -77,7 +81,59 @@ public class MSSBamCFGenBindInCandidateRelation
 			}
 		}
 		else {
-			return ("no");
+			throw new CFLibUnsupportedClassException( getClass(),
+				S_ProcName,
+				"genContext.GenDef",
+				genDef,
+				"ICFBamRelationObj" );
 		}
 	}
+
+	public static boolean inheritsMutable(ICFBamTableObj tbl) {
+		ICFBamTableObj cur = tbl;
+		while (cur != null) {
+			if (cur.getRequiredIsMutable()) {
+				return true;
+			}
+			if (cur.getSuperClassRelation() == null) {
+				return false;
+			}
+			cur = cur.getSuperClassRelation().getRequiredLookupToTable();
+		}
+		return false;
+	}
+
+	public static boolean isSuperiorCandidateRelation( ICFBamRelationObj relnToCheck ) {
+		if (relnToCheck == null) {
+			return false;
+		}
+
+		ICFBamTableObj fromTable = relnToCheck.getRequiredContainerFromTable();
+		ICFBamTableObj toTable = relnToCheck.getRequiredLookupToTable();
+		if( fromTable.getOptionalLookupDefSchema() != null || toTable.getOptionalLookupDefSchema() != null) {
+			return false;
+		}
+		if (inheritsMutable(toTable)) {
+			return false;
+		}
+		if (inheritsMutable(fromTable)) {
+			switch(relnToCheck.getRequiredRelationType()) {
+				case Children:
+				case Components:
+				case Unknown:
+					return false;
+				case Container:
+				case Lookup:
+				case Owner:
+				case Parent:
+					return true;
+				case Superclass:
+					return false;
+				default:
+					return false;
+			}
+		}
+		return true;
+	}
+
 }

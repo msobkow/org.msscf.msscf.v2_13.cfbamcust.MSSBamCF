@@ -29,17 +29,17 @@ package org.msscf.msscf.v2_13.cfbamcust.MSSBamCF;
 import org.msscf.msscf.v2_13.cflib.CFLib.*;
 import org.msscf.msscf.v2_13.cfcore.MssCF.*;
 import org.msscf.msscf.v2_13.cfbam.CFBamObj.*;
-public class MSSBamCFGenBindInNonCandidateRelation
+public class MSSBamCFGenBindInSubservientNonCandidateRelation
 	extends MssCFGenBindObj
 {
 	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
 
-	public MSSBamCFGenBindInNonCandidateRelation() {
+	public MSSBamCFGenBindInSubservientNonCandidateRelation() {
 		super();
 	}
 
-	public MSSBamCFGenBindInNonCandidateRelation(
+	public MSSBamCFGenBindInSubservientNonCandidateRelation(
 		MSSBamCFEngine argSchema,
 		String toolset,
 		String scopeDefClassName,
@@ -69,7 +69,7 @@ public class MSSBamCFGenBindInNonCandidateRelation
 		}
 
 		if (genDef instanceof ICFBamValueObj) {
-			if(MSSBamCFAnyObj.inNonCandidateRelation((ICFBamValueObj)genDef)) {
+			if(MSSBamCFAnyObj.inSubservientNonCandidateRelation((ICFBamValueObj)genDef)) {
 				return( "yes" );
 			}
 			else {

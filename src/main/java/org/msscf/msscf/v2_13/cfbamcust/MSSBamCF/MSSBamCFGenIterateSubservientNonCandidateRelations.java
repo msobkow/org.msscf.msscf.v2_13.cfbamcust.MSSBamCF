@@ -34,16 +34,16 @@ import org.msscf.msscf.v2_13.cfbam.CFBam.*;
 import org.msscf.msscf.v2_13.cfbam.CFBam.ICFBamSchema.RelationTypeEnum;
 import org.msscf.msscf.v2_13.cfbam.CFBamObj.*;
 
-public class MSSBamCFGenIterateNonCandidateRelations
+public class MSSBamCFGenIterateSubservientNonCandidateRelations
 	extends MssCFGenIteratorObj
 {
 	private static final long serialVersionUID = 1L;
 
-	public MSSBamCFGenIterateNonCandidateRelations() {
+	public MSSBamCFGenIterateSubservientNonCandidateRelations() {
 		super();
 	}
 
-	public MSSBamCFGenIterateNonCandidateRelations(
+	public MSSBamCFGenIterateSubservientNonCandidateRelations(
 		MSSBamCFEngine argSchema,
 		String toolset,
 		String scopeDefClassName,
@@ -82,14 +82,14 @@ public class MSSBamCFGenIterateNonCandidateRelations
 		}
 
 		ICFBamTableObj tableObj = (ICFBamTableObj)genDef;
-		List<ICFLibAnyObj> list = getNonCandidateRelations(tableObj);
+		List<ICFLibAnyObj> list = getSubservientNonCandidateRelations(tableObj);
 		return (list.listIterator());
 	}
 
-	public static List<ICFLibAnyObj> getNonCandidateRelations(ICFBamTableObj tableObj) {
-		final String S_ProcName = "getNonCandidateRelations";
+	public static List<ICFLibAnyObj> getSubservientNonCandidateRelations(ICFBamTableObj tableObj) {
+		final String S_ProcName = "getSubservientNonCandidateRelations";
 		if(tableObj == null) {
-			throw new CFLibNullArgumentException(MSSBamCFGenIterateNonCandidateRelations.class, S_ProcName, 0, "tableObj");
+			throw new CFLibNullArgumentException(MSSBamCFGenIterateSubservientNonCandidateRelations.class, S_ProcName, 0, "tableObj");
 		}
 		List<ICFLibAnyObj> list = new LinkedList<ICFLibAnyObj>();
 		List<ICFBamRelationObj> tableRelations = MSSBamCFTableObj.getChildrenRelations(tableObj);
@@ -97,7 +97,7 @@ public class MSSBamCFGenIterateNonCandidateRelations
 			return list;
 		}
 		for( ICFBamRelationObj relation : tableRelations) {
-			if (relation.getRequiredRelationType() != RelationTypeEnum.Superclass && !MSSBamCFGenBindIsCandidateRelation.isCandidateRelation(relation)) {
+			if (relation.getRequiredRelationType() != RelationTypeEnum.Superclass && MSSBamCFGenBindIsSubservientNonCandidateRelation.isSubservientNonCandidateRelation(relation)) {
 				list.add(relation);
 			}
 		}

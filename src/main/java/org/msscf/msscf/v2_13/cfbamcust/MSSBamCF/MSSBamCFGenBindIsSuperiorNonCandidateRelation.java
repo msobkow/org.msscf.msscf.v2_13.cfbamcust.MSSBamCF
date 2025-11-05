@@ -31,17 +31,17 @@ import org.msscf.msscf.v2_13.cfbam.CFBamObj.ICFBamRelationObj;
 import org.msscf.msscf.v2_13.cfbam.CFBamObj.ICFBamTableObj;
 import org.msscf.msscf.v2_13.cfcore.MssCF.*;
 
-public class MSSBamCFGenBindIsCandidateRelation
+public class MSSBamCFGenBindIsSuperiorNonCandidateRelation
 	extends MssCFGenBindObj
 {
 	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
 
-	public MSSBamCFGenBindIsCandidateRelation() {
+	public MSSBamCFGenBindIsSuperiorNonCandidateRelation() {
 		super();
 	}
 
-	public MSSBamCFGenBindIsCandidateRelation(
+	public MSSBamCFGenBindIsSuperiorNonCandidateRelation(
 		MSSBamCFEngine argSchema,
 		String toolset,
 		String scopeDefClassName,
@@ -73,7 +73,7 @@ public class MSSBamCFGenBindIsCandidateRelation
 		ICFBamRelationObj relnToCheck;
 		if( genDef instanceof ICFBamRelationObj ) {
 			relnToCheck = (ICFBamRelationObj)genDef;
-			if (isCandidateRelation(relnToCheck)) {
+			if (isSuperiorNonCandidateRelation(relnToCheck)) {
 				return( "yes" );
 			}
 			else {
@@ -89,51 +89,37 @@ public class MSSBamCFGenBindIsCandidateRelation
 		}
 	}
 
-	public static boolean inheritsMutable(ICFBamTableObj tbl) {
-		ICFBamTableObj cur = tbl;
-		while (cur != null) {
-			if (cur.getRequiredIsMutable()) {
-				return true;
-			}
-			if (cur.getSuperClassRelation() == null) {
-				return false;
-			}
-			cur = cur.getSuperClassRelation().getRequiredLookupToTable();
-		}
-		return false;
-	}
-
-	public static boolean isCandidateRelation( ICFBamRelationObj relnToCheck ) {
+	public static boolean isSuperiorNonCandidateRelation( ICFBamRelationObj relnToCheck ) {
 		if (relnToCheck == null) {
 			return false;
 		}
 
 		ICFBamTableObj fromTable = relnToCheck.getRequiredContainerFromTable();
 		ICFBamTableObj toTable = relnToCheck.getRequiredLookupToTable();
-		if( fromTable.getOptionalLookupDefSchema() != null || toTable.getOptionalLookupDefSchema() != null) {
-			return false;
-		}
-		if (inheritsMutable(toTable)) {
-			return false;
-		}
-		if (inheritsMutable(fromTable)) {
-			switch(relnToCheck.getRequiredRelationType()) {
-				case Children:
-				case Components:
-				case Unknown:
-					return false;
-				case Container:
-				case Lookup:
-				case Owner:
-				case Parent:
+		switch(relnToCheck.getRequiredRelationType()) {
+			case Children:
+			case Components:
+			case Unknown:
+				return false;
+			case Container:
+			case Lookup:
+			case Owner:
+			case Parent:
+				if( fromTable.getOptionalLookupDefSchema() != null || toTable.getOptionalLookupDefSchema() != null) {
 					return true;
-				case Superclass:
-					return false;
-				default:
-					return false;
-			}
+				}
+				if (MSSBamCFGenBindIsSuperiorCandidateRelation.inheritsMutable(toTable)) {
+					return true;
+				}
+				if (MSSBamCFGenBindIsSuperiorCandidateRelation.inheritsMutable(fromTable)) {
+					return true;
+				}
+				return false;
+			case Superclass:
+				return false;
+			default:
+				return false;
 		}
-		return true;
 	}
 
 }

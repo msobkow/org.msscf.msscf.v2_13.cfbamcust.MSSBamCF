@@ -36,8 +36,8 @@ public class MSSBamCFAnyObj
 	public MSSBamCFAnyObj() {
 	}
 
-    public static boolean inCandidateRelation(ICFBamValueObj valueDef) {
-        final String S_ProcName = "MSSCFBamCFAnyObj.inCandidateRelation";
+    public static boolean inSuperiorCandidateRelation(ICFBamValueObj valueDef) {
+        final String S_ProcName = "MSSCFBamCFAnyObj.inSuperiorCandidateRelation";
 		if( valueDef == null ) {
 			throw new CFLibNullArgumentException( MSSBamCFAnyObj.class,
 				S_ProcName,
@@ -56,7 +56,7 @@ public class MSSBamCFAnyObj
         }
         else if(scopeDef instanceof ICFBamTableObj) {
             ICFBamTableObj tableDef = (ICFBamTableObj)scopeDef;
-            List<ICFLibAnyObj> candidateRelations = MSSBamCFGenIterateCandidateRelations.getCandidateRelations(tableDef);
+            List<ICFLibAnyObj> candidateRelations = MSSBamCFGenIterateSuperiorCandidateRelations.getSuperiorCandidateRelations(tableDef);
             if (candidateRelations != null) {
                 for(ICFLibAnyObj curObj : candidateRelations) {
                     ICFBamRelationObj relationDef = (CFBamRelationObj)curObj;
@@ -74,8 +74,8 @@ public class MSSBamCFAnyObj
         }
     }
     
-    public static boolean inNonCandidateRelation(ICFBamValueObj valueDef) {
-        final String S_ProcName = "MSSCFBamCFAnyObj.inNonCandidateRelation";
+    public static boolean inSubservientCandidateRelation(ICFBamValueObj valueDef) {
+        final String S_ProcName = "MSSCFBamCFAnyObj.inSubservientCandidateRelation";
 		if( valueDef == null ) {
 			throw new CFLibNullArgumentException( MSSBamCFAnyObj.class,
 				S_ProcName,
@@ -94,7 +94,83 @@ public class MSSBamCFAnyObj
         }
         else if(scopeDef instanceof ICFBamTableObj) {
             ICFBamTableObj tableDef = (ICFBamTableObj)scopeDef;
-            List<ICFLibAnyObj> nonCandidateRelations = MSSBamCFGenIterateNonCandidateRelations.getNonCandidateRelations(tableDef);
+            List<ICFLibAnyObj> candidateRelations = MSSBamCFGenIterateSubservientCandidateRelations.getSubservientCandidateRelations(tableDef);
+            if (candidateRelations != null) {
+                for(ICFLibAnyObj curObj : candidateRelations) {
+                    ICFBamRelationObj relationDef = (CFBamRelationObj)curObj;
+                    for(ICFBamRelationColObj relationCol : relationDef.getOptionalComponentsColumns()) {
+                        if(relationCol.getRequiredLookupFromCol() == valueDef) {
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+        else {
+            return false;
+        }
+    }
+    
+    public static boolean inSuperiorNonCandidateRelation(ICFBamValueObj valueDef) {
+        final String S_ProcName = "MSSCFBamCFAnyObj.inSuperiorNonCandidateRelation";
+		if( valueDef == null ) {
+			throw new CFLibNullArgumentException( MSSBamCFAnyObj.class,
+				S_ProcName,
+				0,
+				"valueDef" );
+		}
+        if (!isValidTableColumn(valueDef)) {
+            return false;
+        }
+        ICFLibAnyObj scopeDef = valueDef.getObjScope();
+        if (scopeDef == null) {
+            throw new CFLibNullArgumentException( MSSBamCFAnyObj.class,
+            S_ProcName,
+            0,
+            "valueDef.scopeDef" );
+        }
+        else if(scopeDef instanceof ICFBamTableObj) {
+            ICFBamTableObj tableDef = (ICFBamTableObj)scopeDef;
+            List<ICFLibAnyObj> nonCandidateRelations = MSSBamCFGenIterateSuperiorNonCandidateRelations.getSuperiorNonCandidateRelations(tableDef);
+            if (nonCandidateRelations != null) {
+                for(ICFLibAnyObj curObj : nonCandidateRelations) {
+                    ICFBamRelationObj relationDef = (CFBamRelationObj)curObj;
+                    for(ICFBamRelationColObj relationCol : relationDef.getOptionalComponentsColumns()) {
+                        if(relationCol.getRequiredLookupFromCol() == valueDef) {
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+        else {
+            return false;
+        }
+    }
+    
+    public static boolean inSubservientNonCandidateRelation(ICFBamValueObj valueDef) {
+        final String S_ProcName = "MSSCFBamCFAnyObj.inSubservientNonCandidateRelation";
+		if( valueDef == null ) {
+			throw new CFLibNullArgumentException( MSSBamCFAnyObj.class,
+				S_ProcName,
+				0,
+				"valueDef" );
+		}
+        if (!isValidTableColumn(valueDef)) {
+            return false;
+        }
+        ICFLibAnyObj scopeDef = valueDef.getObjScope();
+        if (scopeDef == null) {
+            throw new CFLibNullArgumentException( MSSBamCFAnyObj.class,
+            S_ProcName,
+            0,
+            "valueDef.scopeDef" );
+        }
+        else if(scopeDef instanceof ICFBamTableObj) {
+            ICFBamTableObj tableDef = (ICFBamTableObj)scopeDef;
+            List<ICFLibAnyObj> nonCandidateRelations = MSSBamCFGenIterateSubservientNonCandidateRelations.getSubservientNonCandidateRelations(tableDef);
             if (nonCandidateRelations != null) {
                 for(ICFLibAnyObj curObj : nonCandidateRelations) {
                     ICFBamRelationObj relationDef = (CFBamRelationObj)curObj;
