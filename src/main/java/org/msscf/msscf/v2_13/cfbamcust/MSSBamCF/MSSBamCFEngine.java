@@ -3766,5 +3766,26 @@ public class MSSBamCFEngine
 		((ICFGenKbGenItemEditObj)editReference).setRequiredLookupRuleType( ruleTypeReference );
         editReference.create();
         editReference = null;
+
+        reference = new MSSBamCFGenReferenceFirstSuperiorCandidateRelationship(this,  "any", null, "Value", "FirstSuperiorCandidateRelationship" );
+        editReference = (ICFGenKbGenReferenceEditObj)reference.beginEdit();
+		((ICFGenKbGenItemEditObj)editReference).setRequiredContainerCartridge( ruleCart );
+		((ICFGenKbGenItemEditObj)editReference).setRequiredLookupRuleType( ruleTypeReference );
+        editReference.create();
+        editReference = null;
+        
+        reference = new MSSBamCFGenReferenceFirstSuperiorNonCandidateRelationship(this,  "any", null, "Value", "FirstSuperiorNonCandidateRelationship" );
+        editReference = (ICFGenKbGenReferenceEditObj)reference.beginEdit();
+		((ICFGenKbGenItemEditObj)editReference).setRequiredContainerCartridge( ruleCart );
+		((ICFGenKbGenItemEditObj)editReference).setRequiredLookupRuleType( ruleTypeReference );
+        editReference.create();
+        editReference = null;
+        
+        reference = new MSSBamCFGenReferenceFirstSuperiorRelationship(this,  "any", null, "Value", "FirstSuperiorRelationship" );
+        editReference = (ICFGenKbGenReferenceEditObj)reference.beginEdit();
+		((ICFGenKbGenItemEditObj)editReference).setRequiredContainerCartridge( ruleCart );
+		((ICFGenKbGenItemEditObj)editReference).setRequiredLookupRuleType( ruleTypeReference );
+        editReference.create();
+        editReference = null;
 	}
 }
