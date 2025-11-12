@@ -262,9 +262,41 @@ public class MSSBamCFEngine
 
         ICFGenKbRuleCartObj ruleCart = getInternalRuleCart();
         ICFGenKbRuleTypeObj ruleTypeBind = getRuleTypeTableObj().readRuleTypeByNameIdx("Bind");
+        
+        bind = new MSSBamCFGenBindHasFirstSuperiorCandidateRelation( this,
+            "any", null, "Relation", "HasFirstSuperiorCandidateRelationship" );
+        editBind = (ICFGenKbGenBindEditObj)(bind.beginEdit());
+        editBind.setRequiredContainerCartridge( ruleCart );
+        editBind.setRequiredLookupRuleType( ruleTypeBind );
+        editBind.create();
+        editBind = null;
+        
+        bind = new MSSBamCFGenBindHasFirstSuperiorNonCandidateRelation( this,
+            "any", null, "Relation", "HasFirstSuperiorNonCandidateRelationship" );
+        editBind = (ICFGenKbGenBindEditObj)(bind.beginEdit());
+        editBind.setRequiredContainerCartridge( ruleCart );
+        editBind.setRequiredLookupRuleType( ruleTypeBind );
+        editBind.create();
+        editBind = null;
+        
+        bind = new MSSBamCFGenBindHasFirstSuperiorRelation( this,
+            "any", null, "Relation", "HasFirstSuperiorRelationship" );
+        editBind = (ICFGenKbGenBindEditObj)(bind.beginEdit());
+        editBind.setRequiredContainerCartridge( ruleCart );
+        editBind.setRequiredLookupRuleType( ruleTypeBind );
+        editBind.create();
+        editBind = null;
 
         bind = new MSSBamCFGenBindAllRelationFromColsInPrimaryKey( this,
             "any", null, "Relation", "AllRelationFromColsInPrimaryKey" );
+        editBind = (ICFGenKbGenBindEditObj)(bind.beginEdit());
+        editBind.setRequiredContainerCartridge( ruleCart );
+        editBind.setRequiredLookupRuleType( ruleTypeBind );
+        editBind.create();
+        editBind = null;
+        
+        bind = new MSSBamCFGenBindInSuperiorRelation( this,
+	        "any", null, "Value", "InSuperiorRelation" );
         editBind = (ICFGenKbGenBindEditObj)(bind.beginEdit());
         editBind.setRequiredContainerCartridge( ruleCart );
         editBind.setRequiredLookupRuleType( ruleTypeBind );
@@ -281,6 +313,14 @@ public class MSSBamCFEngine
         
         bind = new MSSBamCFGenBindInSuperiorNonCandidateRelation( this,
 	        "any", null, "Value", "InSuperiorNonCandidateRelation" );
+        editBind = (ICFGenKbGenBindEditObj)(bind.beginEdit());
+        editBind.setRequiredContainerCartridge( ruleCart );
+        editBind.setRequiredLookupRuleType( ruleTypeBind );
+        editBind.create();
+        editBind = null;
+        
+        bind = new MSSBamCFGenBindInSubservientRelation( this,
+	        "any", null, "Value", "InSubservientRelation" );
         editBind = (ICFGenKbGenBindEditObj)(bind.beginEdit());
         editBind.setRequiredContainerCartridge( ruleCart );
         editBind.setRequiredLookupRuleType( ruleTypeBind );
@@ -415,6 +455,14 @@ public class MSSBamCFEngine
         editBind.create();
         editBind = null;
         
+        bind = new MSSBamCFGenBindIsSuperiorRelation( this, 
+	        "any", null, "Relation", "IsSuperiorRelation" );
+        editBind = (ICFGenKbGenBindEditObj)(bind.beginEdit());
+        editBind.setRequiredContainerCartridge( ruleCart );
+        editBind.setRequiredLookupRuleType( ruleTypeBind );
+        editBind.create();
+        editBind = null;
+        
         bind = new MSSBamCFGenBindIsSuperiorCandidateRelation( this, 
 	        "any", null, "Relation", "IsSuperiorCandidateRelation" );
         editBind = (ICFGenKbGenBindEditObj)(bind.beginEdit());
@@ -425,6 +473,14 @@ public class MSSBamCFEngine
         
         bind = new MSSBamCFGenBindIsSuperiorNonCandidateRelation( this, 
 	        "any", null, "Relation", "IsSuperiorNonCandidateRelation" );
+        editBind = (ICFGenKbGenBindEditObj)(bind.beginEdit());
+        editBind.setRequiredContainerCartridge( ruleCart );
+        editBind.setRequiredLookupRuleType( ruleTypeBind );
+        editBind.create();
+        editBind = null;
+        
+        bind = new MSSBamCFGenBindIsSubservientRelation( this, 
+	        "any", null, "Relation", "IsSubservientRelation" );
         editBind = (ICFGenKbGenBindEditObj)(bind.beginEdit());
         editBind.setRequiredContainerCartridge( ruleCart );
         editBind.setRequiredLookupRuleType( ruleTypeBind );
