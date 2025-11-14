@@ -350,6 +350,14 @@ public class MSSBamCFEngine
         editBind.setRequiredLookupRuleType( ruleTypeBind );
         editBind.create();
         editBind = null;
+        
+        bind = new MSSBamCFGenBindHasFirstSuperiorCandidatePKeyRelation( this,
+            "any", null, "Relation", "HasFirstSuperiorCandidatePKeyRelationship" );
+        editBind = (ICFGenKbGenBindEditObj)(bind.beginEdit());
+        editBind.setRequiredContainerCartridge( ruleCart );
+        editBind.setRequiredLookupRuleType( ruleTypeBind );
+        editBind.create();
+        editBind = null;
 
         bind = new MSSBamCFGenBindCommonLicense( this, 
 	        "any", null, "SchemaDef", "CommonLicense" );
@@ -3846,6 +3854,13 @@ public class MSSBamCFEngine
         editReference = null;
         
         reference = new MSSBamCFGenReferenceFirstSuperiorRelationship(this,  "any", null, "Value", "FirstSuperiorRelationship" );
+        editReference = (ICFGenKbGenReferenceEditObj)reference.beginEdit();
+		((ICFGenKbGenItemEditObj)editReference).setRequiredContainerCartridge( ruleCart );
+		((ICFGenKbGenItemEditObj)editReference).setRequiredLookupRuleType( ruleTypeReference );
+        editReference.create();
+        editReference = null;
+
+        reference = new MSSBamCFGenReferenceFirstSuperiorCandidateRelationCol(this,  "any", null, "Value", "FirstSuperiorCandidateRelationCol" );
         editReference = (ICFGenKbGenReferenceEditObj)reference.beginEdit();
 		((ICFGenKbGenItemEditObj)editReference).setRequiredContainerCartridge( ruleCart );
 		((ICFGenKbGenItemEditObj)editReference).setRequiredLookupRuleType( ruleTypeReference );
