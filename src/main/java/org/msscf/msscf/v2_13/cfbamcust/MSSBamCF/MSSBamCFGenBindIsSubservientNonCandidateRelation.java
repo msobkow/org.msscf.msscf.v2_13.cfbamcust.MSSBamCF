@@ -109,6 +109,7 @@ public class MSSBamCFGenBindIsSubservientNonCandidateRelation
 					return true;
 				}
 				if (MSSBamCFGenBindIsSuperiorCandidateRelation.inheritsMutable(fromTable)) {
+					// An entity which pops in and out of existence can't enjoy database dependency enforcement on it's components and children
 					return true;
 				}
 				return false;
@@ -118,5 +119,4 @@ public class MSSBamCFGenBindIsSubservientNonCandidateRelation
 				return false;
 		}
 	}
-
 }

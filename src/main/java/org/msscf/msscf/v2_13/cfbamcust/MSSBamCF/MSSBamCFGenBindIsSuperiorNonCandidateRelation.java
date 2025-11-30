@@ -108,9 +108,6 @@ public class MSSBamCFGenBindIsSuperiorNonCandidateRelation
 				if (MSSBamCFGenBindIsSuperiorCandidateRelation.inheritsMutable(toTable)) {
 					return true;
 				}
-				if (MSSBamCFGenBindIsSuperiorCandidateRelation.inheritsMutable(fromTable)) {
-					return true;
-				}
 				return false;
 			case Superclass:
 				return false;

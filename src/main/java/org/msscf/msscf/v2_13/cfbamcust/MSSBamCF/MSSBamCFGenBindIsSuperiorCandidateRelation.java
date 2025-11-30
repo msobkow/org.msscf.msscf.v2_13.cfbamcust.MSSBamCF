@@ -113,24 +113,20 @@ public class MSSBamCFGenBindIsSuperiorCandidateRelation
 		if (inheritsMutable(toTable)) {
 			return false;
 		}
-		if (inheritsMutable(fromTable)) {
-			switch(relnToCheck.getRequiredRelationType()) {
-				case Children:
-				case Components:
-				case Unknown:
-					return false;
-				case Container:
-				case Lookup:
-				case Owner:
-				case Parent:
-					return true;
-				case Superclass:
-					return false;
-				default:
-					return false;
-			}
+		switch(relnToCheck.getRequiredRelationType()) {
+			case Children:
+			case Components:
+			case Unknown:
+				return false;
+			case Container:
+			case Lookup:
+			case Owner:
+			case Parent:
+				return true;
+			case Superclass:
+				return false;
+			default:
+				return false;
 		}
-		return true;
 	}
-
 }

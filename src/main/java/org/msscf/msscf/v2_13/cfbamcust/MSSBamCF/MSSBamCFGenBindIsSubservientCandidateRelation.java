@@ -100,23 +100,24 @@ public class MSSBamCFGenBindIsSubservientCandidateRelation
 			return false;
 		}
 		if (MSSBamCFGenBindIsSuperiorCandidateRelation.inheritsMutable(fromTable)) {
-			switch(relnToCheck.getRequiredRelationType()) {
-				case Container:
-				case Lookup:
-				case Owner:
-				case Parent:
-				case Unknown:
-					return false;
-				case Children:
-				case Components:
-					return true;
-				case Superclass:
-					return false;
-				default:
-					return false;
-			}
+			// An entity which pops in and out of existence can't enjoy database dependency enforcement on it's components and children
+			return false;
 		}
-		return true;
+		switch(relnToCheck.getRequiredRelationType()) {
+			case Container:
+			case Lookup:
+			case Owner:
+			case Parent:
+			case Unknown:
+				return false;
+			case Children:
+			case Components:
+				return true;
+			case Superclass:
+				return false;
+			default:
+				return false;
+		}
 	}
 
 }

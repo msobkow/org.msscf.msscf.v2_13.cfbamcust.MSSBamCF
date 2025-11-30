@@ -58,7 +58,7 @@ public class MSSBamCFAnyObj
                 for(ICFLibAnyObj curObj : candidateRelations) {
                     ICFBamRelationObj relationDef = (CFBamRelationObj)curObj;
                     for(ICFBamRelationColObj relationCol : relationDef.getOptionalComponentsColumns()) {
-                        if(relationCol.getRequiredLookupFromCol() == valueDef) {
+                        if(relationCol.getRequiredLookupFromCol().getRequiredLookupColumn() == valueDef) {
                             return true;
                         }
                     }
@@ -96,7 +96,7 @@ public class MSSBamCFAnyObj
                 for(ICFLibAnyObj curObj : relations) {
                     ICFBamRelationObj relationDef = (CFBamRelationObj)curObj;
                     for(ICFBamRelationColObj relationCol : relationDef.getOptionalComponentsColumns()) {
-                        if(relationCol.getRequiredLookupFromCol() == valueDef) {
+                        if(relationCol.getRequiredLookupFromCol().getRequiredLookupColumn() == valueDef) {
                             return true;
                         }
                     }
@@ -134,7 +134,7 @@ public class MSSBamCFAnyObj
                 for(ICFLibAnyObj curObj : candidateRelations) {
                     ICFBamRelationObj relationDef = (CFBamRelationObj)curObj;
                     for(ICFBamRelationColObj relationCol : relationDef.getOptionalComponentsColumns()) {
-                        if(relationCol.getRequiredLookupFromCol() == valueDef) {
+                        if(relationCol.getRequiredLookupFromCol().getRequiredLookupColumn() == valueDef) {
                             return relationDef;
                         }
                     }
@@ -172,7 +172,7 @@ public class MSSBamCFAnyObj
                 for(ICFLibAnyObj curObj : candidateRelations) {
                     ICFBamRelationObj relationDef = (CFBamRelationObj)curObj;
                     for(ICFBamRelationColObj relationCol : relationDef.getOptionalComponentsColumns()) {
-                        if(relationCol.getRequiredLookupFromCol() == valueDef) {
+                        if(relationCol.getRequiredLookupFromCol().getRequiredLookupColumn() == valueDef) {
                             return relationDef;
                         }
                     }
@@ -210,7 +210,7 @@ public class MSSBamCFAnyObj
                 for(ICFLibAnyObj curObj : relations) {
                     ICFBamRelationObj relationDef = (CFBamRelationObj)curObj;
                     for(ICFBamRelationColObj relationCol : relationDef.getOptionalComponentsColumns()) {
-                        if(relationCol.getRequiredLookupFromCol() == valueDef) {
+                        if(relationCol.getRequiredLookupFromCol().getRequiredLookupColumn() == valueDef) {
                             return true;
                         }
                     }
@@ -248,7 +248,7 @@ public class MSSBamCFAnyObj
                 for(ICFLibAnyObj curObj : nonCandidateRelations) {
                     ICFBamRelationObj relationDef = (CFBamRelationObj)curObj;
                     for(ICFBamRelationColObj relationCol : relationDef.getOptionalComponentsColumns()) {
-                        if(relationCol.getRequiredLookupFromCol() == valueDef) {
+                        if(relationCol.getRequiredLookupFromCol().getRequiredLookupColumn() == valueDef) {
                             return true;
                         }
                     }
@@ -286,7 +286,7 @@ public class MSSBamCFAnyObj
                 for(ICFLibAnyObj curObj : nonCandidateRelations) {
                     ICFBamRelationObj relationDef = (CFBamRelationObj)curObj;
                     for(ICFBamRelationColObj relationCol : relationDef.getOptionalComponentsColumns()) {
-                        if(relationCol.getRequiredLookupFromCol() == valueDef) {
+                        if(relationCol.getRequiredLookupFromCol().getRequiredLookupColumn() == valueDef) {
                             return relationDef;
                         }
                     }
@@ -324,7 +324,7 @@ public class MSSBamCFAnyObj
                 for(ICFLibAnyObj curObj : candidateRelations) {
                     ICFBamRelationObj relationDef = (CFBamRelationObj)curObj;
                     for(ICFBamRelationColObj relationCol : relationDef.getOptionalComponentsColumns()) {
-                        if(relationCol.getRequiredLookupFromCol() == valueDef) {
+                        if(relationCol.getRequiredLookupFromCol().getRequiredLookupColumn() == valueDef) {
                             return true;
                         }
                     }
@@ -362,7 +362,7 @@ public class MSSBamCFAnyObj
                 for(ICFLibAnyObj curObj : nonCandidateRelations) {
                     ICFBamRelationObj relationDef = (CFBamRelationObj)curObj;
                     for(ICFBamRelationColObj relationCol : relationDef.getOptionalComponentsColumns()) {
-                        if(relationCol.getRequiredLookupFromCol() == valueDef) {
+                        if(relationCol.getRequiredLookupFromCol().getRequiredLookupColumn() == valueDef) {
                             return true;
                         }
                     }
@@ -400,7 +400,7 @@ public class MSSBamCFAnyObj
                 return false;
             }
             for(ICFBamRelationColObj relationCol : superClassRelation.getOptionalComponentsColumns()) {
-                if(relationCol.getRequiredLookupFromCol() == valueDef) {
+                if(relationCol.getRequiredLookupFromCol().getRequiredLookupColumn() == valueDef) {
                     return true;
                 }
             }
