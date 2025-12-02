@@ -261,7 +261,7 @@ public class MSSBamCFEngine
         ICFGenKbRuleTypeObj ruleTypeBind = getRuleTypeTableObj().readRuleTypeByNameIdx("Bind");
         
         bind = new MSSBamCFGenBindHasFirstSuperiorCandidateRelation( this,
-            "any", null, "Relation", "HasFirstSuperiorCandidateRelationship" );
+            "any", null, "Value", "HasFirstSuperiorCandidateRelationship" );
         editBind = (ICFGenKbGenBindEditObj)(bind.beginEdit());
         editBind.setRequiredContainerCartridge( ruleCart );
         editBind.setRequiredLookupRuleType( ruleTypeBind );
@@ -269,7 +269,7 @@ public class MSSBamCFEngine
         editBind = null;
         
         bind = new MSSBamCFGenBindHasFirstSuperiorNonCandidateRelation( this,
-            "any", null, "Relation", "HasFirstSuperiorNonCandidateRelationship" );
+            "any", null, "Value", "HasFirstSuperiorNonCandidateRelationship" );
         editBind = (ICFGenKbGenBindEditObj)(bind.beginEdit());
         editBind.setRequiredContainerCartridge( ruleCart );
         editBind.setRequiredLookupRuleType( ruleTypeBind );
@@ -277,7 +277,7 @@ public class MSSBamCFEngine
         editBind = null;
         
         bind = new MSSBamCFGenBindHasFirstSuperiorRelation( this,
-            "any", null, "Relation", "HasFirstSuperiorRelationship" );
+            "any", null, "Value", "HasFirstSuperiorRelationship" );
         editBind = (ICFGenKbGenBindEditObj)(bind.beginEdit());
         editBind.setRequiredContainerCartridge( ruleCart );
         editBind.setRequiredLookupRuleType( ruleTypeBind );
