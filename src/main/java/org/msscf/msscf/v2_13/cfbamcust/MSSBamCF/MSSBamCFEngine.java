@@ -267,7 +267,7 @@ public class MSSBamCFEngine
         editBind.setRequiredLookupRuleType( ruleTypeBind );
         editBind.create();
         editBind = null;
-        
+
         bind = new MSSBamCFGenBindHasFirstSuperiorNonCandidateRelation( this,
             "any", null, "Value", "HasFirstSuperiorNonCandidateRelationship" );
         editBind = (ICFGenKbGenBindEditObj)(bind.beginEdit());
@@ -446,6 +446,14 @@ public class MSSBamCFEngine
 
         bind = new MSSBamCFGenBindHasScope( this, 
 	        "any", null, "Object", "HasScope" );
+        editBind = (ICFGenKbGenBindEditObj)(bind.beginEdit());
+        editBind.setRequiredContainerCartridge( ruleCart );
+        editBind.setRequiredLookupRuleType( ruleTypeBind );
+        editBind.create();
+        editBind = null;
+
+        bind = new MSSBamCFGenBindIsRelationInPrimaryIndex( this,
+            "any", null, "Relation", "IsRelationInPrimaryIndex" );
         editBind = (ICFGenKbGenBindEditObj)(bind.beginEdit());
         editBind.setRequiredContainerCartridge( ruleCart );
         editBind.setRequiredLookupRuleType( ruleTypeBind );
