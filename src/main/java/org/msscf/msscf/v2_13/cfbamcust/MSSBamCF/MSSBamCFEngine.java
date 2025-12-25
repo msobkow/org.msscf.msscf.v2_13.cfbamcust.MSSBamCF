@@ -260,6 +260,14 @@ public class MSSBamCFEngine
         ICFGenKbRuleCartObj ruleCart = getInternalRuleCart();
         ICFGenKbRuleTypeObj ruleTypeBind = getRuleTypeTableObj().readRuleTypeByNameIdx("Bind");
         
+        bind = new MSSBamCFGenBindHasReverseRelation( this,
+            "any", null, "Relation", "HasReverseRelation" );
+        editBind = (ICFGenKbGenBindEditObj)(bind.beginEdit());
+        editBind.setRequiredContainerCartridge( ruleCart );
+        editBind.setRequiredLookupRuleType( ruleTypeBind );
+        editBind.create();
+        editBind = null;
+        
         bind = new MSSBamCFGenBindHasFirstSuperiorCandidateRelation( this,
             "any", null, "Value", "HasFirstSuperiorCandidateRelationship" );
         editBind = (ICFGenKbGenBindEditObj)(bind.beginEdit());
@@ -3721,6 +3729,13 @@ public class MSSBamCFEngine
         editIterator.create();
         editIterator = null;
 
+        iterator = new MSSBamCFGenIterateReverseRelationships(this,  "any", null, "Relation", "ReverseRelationships" );
+        editIterator = (ICFGenKbGenIteratorEditObj)iterator.beginEdit();
+		((ICFGenKbGenItemEditObj)editIterator).setRequiredContainerCartridge( ruleCart );
+		((ICFGenKbGenItemEditObj)editIterator).setRequiredLookupRuleType( ruleTypeIterator );
+        editIterator.create();
+        editIterator = null;
+
         iterator = new MSSBamCFGenIterateDispensedId16Generators(this,  "any", null, "Table", "DispensedId16Generators" );
         editIterator = (ICFGenKbGenIteratorEditObj)iterator.beginEdit();
 		((ICFGenKbGenItemEditObj)editIterator).setRequiredContainerCartridge( ruleCart );
@@ -3982,7 +3997,7 @@ public class MSSBamCFEngine
         editReference.create();
         editReference = null;
 
-        reference = new MSSBamCFGenReferenceFirstSuperiorCandidateRelationship(this,  "any", null, "Value", "FirstSuperiorCandidateRelationship" );
+        reference = new MSSBamCFGenReferenceReverseRelationship(this,  "any", null, "Value", "FirstSuperiorCandidateRelationship" );
         editReference = (ICFGenKbGenReferenceEditObj)reference.beginEdit();
 		((ICFGenKbGenItemEditObj)editReference).setRequiredContainerCartridge( ruleCart );
 		((ICFGenKbGenItemEditObj)editReference).setRequiredLookupRuleType( ruleTypeReference );
@@ -4009,5 +4024,13 @@ public class MSSBamCFEngine
 		((ICFGenKbGenItemEditObj)editReference).setRequiredLookupRuleType( ruleTypeReference );
         editReference.create();
         editReference = null;
+
+        reference = new MSSBamCFGenReferenceReverseRelationship(this,  "any", null, "Relation", "ReverseRelationship" );
+        editReference = (ICFGenKbGenReferenceEditObj)reference.beginEdit();
+		((ICFGenKbGenItemEditObj)editReference).setRequiredContainerCartridge( ruleCart );
+		((ICFGenKbGenItemEditObj)editReference).setRequiredLookupRuleType( ruleTypeReference );
+        editReference.create();
+        editReference = null;
+
 	}
 }

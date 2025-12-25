@@ -24,6 +24,7 @@
 package org.msscf.msscf.v2_13.cfbamcust.MSSBamCF;
 
 import java.util.*;
+import org.msscf.msscf.v2_13.cfbam.CFBam.ICFBamSchema.RelationTypeEnum;
 
 import org.msscf.msscf.v2_13.cflib.CFLib.*;
 import org.msscf.msscf.v2_13.cfbam.CFBamObj.*;
@@ -391,7 +392,7 @@ public class MSSBamCFAnyObj
             return null;
         }
     }
-    
+
     public static ICFBamRelationObj derefFirstSuperiorCandidateRelation(ICFBamValueObj valueDef) {
         final String S_ProcName = "MSSCFBamCFAnyObj.derefFirstSuperiorCandidateRelation";
 		if( valueDef == null ) {
@@ -428,6 +429,97 @@ public class MSSBamCFAnyObj
         else {
             return null;
         }
+    }
+
+	public static List<ICFBamRelationObj> getInheritedRelations(ICFBamTableObj tableDef) {
+        final String S_ProcName = "MSSCFBamCFAnyObj.getInheritedRelations";
+		if( tableDef == null ) {
+			throw new CFLibNullArgumentException( MSSBamCFAnyObj.class,
+				S_ProcName,
+				1,
+				"tableDef" );
+		}
+		ArrayList<ICFBamRelationObj> retlist = new ArrayList<>();
+		ICFBamTableObj curTable = tableDef;
+		while (curTable != null) {
+			for (ICFBamRelationObj cur: curTable.getChildrenRelations()) {
+				if (cur.getRequiredRelationType() != RelationTypeEnum.Superclass) {
+					retlist.add(cur);
+				}
+			}
+			ICFBamRelationObj screl = curTable.getSuperClassRelation();
+			if (screl != null) {
+				curTable = screl.getRequiredLookupToTable();
+			}
+			else {
+				curTable = null;
+			}
+		}
+		return( retlist );
+	}
+
+    public static ICFBamRelationObj derefReverseRelation(ICFBamRelationObj relationDef) {
+        final String S_ProcName = "MSSCFBamCFAnyObj.derefReverseRelation";
+		if( relationDef == null ) {
+			throw new CFLibNullArgumentException( MSSBamCFAnyObj.class,
+				S_ProcName,
+				1,
+				"relationDef" );
+		}
+		ICFBamTableObj fromTable = relationDef.getRequiredContainerFromTable();
+		ICFBamTableObj toTable = relationDef.getRequiredLookupToTable();
+		List<ICFBamRelationObj> inheritedToRelations = getInheritedRelations(toTable);
+		List<ICFBamRelationObj> toRelationsReferencingFromTable = new ArrayList<>();
+		for (ICFBamRelationObj cur: inheritedToRelations) {
+			if (cur.getRequiredLookupToTable() == fromTable) {
+				toRelationsReferencingFromTable.add(cur);
+			}
+		}
+		ICFBamIndexObj fromIndex = relationDef.getRequiredLookupFromIndex();
+		List<ICFBamRelationObj> toRelationsReferencingFromIndex = new ArrayList<>();
+		for (ICFBamRelationObj cur: toRelationsReferencingFromTable) {
+			if( cur.getRequiredLookupToIndex() == fromIndex) {
+				toRelationsReferencingFromIndex.add(cur);
+			}
+		}
+
+		if( toRelationsReferencingFromIndex.size() == 1) {
+			return(toRelationsReferencingFromIndex.get(0));
+		}
+		else if( toRelationsReferencingFromIndex.isEmpty()) {
+			return( null );
+		}
+		else {
+			throw new CFLibUnresolvedRelationException(MSSBamCFAnyObj.class, S_ProcName, "Multiple candidate reverse relationships found for " + relationDef.getRequiredContainerFromTable().getObjName() + "." + relationDef.getRequiredName() + " in target table " + toTable.getRequiredName());
+		}
+    }
+
+    public static List<ICFBamRelationObj> derefReverseRelationships(ICFBamRelationObj relationDef) {
+        final String S_ProcName = "MSSCFBamCFAnyObj.derefReverseRelationships";
+		if( relationDef == null ) {
+			throw new CFLibNullArgumentException( MSSBamCFAnyObj.class,
+				S_ProcName,
+				1,
+				"relationDef" );
+		}
+		ICFBamTableObj fromTable = relationDef.getRequiredContainerFromTable();
+		ICFBamTableObj toTable = relationDef.getRequiredLookupToTable();
+		List<ICFBamRelationObj> inheritedToRelations = getInheritedRelations(toTable);
+		List<ICFBamRelationObj> toRelationsReferencingFromTable = new ArrayList<>();
+		for (ICFBamRelationObj cur: inheritedToRelations) {
+			if (cur.getRequiredLookupToTable() == fromTable) {
+				toRelationsReferencingFromTable.add(cur);
+			}
+		}
+		ICFBamIndexObj fromIndex = relationDef.getRequiredLookupFromIndex();
+		List<ICFBamRelationObj> toRelationsReferencingFromIndex = new ArrayList<>();
+		for (ICFBamRelationObj cur: toRelationsReferencingFromTable) {
+			if( cur.getRequiredLookupToIndex() == fromIndex) {
+				toRelationsReferencingFromIndex.add(cur);
+			}
+		}
+
+		return(toRelationsReferencingFromIndex);
     }
     
     public static boolean inSubservientRelation(ICFBamValueObj valueDef) {

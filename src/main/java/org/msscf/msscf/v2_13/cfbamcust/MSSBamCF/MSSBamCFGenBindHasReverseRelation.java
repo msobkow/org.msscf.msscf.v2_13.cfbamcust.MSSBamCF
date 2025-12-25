@@ -23,32 +23,32 @@
 
 package org.msscf.msscf.v2_13.cfbamcust.MSSBamCF;
 
-import org.msscf.msscf.v2_13.cflib.CFLib.*;
+import java.util.List;
 import org.msscf.msscf.v2_13.cfbam.CFBamObj.ICFBamRelationObj;
-import org.msscf.msscf.v2_13.cfbam.CFBamObj.ICFBamTableObj;
-import org.msscf.msscf.v2_13.cfbam.CFBamObj.ICFBamValueObj;
+import org.msscf.msscf.v2_13.cflib.CFLib.*;
 import org.msscf.msscf.v2_13.cfcore.MssCF.*;
 
-public class MSSBamCFGenReferenceFirstSuperiorCandidateRelationship
-	extends MssCFGenReferenceObj
+public class MSSBamCFGenBindHasReverseRelation
+	extends MssCFGenBindObj
 {
+	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
 
-	public MSSBamCFGenReferenceFirstSuperiorCandidateRelationship() {
+	public MSSBamCFGenBindHasReverseRelation() {
 		super();
 	}
 
-	public MSSBamCFGenReferenceFirstSuperiorCandidateRelationship(
+	public MSSBamCFGenBindHasReverseRelation(
 		MSSBamCFEngine argSchema,
 		String toolset,
 		String scopeDefClassName,
 		String genDefClassName,
 		String itemName)
 	{
-		super(argSchema, toolset, scopeDefClassName, genDefClassName, itemName, "Value" );
+		super( argSchema, toolset, scopeDefClassName, genDefClassName, itemName);
 	}
 
-	public ICFLibAnyObj dereference( MssCFGenContext genContext) {
+	public String expandBody( MssCFGenContext genContext ) {
 		ICFLibAnyObj genDef;
 		final String S_ProcName = "expandBody";
 
@@ -67,10 +67,19 @@ public class MSSBamCFGenReferenceFirstSuperiorCandidateRelationship
 				"genContext.GenDef" );
 		}
 
-		if (!(genDef instanceof ICFBamValueObj)) {
-			throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "genContext", genDef, "ICFBamValueObj");
+		if (! (genDef instanceof ICFBamRelationObj)) {
+			throw new CFLibUnsupportedClassException(MSSBamCFGenBindHasReverseRelation.class, S_ProcName, "genDef", genDef, "ICFBamRelationObj");
 		}
-		ICFBamValueObj valueDef = (ICFBamValueObj)genDef;
-		return( MSSBamCFAnyObj.derefFirstSuperiorCandidateRelation(valueDef) );
+		ICFBamRelationObj relationObj = (ICFBamRelationObj)genDef;
+		List<ICFBamRelationObj> reverseRelations = MSSBamCFAnyObj.derefReverseRelationships(relationObj);
+		if( reverseRelations == null ) {
+			return( "no" );
+		}
+		else if (reverseRelations.size() == 1) {
+			return( "yes" );
+		}
+		else {
+			return( "no" );
+		}
 	}
 }
