@@ -651,9 +651,41 @@ public class MSSBamCFEngine
         editBind.setRequiredLookupRuleType( ruleTypeBind );
         editBind.create();
         editBind = null;
+
+        bind = new MSSBamCFGenBindIsSubservientDataRelation( this, 
+	        "any", null, "Relation", "IsSubservientDataRelation" );
+        editBind = (ICFGenKbGenBindEditObj)(bind.beginEdit());
+        editBind.setRequiredContainerCartridge( ruleCart );
+        editBind.setRequiredLookupRuleType( ruleTypeBind );
+        editBind.create();
+        editBind = null;
+
+        bind = new MSSBamCFGenBindIsSubservientPrimaryKeyRelation( this, 
+	        "any", null, "Relation", "IsSubservientPrimaryKeyRelation" );
+        editBind = (ICFGenKbGenBindEditObj)(bind.beginEdit());
+        editBind.setRequiredContainerCartridge( ruleCart );
+        editBind.setRequiredLookupRuleType( ruleTypeBind );
+        editBind.create();
+        editBind = null;
         
         bind = new MSSBamCFGenBindIsSubservientCandidateRelation( this, 
 	        "any", null, "Relation", "IsSubservientCandidateRelation" );
+        editBind = (ICFGenKbGenBindEditObj)(bind.beginEdit());
+        editBind.setRequiredContainerCartridge( ruleCart );
+        editBind.setRequiredLookupRuleType( ruleTypeBind );
+        editBind.create();
+        editBind = null;
+
+        bind = new MSSBamCFGenBindIsSubservientCandidateDataRelation( this, 
+	        "any", null, "Relation", "IsSubservientCandidateDataRelation" );
+        editBind = (ICFGenKbGenBindEditObj)(bind.beginEdit());
+        editBind.setRequiredContainerCartridge( ruleCart );
+        editBind.setRequiredLookupRuleType( ruleTypeBind );
+        editBind.create();
+        editBind = null;
+
+        bind = new MSSBamCFGenBindIsSubservientCandidatePrimaryKeyRelation( this, 
+	        "any", null, "Relation", "IsSubservientCandidatePrimaryKeyRelation" );
         editBind = (ICFGenKbGenBindEditObj)(bind.beginEdit());
         editBind.setRequiredContainerCartridge( ruleCart );
         editBind.setRequiredLookupRuleType( ruleTypeBind );
@@ -668,40 +700,8 @@ public class MSSBamCFEngine
         editBind.create();
         editBind = null;
 
-        bind = new MSSBamCFGenBindIsSubservientCandidateDataRelation( this, 
-	        "any", null, "Relation", "IsSubservientCandidateDataRelation" );
-        editBind = (ICFGenKbGenBindEditObj)(bind.beginEdit());
-        editBind.setRequiredContainerCartridge( ruleCart );
-        editBind.setRequiredLookupRuleType( ruleTypeBind );
-        editBind.create();
-        editBind = null;
-
-        bind = new MSSBamCFGenBindIsSubservientPrimaryKeyRelation( this, 
-	        "any", null, "Relation", "IsSubservientPrimaryKeyRelation" );
-        editBind = (ICFGenKbGenBindEditObj)(bind.beginEdit());
-        editBind.setRequiredContainerCartridge( ruleCart );
-        editBind.setRequiredLookupRuleType( ruleTypeBind );
-        editBind.create();
-        editBind = null;
-
-        bind = new MSSBamCFGenBindIsSubservientCandidateDataRelation( this, 
-	        "any", null, "Relation", "IsSubservientCandidateDataRelation" );
-        editBind = (ICFGenKbGenBindEditObj)(bind.beginEdit());
-        editBind.setRequiredContainerCartridge( ruleCart );
-        editBind.setRequiredLookupRuleType( ruleTypeBind );
-        editBind.create();
-        editBind = null;
-
         bind = new MSSBamCFGenBindIsSubservientNonCandidateDataRelation( this, 
 	        "any", null, "Relation", "IsSubservientNonCandidateDataRelation" );
-        editBind = (ICFGenKbGenBindEditObj)(bind.beginEdit());
-        editBind.setRequiredContainerCartridge( ruleCart );
-        editBind.setRequiredLookupRuleType( ruleTypeBind );
-        editBind.create();
-        editBind = null;
-
-        bind = new MSSBamCFGenBindIsSubservientCandidatePrimaryKeyRelation( this, 
-	        "any", null, "Relation", "IsSubservientCandidatePrimaryKeyRelation" );
         editBind = (ICFGenKbGenBindEditObj)(bind.beginEdit());
         editBind.setRequiredContainerCartridge( ruleCart );
         editBind.setRequiredLookupRuleType( ruleTypeBind );
@@ -3729,13 +3729,6 @@ public class MSSBamCFEngine
         editIterator = null;
 
         iterator = new MSSBamCFGenIterateSubservientNonCandidatePrimaryKeyRelations(this,  "any", null, "Table", "SubservientNonCandidatePrimaryKeyRelations" );
-        editIterator = (ICFGenKbGenIteratorEditObj)iterator.beginEdit();
-		((ICFGenKbGenItemEditObj)editIterator).setRequiredContainerCartridge( ruleCart );
-		((ICFGenKbGenItemEditObj)editIterator).setRequiredLookupRuleType( ruleTypeIterator );
-        editIterator.create();
-        editIterator = null;
-
-        iterator = new MSSBamCFGenIterateSubservientCandidateDataRelations(this,  "any", null, "Table", "SubservientCandidateDataRelations" );
         editIterator = (ICFGenKbGenIteratorEditObj)iterator.beginEdit();
 		((ICFGenKbGenItemEditObj)editIterator).setRequiredContainerCartridge( ruleCart );
 		((ICFGenKbGenItemEditObj)editIterator).setRequiredLookupRuleType( ruleTypeIterator );
