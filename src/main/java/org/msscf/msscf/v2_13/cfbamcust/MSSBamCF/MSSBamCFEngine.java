@@ -4101,6 +4101,132 @@ public class MSSBamCFEngine
         editReference.create();
         editReference = null;
 
+        reference = new MSSBamCFGenReferenceSuperiorCandidateRelationCol(this,  "any", null, "Object", "SuperiorCandidateRelationCol" );
+        editReference = (ICFGenKbGenReferenceEditObj)reference.beginEdit();
+		((ICFGenKbGenItemEditObj)editReference).setRequiredContainerCartridge( ruleCart );
+		((ICFGenKbGenItemEditObj)editReference).setRequiredLookupRuleType( ruleTypeReference );
+        editReference.create();
+        editReference = null;
+
+        reference = new MSSBamCFGenReferenceSuperiorRelationCol(this,  "any", null, "Object", "SuperiorRelationCol" );
+        editReference = (ICFGenKbGenReferenceEditObj)reference.beginEdit();
+		((ICFGenKbGenItemEditObj)editReference).setRequiredContainerCartridge( ruleCart );
+		((ICFGenKbGenItemEditObj)editReference).setRequiredLookupRuleType( ruleTypeReference );
+        editReference.create();
+        editReference = null;
+	
+        reference = new MSSBamCFGenReferenceSuperiorPrimaryKeyRelationCol(this,  "any", null, "Object", "SuperiorPrimaryKeyRelationCol" );
+        editReference = (ICFGenKbGenReferenceEditObj)reference.beginEdit();
+		((ICFGenKbGenItemEditObj)editReference).setRequiredContainerCartridge( ruleCart );
+		((ICFGenKbGenItemEditObj)editReference).setRequiredLookupRuleType( ruleTypeReference );
+        editReference.create();
+        editReference = null;
+	
+        reference = new MSSBamCFGenReferenceSuperiorCandidatePrimaryKeyRelationCol(this,  "any", null, "Object", "SuperiorCandidatePrimaryKeyRelationCol" );
+        editReference = (ICFGenKbGenReferenceEditObj)reference.beginEdit();
+		((ICFGenKbGenItemEditObj)editReference).setRequiredContainerCartridge( ruleCart );
+		((ICFGenKbGenItemEditObj)editReference).setRequiredLookupRuleType( ruleTypeReference );
+        editReference.create();
+        editReference = null;
+	
+        reference = new MSSBamCFGenReferenceSuperiorNonCandidatePrimaryKeyRelationCol(this,  "any", null, "Object", "SuperiorNonCandidatePrimaryKeyRelationCol" );
+        editReference = (ICFGenKbGenReferenceEditObj)reference.beginEdit();
+		((ICFGenKbGenItemEditObj)editReference).setRequiredContainerCartridge( ruleCart );
+		((ICFGenKbGenItemEditObj)editReference).setRequiredLookupRuleType( ruleTypeReference );
+        editReference.create();
+        editReference = null;
+	
+        reference = new MSSBamCFGenReferenceSuperiorDataRelationCol(this,  "any", null, "Object", "SuperiorDataRelationCol" );
+        editReference = (ICFGenKbGenReferenceEditObj)reference.beginEdit();
+		((ICFGenKbGenItemEditObj)editReference).setRequiredContainerCartridge( ruleCart );
+		((ICFGenKbGenItemEditObj)editReference).setRequiredLookupRuleType( ruleTypeReference );
+        editReference.create();
+        editReference = null;
+	
+        reference = new MSSBamCFGenReferenceSuperiorCandidateDataRelationCol(this,  "any", null, "Object", "SuperiorCandidateDataRelationCol" );
+        editReference = (ICFGenKbGenReferenceEditObj)reference.beginEdit();
+		((ICFGenKbGenItemEditObj)editReference).setRequiredContainerCartridge( ruleCart );
+		((ICFGenKbGenItemEditObj)editReference).setRequiredLookupRuleType( ruleTypeReference );
+        editReference.create();
+        editReference = null;
+	
+        reference = new MSSBamCFGenReferenceSuperiorNonCandidateRelationCol(this,  "any", null, "Object", "SuperiorNonCandidateRelationRelationCol" );
+        editReference = (ICFGenKbGenReferenceEditObj)reference.beginEdit();
+		((ICFGenKbGenItemEditObj)editReference).setRequiredContainerCartridge( ruleCart );
+		((ICFGenKbGenItemEditObj)editReference).setRequiredLookupRuleType( ruleTypeReference );
+        editReference.create();
+        editReference = null;
+    
+        reference = new MSSBamCFGenReferenceSuperiorNonCandidateDataRelationCol(this,  "any", null, "Object", "SuperiorNonCandidateDataRelationCol" );
+        editReference = (ICFGenKbGenReferenceEditObj)reference.beginEdit();
+		((ICFGenKbGenItemEditObj)editReference).setRequiredContainerCartridge( ruleCart );
+		((ICFGenKbGenItemEditObj)editReference).setRequiredLookupRuleType( ruleTypeReference );
+        editReference.create();
+        editReference = null;
+    
+        reference = new MSSBamCFGenReferenceSubservientRelationCol(this,  "any", null, "Object", "SubservientRelationCol" );
+        editReference = (ICFGenKbGenReferenceEditObj)reference.beginEdit();
+		((ICFGenKbGenItemEditObj)editReference).setRequiredContainerCartridge( ruleCart );
+		((ICFGenKbGenItemEditObj)editReference).setRequiredLookupRuleType( ruleTypeReference );
+        editReference.create();
+        editReference = null;
+    
+        reference = new MSSBamCFGenReferenceSubservientDataRelationCol(this,  "any", null, "Object", "SubservientDataRelationCol" );
+        editReference = (ICFGenKbGenReferenceEditObj)reference.beginEdit();
+		((ICFGenKbGenItemEditObj)editReference).setRequiredContainerCartridge( ruleCart );
+		((ICFGenKbGenItemEditObj)editReference).setRequiredLookupRuleType( ruleTypeReference );
+        editReference.create();
+        editReference = null;
+    
+        reference = new MSSBamCFGenReferenceSubservientPrimaryKeyRelationCol(this,  "any", null, "Object", "SubservientPrimaryKeyRelationCol" );
+        editReference = (ICFGenKbGenReferenceEditObj)reference.beginEdit();
+		((ICFGenKbGenItemEditObj)editReference).setRequiredContainerCartridge( ruleCart );
+		((ICFGenKbGenItemEditObj)editReference).setRequiredLookupRuleType( ruleTypeReference );
+        editReference.create();
+        editReference = null;
+    
+        reference = new MSSBamCFGenReferenceSubservientCandidateRelationCol(this,  "any", null, "Object", "SubservientCandidateRelationCol" );
+        editReference = (ICFGenKbGenReferenceEditObj)reference.beginEdit();
+		((ICFGenKbGenItemEditObj)editReference).setRequiredContainerCartridge( ruleCart );
+		((ICFGenKbGenItemEditObj)editReference).setRequiredLookupRuleType( ruleTypeReference );
+        editReference.create();
+        editReference = null;
+    
+        reference = new MSSBamCFGenReferenceSubservientCandidateDataRelationCol(this,  "any", null, "Object", "SubservientCandidateDataRelationCol" );
+        editReference = (ICFGenKbGenReferenceEditObj)reference.beginEdit();
+		((ICFGenKbGenItemEditObj)editReference).setRequiredContainerCartridge( ruleCart );
+		((ICFGenKbGenItemEditObj)editReference).setRequiredLookupRuleType( ruleTypeReference );
+        editReference.create();
+        editReference = null;
+    
+        reference = new MSSBamCFGenReferenceSubservientCandidatePrimaryKeyRelationCol(this,  "any", null, "Object", "SubservientCandidatePrimaryKeyRelationCol" );
+        editReference = (ICFGenKbGenReferenceEditObj)reference.beginEdit();
+		((ICFGenKbGenItemEditObj)editReference).setRequiredContainerCartridge( ruleCart );
+		((ICFGenKbGenItemEditObj)editReference).setRequiredLookupRuleType( ruleTypeReference );
+        editReference.create();
+        editReference = null;
+    
+        reference = new MSSBamCFGenReferenceSubservientNonCandidateRelationCol(this,  "any", null, "Object", "SubservientNonCandidateRelationCol" );
+        editReference = (ICFGenKbGenReferenceEditObj)reference.beginEdit();
+		((ICFGenKbGenItemEditObj)editReference).setRequiredContainerCartridge( ruleCart );
+		((ICFGenKbGenItemEditObj)editReference).setRequiredLookupRuleType( ruleTypeReference );
+        editReference.create();
+        editReference = null;
+    
+        reference = new MSSBamCFGenReferenceSubservientNonCandidateDataRelationCol(this,  "any", null, "Object", "SubservientNonCandidateDataRelationCol" );
+        editReference = (ICFGenKbGenReferenceEditObj)reference.beginEdit();
+		((ICFGenKbGenItemEditObj)editReference).setRequiredContainerCartridge( ruleCart );
+		((ICFGenKbGenItemEditObj)editReference).setRequiredLookupRuleType( ruleTypeReference );
+        editReference.create();
+        editReference = null;
+    
+        reference = new MSSBamCFGenReferenceSubservientNonCandidatePrimaryKeyRelationCol(this,  "any", null, "Object", "SubservientNonCandidatePrimaryKeyRelationCol" );
+        editReference = (ICFGenKbGenReferenceEditObj)reference.beginEdit();
+		((ICFGenKbGenItemEditObj)editReference).setRequiredContainerCartridge( ruleCart );
+		((ICFGenKbGenItemEditObj)editReference).setRequiredLookupRuleType( ruleTypeReference );
+        editReference.create();
+        editReference = null;
+
         reference = new MSSBamCFGenReferenceObjNameColumn(this,  "any", null, "Value", "ObjNameColumn" );
         editReference = (ICFGenKbGenReferenceEditObj)reference.beginEdit();
 		((ICFGenKbGenItemEditObj)editReference).setRequiredContainerCartridge( ruleCart );
