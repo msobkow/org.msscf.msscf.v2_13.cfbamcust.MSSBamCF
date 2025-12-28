@@ -299,9 +299,25 @@ public class MSSBamCFEngine
         editBind.setRequiredLookupRuleType( ruleTypeBind );
         editBind.create();
         editBind = null;
-        
+
+        bind = new MSSBamCFGenBindInPrimaryKeyRelation( this,
+	        "any", null, "Value", "InPrimaryKeyRelation" );
+        editBind = (ICFGenKbGenBindEditObj)(bind.beginEdit());
+        editBind.setRequiredContainerCartridge( ruleCart );
+        editBind.setRequiredLookupRuleType( ruleTypeBind );
+        editBind.create();
+        editBind = null;
+
         bind = new MSSBamCFGenBindInSuperiorRelation( this,
 	        "any", null, "Value", "InSuperiorRelation" );
+        editBind = (ICFGenKbGenBindEditObj)(bind.beginEdit());
+        editBind.setRequiredContainerCartridge( ruleCart );
+        editBind.setRequiredLookupRuleType( ruleTypeBind );
+        editBind.create();
+        editBind = null;
+
+        bind = new MSSBamCFGenBindInDataRelation( this,
+	        "any", null, "Value", "InDataRelation" );
         editBind = (ICFGenKbGenBindEditObj)(bind.beginEdit());
         editBind.setRequiredContainerCartridge( ruleCart );
         editBind.setRequiredLookupRuleType( ruleTypeBind );
@@ -3650,6 +3666,19 @@ public class MSSBamCFEngine
         editIterator.create();
         editIterator = null;
 
+        iterator = new MSSBamCFGenIteratePrimaryKeyRelations(this,  "any", null, "Table", "PrimaryKeyRelations" );
+        editIterator = (ICFGenKbGenIteratorEditObj)iterator.beginEdit();
+		((ICFGenKbGenItemEditObj)editIterator).setRequiredContainerCartridge( ruleCart );
+		((ICFGenKbGenItemEditObj)editIterator).setRequiredLookupRuleType( ruleTypeIterator );
+        editIterator.create();
+        editIterator = null;
+
+        iterator = new MSSBamCFGenIterateDataRelations(this,  "any", null, "Table", "DataRelations" );
+        editIterator = (ICFGenKbGenIteratorEditObj)iterator.beginEdit();
+		((ICFGenKbGenItemEditObj)editIterator).setRequiredContainerCartridge( ruleCart );
+		((ICFGenKbGenItemEditObj)editIterator).setRequiredLookupRuleType( ruleTypeIterator );
+        editIterator.create();
+        editIterator = null;
 
         iterator = new MSSBamCFGenIterateSuperiorDataRelations(this,  "any", null, "Table", "SuperiorDataRelations" );
         editIterator = (ICFGenKbGenIteratorEditObj)iterator.beginEdit();
