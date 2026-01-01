@@ -90,7 +90,9 @@ public class MSSBamCFGenBindIsSuperiorDataRelation
 		if (relnToCheck == null) {
 			return false;
 		}
-
+		if (MSSBamCFGenBindIsRelationInPrimaryIndex.isRelationInPrimaryIndex(relnToCheck)) {
+			return false;
+		}
 		ICFBamTableObj fromTable = relnToCheck.getRequiredContainerFromTable();
 		ICFBamTableObj toTable = relnToCheck.getRequiredLookupToTable();
 		switch(relnToCheck.getRequiredRelationType()) {
@@ -102,7 +104,7 @@ public class MSSBamCFGenBindIsSuperiorDataRelation
 			case Lookup:
 			case Owner:
 			case Parent:
-				return( ! MSSBamCFGenBindIsRelationInPrimaryIndex.isRelationInPrimaryIndex(relnToCheck) );
+				return( true );
 			case Superclass:
 				return false;
 			default:

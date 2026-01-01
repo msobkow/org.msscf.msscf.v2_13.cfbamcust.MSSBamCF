@@ -91,6 +91,10 @@ public class MSSBamCFGenBindIsSubservientDataRelation
 			return false;
 		}
 
+		if (MSSBamCFGenBindIsRelationInPrimaryIndex.isRelationInPrimaryIndex(relnToCheck)) {
+			return false;
+		}
+
 		switch(relnToCheck.getRequiredRelationType()) {
 			case Container:
 			case Lookup:
@@ -100,7 +104,7 @@ public class MSSBamCFGenBindIsSubservientDataRelation
 				return false;
 			case Children:
 			case Components:
-					return( ! MSSBamCFGenBindIsRelationInPrimaryIndex.isRelationInPrimaryIndex(relnToCheck) );
+					return( true );
 			case Superclass:
 				return false;
 			default:
