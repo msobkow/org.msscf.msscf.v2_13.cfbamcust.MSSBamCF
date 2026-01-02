@@ -903,21 +903,14 @@ public class MSSBamCFAnyObj
 		}
 		ICFBamTableObj fromTable = relationDef.getRequiredContainerFromTable();
 		ICFBamTableObj toTable = relationDef.getRequiredLookupToTable();
-		List<ICFBamRelationObj> inheritedToRelations = getInheritedRelations(toTable);
-		List<ICFBamRelationObj> toRelationsReferencingFromTable = new ArrayList<>();
-		for (ICFBamRelationObj cur: inheritedToRelations) {
-			if (cur.getRequiredLookupToTable() == fromTable) {
-				toRelationsReferencingFromTable.add(cur);
-			}
-		}
 		ICFBamIndexObj fromIndex = relationDef.getRequiredLookupFromIndex();
+		List<ICFBamRelationObj> inheritedToRelations = getInheritedRelations(toTable);
 		List<ICFBamRelationObj> toRelationsReferencingFromIndex = new ArrayList<>();
-		for (ICFBamRelationObj cur: toRelationsReferencingFromTable) {
-			if( cur.getRequiredLookupToIndex() == fromIndex) {
+		for (ICFBamRelationObj cur: inheritedToRelations) {
+			if (cur.getRequiredLookupToIndex() == fromIndex) {
 				toRelationsReferencingFromIndex.add(cur);
 			}
 		}
-
 		if( toRelationsReferencingFromIndex.size() == 1) {
 			return(toRelationsReferencingFromIndex.get(0));
 		}
@@ -925,34 +918,32 @@ public class MSSBamCFAnyObj
 			return( null );
 		}
 		else {
-			List<ICFBamRelationObj> toRelationsMatchingReverseCols = new ArrayList<>();
+			List<ICFBamRelationObj> toRelationsWithAllColsMatching = new ArrayList<>();
 			for(ICFBamRelationObj cur: toRelationsReferencingFromIndex) {
-				if (cur.getOptionalComponentsColumns().size() == relationDef.getOptionalComponentsColumns().size()) {
-					boolean anyColsMissing = false;
-					for (ICFBamRelationColObj mycol: relationDef.getOptionalComponentsColumns()) {
-						boolean foundCol = false;
-						for(ICFBamRelationColObj theircol: cur.getOptionalComponentsColumns()) {
-							if (mycol.getRequiredLookupFromCol().getRequiredLookupColumn() == theircol.getRequiredLookupFromCol().getRequiredLookupColumn()) {
-								foundCol = true;
-							}
-						}
-						if(!foundCol) {
-							anyColsMissing = true;
+				if (relationDef.getOptionalComponentsColumns().size() == cur.getOptionalComponentsColumns().size()) {
+					boolean anymismatches = false;
+					Iterator<ICFBamRelationColObj> mycoliter = relationDef.getOptionalComponentsColumns().iterator();
+					Iterator<ICFBamRelationColObj> theircoliter = cur.getOptionalComponentsColumns().iterator();
+					while (mycoliter.hasNext()) {
+						ICFBamRelationColObj mine = mycoliter.next();
+						ICFBamRelationColObj theirs = theircoliter.next();
+						if (mine.getRequiredLookupToCol() != theirs.getRequiredLookupFromCol()) {
+							anymismatches = true;
 						}
 					}
-					if(!anyColsMissing) {
-						toRelationsMatchingReverseCols.add(cur);
+					if (!anymismatches) {
+						toRelationsWithAllColsMatching.add(cur);
 					}
 				}
 			}
-			if( toRelationsMatchingReverseCols.size() == 1) {
-				return(toRelationsMatchingReverseCols.get(0));
+			if( toRelationsWithAllColsMatching.size() == 1) {
+				return(toRelationsWithAllColsMatching.get(0));
 			}
-			else if( toRelationsMatchingReverseCols.isEmpty()) {
+			else if( toRelationsWithAllColsMatching.isEmpty()) {
 				return( null );
 			}
 			else {
-				throw new CFLibUnresolvedRelationException(MSSBamCFAnyObj.class, S_ProcName, "Multiple candidate reverse relationships with matching columns found for " + relationDef.getRequiredContainerFromTable().getObjName() + "." + relationDef.getRequiredName() + " in target table " + toTable.getRequiredName());
+				throw new CFLibUnresolvedRelationException(MSSBamCFAnyObj.class, S_ProcName, "Multiple candidate reverse relationships found for " + relationDef.getRequiredContainerFromTable().getObjName() + "." + relationDef.getRequiredName() + " in target table " + toTable.getRequiredName());
 			}
 		}
     }
