@@ -925,7 +925,35 @@ public class MSSBamCFAnyObj
 			return( null );
 		}
 		else {
-			throw new CFLibUnresolvedRelationException(MSSBamCFAnyObj.class, S_ProcName, "Multiple candidate reverse relationships found for " + relationDef.getRequiredContainerFromTable().getObjName() + "." + relationDef.getRequiredName() + " in target table " + toTable.getRequiredName());
+			List<ICFBamRelationObj> toRelationsMatchingReverseCols = new ArrayList<>();
+			for(ICFBamRelationObj cur: toRelationsReferencingFromIndex) {
+				if (cur.getOptionalComponentsColumns().size() == relationDef.getOptionalComponentsColumns().size()) {
+					boolean anyColsMissing = false;
+					for (ICFBamRelationColObj mycol: relationDef.getOptionalComponentsColumns()) {
+						boolean foundCol = false;
+						for(ICFBamRelationColObj theircol: cur.getOptionalComponentsColumns()) {
+							if (mycol.getRequiredLookupFromCol().getRequiredLookupColumn() == theircol.getRequiredLookupFromCol().getRequiredLookupColumn()) {
+								foundCol = true;
+							}
+						}
+						if(!foundCol) {
+							anyColsMissing = true;
+						}
+					}
+					if(!anyColsMissing) {
+						toRelationsMatchingReverseCols.add(cur);
+					}
+				}
+			}
+			if( toRelationsMatchingReverseCols.size() == 1) {
+				return(toRelationsMatchingReverseCols.get(0));
+			}
+			else if( toRelationsMatchingReverseCols.isEmpty()) {
+				return( null );
+			}
+			else {
+				throw new CFLibUnresolvedRelationException(MSSBamCFAnyObj.class, S_ProcName, "Multiple candidate reverse relationships with matching columns found for " + relationDef.getRequiredContainerFromTable().getObjName() + "." + relationDef.getRequiredName() + " in target table " + toTable.getRequiredName());
+			}
 		}
     }
 

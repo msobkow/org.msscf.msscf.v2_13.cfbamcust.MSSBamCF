@@ -4305,7 +4305,7 @@ public class MSSBamCFEngine
         editReference.create();
         editReference = null;
 
-        reference = new MSSBamCFGenReferenceReverseRelationship(this,  "any", null, "Value", "FirstSuperiorCandidateRelationship" );
+        reference = new MSSBamCFGenReferenceFirstSuperiorCandidateRelationship(this,  "any", null, "Value", "FirstSuperiorCandidateRelationship" );
         editReference = (ICFGenKbGenReferenceEditObj)reference.beginEdit();
 		((ICFGenKbGenItemEditObj)editReference).setRequiredContainerCartridge( ruleCart );
 		((ICFGenKbGenItemEditObj)editReference).setRequiredLookupRuleType( ruleTypeReference );
