@@ -259,7 +259,15 @@ public class MSSBamCFEngine
 
         ICFGenKbRuleCartObj ruleCart = getInternalRuleCart();
         ICFGenKbRuleTypeObj ruleTypeBind = getRuleTypeTableObj().readRuleTypeByNameIdx("Bind");
-        
+
+        bind = new MSSBamCFGenBindHasSuperiorCandidateRelationCol( this,
+            "any", null, "Value", "HasSuperiorCandidateRelationCol" );
+        editBind = (ICFGenKbGenBindEditObj)(bind.beginEdit());
+        editBind.setRequiredContainerCartridge( ruleCart );
+        editBind.setRequiredLookupRuleType( ruleTypeBind );
+        editBind.create();
+        editBind = null;
+
         bind = new MSSBamCFGenBindHasReverseRelation( this,
             "any", null, "Relation", "HasReverseRelation" );
         editBind = (ICFGenKbGenBindEditObj)(bind.beginEdit());

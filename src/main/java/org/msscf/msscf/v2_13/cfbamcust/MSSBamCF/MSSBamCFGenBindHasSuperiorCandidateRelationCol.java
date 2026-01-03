@@ -24,32 +24,30 @@
 package org.msscf.msscf.v2_13.cfbamcust.MSSBamCF;
 
 import org.msscf.msscf.v2_13.cflib.CFLib.*;
-import org.msscf.msscf.v2_13.cfbam.CFBamObj.ICFBamRelationColObj;
-import org.msscf.msscf.v2_13.cfbam.CFBamObj.ICFBamRelationObj;
-import org.msscf.msscf.v2_13.cfbam.CFBamObj.ICFBamTableObj;
-import org.msscf.msscf.v2_13.cfbam.CFBamObj.ICFBamValueObj;
 import org.msscf.msscf.v2_13.cfcore.MssCF.*;
+import org.msscf.msscf.v2_13.cfbam.CFBamObj.*;
 
-public class MSSBamCFGenReferenceFirstSuperiorCandidateRelationCol
-	extends MssCFGenReferenceObj
+public class MSSBamCFGenBindHasSuperiorCandidateRelationCol
+	extends MssCFGenBindObj
 {
+	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
 
-	public MSSBamCFGenReferenceFirstSuperiorCandidateRelationCol() {
+	public MSSBamCFGenBindHasSuperiorCandidateRelationCol() {
 		super();
 	}
 
-	public MSSBamCFGenReferenceFirstSuperiorCandidateRelationCol(
+	public MSSBamCFGenBindHasSuperiorCandidateRelationCol(
 		MSSBamCFEngine argSchema,
 		String toolset,
 		String scopeDefClassName,
 		String genDefClassName,
 		String itemName)
 	{
-		super(argSchema, toolset, scopeDefClassName, genDefClassName, itemName, "Value" );
+		super( argSchema, toolset, scopeDefClassName, genDefClassName, itemName);
 	}
 
-	public ICFLibAnyObj dereference( MssCFGenContext genContext) {
+	public String expandBody( MssCFGenContext genContext ) {
 		ICFLibAnyObj genDef;
 		final String S_ProcName = "expandBody";
 
@@ -68,20 +66,16 @@ public class MSSBamCFGenReferenceFirstSuperiorCandidateRelationCol
 				"genContext.GenDef" );
 		}
 
-		if (!(genDef instanceof ICFBamValueObj)) {
-			throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "genContext", genDef, "ICFBamValueObj");
-		}
-		ICFBamValueObj valueDef = (ICFBamValueObj)genDef;
-		ICFBamRelationObj fscr = MSSBamCFAnyObj.derefFirstSuperiorCandidateRelation(valueDef);
-		if (fscr == null) {
-			return( null );
-		}
-		for (ICFLibAnyObj o: fscr.getOptionalComponentsColumns()) {
-			ICFBamRelationColObj col = (ICFBamRelationColObj)o;
-			if (col.getRequiredLookupFromCol().getRequiredLookupColumn() == valueDef) {
-				return( col );
+		if (genDef instanceof ICFBamValueObj) {
+			if(null != MSSBamCFAnyObj.derefSuperiorCandidateRelationCol((ICFBamValueObj)genDef)) {
+				return( "yes" );
+			}
+			else {
+				return( "no" );
 			}
 		}
-		return( null );
+		else {
+			return ("no");
+		}
 	}
 }

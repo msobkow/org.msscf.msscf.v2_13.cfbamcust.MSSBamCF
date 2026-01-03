@@ -530,6 +530,7 @@ public class MSSBamCFAnyObj
                     for(ICFBamRelationColObj relationCol : relationDef.getOptionalComponentsColumns()) {
                         if(relationCol.getRequiredLookupFromCol().getRequiredLookupColumn() == valueDef) {
 							if (retval != null) {
+								System.err.println("Collision detected for " + relationCol.getObjFullName());
 								throw new CFLibCollisionDetectedException( MSSBamCFAnyObj.class, S_ProcName, relationCol.getPKey());
 							}
 							else {
@@ -539,6 +540,11 @@ public class MSSBamCFAnyObj
                     }
                 }
             }
+			if (retval == null) {
+				System.err.println("No match found for " + valueDef.getObjFullName());
+			} else {
+				System.err.println("Matched " + retval.getObjFullName());
+			}
             return retval;
         }
         else {
