@@ -112,7 +112,13 @@ public class MSSBamCFGenBindIsSubservientNonCandidateRelation
 					// An entity which pops in and out of existence can't enjoy database dependency enforcement on it's components and children
 					return true;
 				}
-				return false;
+				ICFBamRelationObj reversed = MSSBamCFAnyObj.derefReverseRelation(relnToCheck);
+				if (reversed == null) {
+					return true;
+				}
+				else {
+					return false;
+				}
 			case Superclass:
 				return false;
 			default:

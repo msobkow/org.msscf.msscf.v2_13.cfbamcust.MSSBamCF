@@ -118,11 +118,18 @@ public class MSSBamCFGenBindIsSuperiorCandidateRelation
 			case Components:
 			case Unknown:
 				return false;
-			case Container:
 			case Lookup:
+				return true;
+			case Container:
 			case Owner:
 			case Parent:
-				return true;
+				ICFBamRelationObj reversed = MSSBamCFAnyObj.derefReverseRelation(relnToCheck);
+				if (reversed == null) {
+					return false;
+				}
+				else {
+					return true;
+				}
 			case Superclass:
 				return false;
 			default:

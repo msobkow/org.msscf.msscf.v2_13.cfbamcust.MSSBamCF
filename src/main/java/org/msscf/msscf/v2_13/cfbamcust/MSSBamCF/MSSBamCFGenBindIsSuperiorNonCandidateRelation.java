@@ -23,6 +23,7 @@
 
 package org.msscf.msscf.v2_13.cfbamcust.MSSBamCF;
 
+import org.msscf.msscf.v2_13.cfbam.CFBam.ICFBamSchema;
 import org.msscf.msscf.v2_13.cflib.CFLib.*;
 import org.msscf.msscf.v2_13.cfbam.CFBamObj.ICFBamRelationObj;
 import org.msscf.msscf.v2_13.cfbam.CFBamObj.ICFBamTableObj;
@@ -108,7 +109,18 @@ public class MSSBamCFGenBindIsSuperiorNonCandidateRelation
 				if (MSSBamCFGenBindIsSuperiorCandidateRelation.inheritsMutable(toTable)) {
 					return true;
 				}
-				return false;
+				ICFBamRelationObj reversed = MSSBamCFAnyObj.derefReverseRelation(relnToCheck);
+				if (reversed == null) {
+					if (relnToCheck.getRequiredRelationType() == ICFBamSchema.RelationTypeEnum.Lookup) {
+						return false;
+					}
+					else {
+						return true;
+					}
+				}
+				else {
+					return false;
+				}
 			case Superclass:
 				return false;
 			default:

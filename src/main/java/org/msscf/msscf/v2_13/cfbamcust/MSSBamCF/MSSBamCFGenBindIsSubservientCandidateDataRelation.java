@@ -90,7 +90,9 @@ public class MSSBamCFGenBindIsSubservientCandidateDataRelation
 		if (relnToCheck == null) {
 			return false;
 		}
-
+		if (!MSSBamCFGenBindIsSubservientCandidateRelation.isSubservientCandidateRelation(relnToCheck)) {
+			return false;
+		}
 		ICFBamTableObj fromTable = relnToCheck.getRequiredContainerFromTable();
 		ICFBamTableObj toTable = relnToCheck.getRequiredLookupToTable();
 		if( fromTable.getOptionalLookupDefSchema() != null || toTable.getOptionalLookupDefSchema() != null) {

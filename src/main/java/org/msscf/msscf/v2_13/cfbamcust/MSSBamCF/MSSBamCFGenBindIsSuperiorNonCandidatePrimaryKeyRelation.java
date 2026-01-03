@@ -90,6 +90,9 @@ public class MSSBamCFGenBindIsSuperiorNonCandidatePrimaryKeyRelation
 		if (relnToCheck == null) {
 			return false;
 		}
+		if (!MSSBamCFGenBindIsSuperiorNonCandidateRelation.isSuperiorNonCandidateRelation(relnToCheck)) {
+			return false;
+		}
 
 		ICFBamTableObj fromTable = relnToCheck.getRequiredContainerFromTable();
 		ICFBamTableObj toTable = relnToCheck.getRequiredLookupToTable();

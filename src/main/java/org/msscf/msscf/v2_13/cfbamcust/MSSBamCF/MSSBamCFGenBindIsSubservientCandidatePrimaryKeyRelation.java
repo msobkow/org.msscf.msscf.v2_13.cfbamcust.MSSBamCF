@@ -90,6 +90,9 @@ public class MSSBamCFGenBindIsSubservientCandidatePrimaryKeyRelation
 		if (relnToCheck == null) {
 			return false;
 		}
+		if (!MSSBamCFGenBindIsSubservientCandidateRelation.isSubservientCandidateRelation(relnToCheck)) {
+			return false;
+		}
 
 		ICFBamTableObj fromTable = relnToCheck.getRequiredContainerFromTable();
 		ICFBamTableObj toTable = relnToCheck.getRequiredLookupToTable();

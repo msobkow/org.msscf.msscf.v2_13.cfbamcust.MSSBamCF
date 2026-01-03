@@ -104,15 +104,21 @@ public class MSSBamCFGenBindIsSubservientCandidateRelation
 			return false;
 		}
 		switch(relnToCheck.getRequiredRelationType()) {
-			case Container:
 			case Lookup:
+			case Container:
 			case Owner:
 			case Parent:
 			case Unknown:
 				return false;
 			case Children:
 			case Components:
-				return true;
+				ICFBamRelationObj reversed = MSSBamCFAnyObj.derefReverseRelation(relnToCheck);
+				if (reversed == null) {
+					return false;
+				}
+				else {
+					return true;
+				}
 			case Superclass:
 				return false;
 			default:

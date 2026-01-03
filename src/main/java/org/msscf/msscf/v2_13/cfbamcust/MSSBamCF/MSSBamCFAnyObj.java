@@ -915,6 +915,7 @@ public class MSSBamCFAnyObj
 			return(toRelationsReferencingFromIndex.get(0));
 		}
 		else if( toRelationsReferencingFromIndex.isEmpty()) {
+//			System.err.println("WARNING: No reverse relations matching from index for " + relationDef.getObjFullName() + " exist");
 			return( null );
 		}
 		else {
@@ -927,22 +928,31 @@ public class MSSBamCFAnyObj
 					while (mycoliter.hasNext()) {
 						ICFBamRelationColObj mine = mycoliter.next();
 						ICFBamRelationColObj theirs = theircoliter.next();
-						if (mine.getRequiredLookupToCol() != theirs.getRequiredLookupFromCol()) {
+						if (!mine.getRequiredLookupToCol().getRequiredName().equals(theirs.getRequiredLookupFromCol().getRequiredName())) {
 							anymismatches = true;
 						}
 					}
 					if (!anymismatches) {
 						toRelationsWithAllColsMatching.add(cur);
 					}
+//					else {
+//						System.err.println("Filtered out " + cur.getObjFullName() + " from candidates for " + relationDef.getObjFullName() + " due to mismatched names");
+//					}
 				}
+//				else {
+//					System.err.println("Filtered out " + cur.getObjFullName() + " from candidates for " + relationDef.getObjFullName() + " due to mismatched column counts");
+//				}
 			}
 			if( toRelationsWithAllColsMatching.size() == 1) {
+//				System.err.println("Matched reverse relationship " + toRelationsWithAllColsMatching.get(0).getObjFullName() + " for " + relationDef.getObjFullName());
 				return(toRelationsWithAllColsMatching.get(0));
 			}
 			else if( toRelationsWithAllColsMatching.isEmpty()) {
+//				System.err.println("WARNING: All " + toRelationsReferencingFromIndex.size() + " reverse relations matching from index for " + relationDef.getObjFullName() + "filtered out due to mismatched columns");
 				return( null );
 			}
 			else {
+//				System.err.println("WARNING: Multiple (" + toRelationsWithAllColsMatching.size() + " reverse relations matching from index for " + relationDef.getObjFullName() + " remain after filtering for matching columns");
 				throw new CFLibUnresolvedRelationException(MSSBamCFAnyObj.class, S_ProcName, "Multiple candidate reverse relationships found for " + relationDef.getRequiredContainerFromTable().getObjName() + "." + relationDef.getRequiredName() + " in target table " + toTable.getRequiredName());
 			}
 		}
