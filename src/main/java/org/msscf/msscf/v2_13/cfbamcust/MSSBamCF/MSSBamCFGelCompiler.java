@@ -41,7 +41,7 @@ extends MssCFGelCompiler
 	public final static String _BUILTIN_GENPACKAGEDIR = "GenPackageDir";
 	public final static String	_BUILTIN_GENPACKAGEFULLDIR = "GenPackageFullDir";
 	public final static String _BUILTIN_CODEFACTORYVERSION = "CodeFactoryVersion";
-
+	public final static String _BUILTIN_SCHEMAHOSTNAME = "SchemaHostName";
 	protected static String codeFactoryVersion = MSSBamCFEngine.LinkVersion;
 
 	/**
@@ -495,6 +495,37 @@ extends MssCFGelCompiler
 		}
 	}
 
+	protected class MssCFBuiltinSchemaHostName
+	extends CFGenKbGelBuiltinObj
+	{
+		public MssCFBuiltinSchemaHostName( ICFGenKbSchemaObj schemaObj ) {
+			super( schemaObj );
+		}
+
+		public String expand( MssCFGenContext genContext ) {
+			String ret = null;
+//			MssCFGenContext fileContext = genContext.getGenFileContext();
+//			if( fileContext != null ) {
+				ICFLibAnyObj tmp = (ICFLibAnyObj)(genContext.getGenDef());
+				if( tmp != null ) {
+					while ((tmp != null) && !(tmp instanceof ICFBamSchemaDefObj)) {
+						tmp = tmp.getObjScope();
+					}
+					if ((tmp != null) && (tmp instanceof ICFBamSchemaDefObj)) {
+						ICFBamSchemaDefObj schemaDef = (ICFBamSchemaDefObj)tmp;
+						ret = schemaDef.getRequiredContainerMinorVersion().getRequiredContainerParentMajVer().getRequiredContainerParentSPrj().getRequiredContainerParentTPrj().getRequiredName()
+							+ "." + schemaDef.getRequiredContainerMinorVersion().getRequiredContainerParentMajVer().getRequiredContainerParentSPrj().getRequiredContainerParentTPrj().getRequiredContainerParentSDom().getRequiredName()
+						    + "." + schemaDef.getRequiredContainerMinorVersion().getRequiredContainerParentMajVer().getRequiredContainerParentSPrj().getRequiredContainerParentTPrj().getRequiredContainerParentSDom().getRequiredContainerParentTld().getRequiredName();
+					}
+					else {
+						ret = System.getenv("HOSTNAME");
+					}
+				}
+//			}
+			return( ret );
+		}
+	}
+
 	protected ICFGenKbGelInstructionObj compileMacro( String macro )
 	{
 		boolean noSuperCompiler = true;
@@ -590,6 +621,16 @@ extends MssCFGelCompiler
 		}
 		else if( macro.equals( _BUILTIN_GENPACKAGEFULLDIR ) ) {
 			ICFGenKbGelBuiltinObj builtinObj = new MssCFBuiltinGenPackageFullDir( genEngine ); 
+			ICFGenKbGelBuiltinEditObj builtinEdit = (ICFGenKbGelBuiltinEditObj)builtinObj.beginEdit();
+			builtinEdit.setRequiredOwnerTenant( myGelCache.getRequiredOwnerTenant() );
+			builtinEdit.setRequiredContainerGelCache( myGelCache );
+			builtinEdit.setRequiredSourceText( macro );
+			builtinObj = (ICFGenKbGelBuiltinObj)builtinEdit.create();
+			builtinEdit = null;
+			ret = builtinObj;
+		}
+		else if( macro.equals( _BUILTIN_SCHEMAHOSTNAME )) {
+			ICFGenKbGelBuiltinObj builtinObj = new MssCFBuiltinSchemaHostName(genEngine);
 			ICFGenKbGelBuiltinEditObj builtinEdit = (ICFGenKbGelBuiltinEditObj)builtinObj.beginEdit();
 			builtinEdit.setRequiredOwnerTenant( myGelCache.getRequiredOwnerTenant() );
 			builtinEdit.setRequiredContainerGelCache( myGelCache );
