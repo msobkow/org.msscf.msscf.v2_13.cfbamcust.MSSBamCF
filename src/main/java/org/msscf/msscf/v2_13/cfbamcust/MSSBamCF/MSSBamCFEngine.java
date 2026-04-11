@@ -43,6 +43,8 @@
 
 package org.msscf.msscf.v2_13.cfbamcust.MSSBamCF;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -65,6 +67,46 @@ public class MSSBamCFEngine
 	public final static String		ITEMNAME_TOP = "top";
 
 	protected String rootGenDir = null;
+
+	protected final HashMap<String,String> schemaTweakNames = new HashMap<>();
+	protected final HashMap<String,String> tableTweakNames = new HashMap<>();
+
+	public void resetSchemaTweakNames() {
+		schemaTweakNames.clear();
+	}
+
+	public void defineSchemaTweakName(String tweakName) {
+		if (!schemaTweakNames.containsKey(tweakName)) {
+			schemaTweakNames.put(tweakName, tweakName);
+		}
+	}
+
+	public List<String> getSchemaTweakNames() {
+		ArrayList<String> tweakNames = new ArrayList<>(schemaTweakNames.keySet());
+		tweakNames.sort((o1, o2) -> {
+			return o1.compareTo(o2);
+		});
+		return tweakNames;
+	}
+
+	public void resetTableTweakNames() {
+		tableTweakNames.clear();
+	}
+
+	public void defineTableTweakName(String tweakName) {
+		if (!tableTweakNames.containsKey(tweakName)) {
+			tableTweakNames.put(tweakName, tweakName);
+		}
+	}
+
+	public List<String> getTableTweakNames() {
+		ArrayList<String> tweakNames = new ArrayList<>(tableTweakNames.keySet());
+		tweakNames.sort((o1, o2) -> {
+			return o1.compareTo(o2);
+		});
+		return tweakNames;
+	}
+
 	public String getRootGenDir() {
 		return( rootGenDir );
 	}

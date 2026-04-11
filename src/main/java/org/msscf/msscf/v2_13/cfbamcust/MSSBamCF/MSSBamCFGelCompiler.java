@@ -557,6 +557,9 @@ extends MssCFGelCompiler
 		public MssCFBuiltinSchemaTweak( ICFGenKbSchemaObj schemaObj, String tweakName ) {
 			super( schemaObj );
 			this.tweakName = tweakName;
+			if (schemaObj instanceof MSSBamCFEngine) {
+				((MSSBamCFEngine)schemaObj).defineSchemaTweakName(tweakName);
+			}
 		}
 
 		public String expand( MssCFGenContext genContext ) {
@@ -652,6 +655,9 @@ extends MssCFGelCompiler
 		public MssCFBuiltinTableTweak( ICFGenKbSchemaObj schemaObj, String tweakName ) {
 			super( schemaObj );
 			this.tweakName = tweakName;
+			if (schemaObj instanceof MSSBamCFEngine) {
+				((MSSBamCFEngine)schemaObj).defineTableTweakName(tweakName);
+			}
 		}
 
 		public String expand( MssCFGenContext genContext ) {
