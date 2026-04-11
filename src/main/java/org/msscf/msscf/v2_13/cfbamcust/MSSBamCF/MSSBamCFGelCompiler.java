@@ -43,6 +43,7 @@
 
 package org.msscf.msscf.v2_13.cfbamcust.MSSBamCF;
 
+import java.util.ArrayList;
 import org.msscf.msscf.v2_13.cflib.CFLib.*;
 import org.msscf.msscf.v2_13.cfsec.CFSecObj.ICFSecTenantObj;
 import org.msscf.msscf.v2_13.cfcore.MssCF.*;
@@ -62,6 +63,8 @@ extends MssCFGelCompiler
 	public final static String	_BUILTIN_GENPACKAGEFULLDIR = "GenPackageFullDir";
 	public final static String _BUILTIN_CODEFACTORYVERSION = "CodeFactoryVersion";
 	public final static String _BUILTIN_SCHEMAHOSTNAME = "SchemaHostName";
+	public final static String _BUILTIN_SCHEMATWEAK = "schematweak";
+	public final static String _BUILTIN_TABLETWEAK = "tabletweak";
 	protected static String codeFactoryVersion = MSSBamCFEngine.LinkVersion;
 
 	/**
@@ -546,6 +549,197 @@ extends MssCFGelCompiler
 		}
 	}
 
+	protected class MssCFBuiltinSchemaTweak
+	extends CFGenKbGelBuiltinObj
+	{
+		protected final String tweakName;
+
+		public MssCFBuiltinSchemaTweak( ICFGenKbSchemaObj schemaObj, String tweakName ) {
+			super( schemaObj );
+			this.tweakName = tweakName;
+		}
+
+		public String expand( MssCFGenContext genContext ) {
+			String ret = null;
+
+			ICFLibAnyObj genDef;
+			final String S_ProcName = "expandSchemaTweak";
+
+			if (genContext == null) {
+				throw new CFLibNullArgumentException( getClass(),
+					S_ProcName,
+					1,
+					"genContext" );
+			}
+
+			genDef = genContext.getGenDef();
+			if (genDef == null) {
+				throw new CFLibNullArgumentException( getClass(),
+					S_ProcName,
+					0,
+					"genContext.GenDef" );
+			}
+
+			if( ! ( genDef instanceof ICFBamSchemaDefObj ) ) {
+				throw new CFLibUnsupportedClassException( getClass(),
+					S_ProcName,
+					"genContext.GenDef",
+					genDef,
+					"ICFBamSchemaDefObj" );
+			}
+
+			ArrayList<ICFBamSchemaTweakObj> arrTweaks = new ArrayList<>();
+
+			ICFBamSchemaDefObj schema = (ICFBamSchemaDefObj)genDef;
+			for (ICFBamSchemaRefObj refSchema : schema.getOptionalComponentsSchemaRefs()) {
+				ICFBamSchemaDefObj forSchema = refSchema.getOptionalLookupRefSchema();
+				if (forSchema != null) {
+					for (ICFBamTweakObj tweak : forSchema.getOptionalComponentsTweaks()) {
+						ICFBamSchemaTweakObj rtweak = (ICFBamSchemaTweakObj)tweak;
+						if (rtweak.getRequiredName().equals(tweakName)) {
+							if (!arrTweaks.contains(rtweak)) {
+								arrTweaks.add(rtweak);
+							}
+						}
+					}
+				}
+			}
+			for (ICFBamTweakObj tweak : schema.getOptionalComponentsTweaks()) {
+				ICFBamSchemaTweakObj rtweak = (ICFBamSchemaTweakObj)tweak;
+				if (rtweak.getRequiredName().equals(tweakName)) {
+					if (!arrTweaks.contains(rtweak)) {
+						arrTweaks.add(rtweak);
+					}
+				}
+			}
+
+			StringBuilder buff = new StringBuilder();
+			for (ICFBamSchemaTweakObj tweak: arrTweaks) {
+				if (tweak.getRequiredReplacesInherited()) {
+					buff.setLength(0);
+				}
+				buff.append(tweak.getRequiredTweakGelText());
+			}
+
+			if(! buff.isEmpty()) {
+				StringBuilder execName = new StringBuilder( genDef.getGenDefName() );
+				execName.append( "::" );
+				execName.append(	genDef.getObjFullName() );
+				execName.append( "::" );
+				execName.append( tweakName );
+				try {
+					ICFGenKbGelExecutableObj bin = genContext.getGenEngine().getGelCompiler().compileExecutable( execName.toString(), buff.toString(), null );
+					ret = bin.expand( genContext );
+				}
+				catch (Throwable th) {
+					genContext.getGenEngine().getLog().message("ERROR: Could not compile " + genDef.getObjFullName() + " schematweak " + execName.toString() + " text='" + buff.toString() + "' - " + th.getMessage());
+					ret = "";
+				}
+			}
+			else {
+				ret = "";
+			}
+
+			return (ret);
+		}
+	}
+
+	protected class MssCFBuiltinTableTweak
+	extends CFGenKbGelBuiltinObj
+	{
+		protected final String tweakName;
+
+		public MssCFBuiltinTableTweak( ICFGenKbSchemaObj schemaObj, String tweakName ) {
+			super( schemaObj );
+			this.tweakName = tweakName;
+		}
+
+		public String expand( MssCFGenContext genContext ) {
+			String ret = null;
+
+			ICFLibAnyObj genDef;
+			final String S_ProcName = "expandTableTweak";
+
+			if (genContext == null) {
+				throw new CFLibNullArgumentException( getClass(),
+					S_ProcName,
+					1,
+					"genContext" );
+			}
+
+			genDef = genContext.getGenDef();
+			if (genDef == null) {
+				throw new CFLibNullArgumentException( getClass(),
+					S_ProcName,
+					0,
+					"genContext.GenDef" );
+			}
+
+			if( ! ( genDef instanceof ICFBamTableObj ) ) {
+				throw new CFLibUnsupportedClassException( getClass(),
+					S_ProcName,
+					"genContext.GenDef",
+					genDef,
+					"ICFBamTableObj" );
+			}
+
+			ArrayList<ICFBamTableTweakObj> arrTweaks = new ArrayList<>();
+
+			ICFBamTableObj table = (ICFBamTableObj)genDef;
+			while (table != null) {
+				for (ICFBamTweakObj tweak : table.getOptionalComponentsTweaks()) {
+					ICFBamTableTweakObj rtweak = (ICFBamTableTweakObj)tweak;
+					if (rtweak.getRequiredName().equals(tweakName)) {
+						if (!arrTweaks.contains(rtweak)) {
+							arrTweaks.addFirst(rtweak);
+						}
+					}
+				}
+				if (table.getOptionalDefSchemaTenantId() != null && table.getOptionalDefSchemaId() != null) {
+					ICFBamSchemaDefObj schemaDef = table.getSchema().getSchemaDefTableObj().readSchemaDefByIdIdx(table.getOptionalDefSchemaTenantId(), table.getOptionalDefSchemaId());
+					for( ICFBamTableObj curTable : schemaDef.getOptionalComponentsTables()) {
+						if (curTable.getRequiredName().equals(table.getRequiredName())) {
+							table = curTable;
+							break;
+						}
+					}
+				}
+				else {
+					table = null;
+				}
+			}
+
+			StringBuilder buff = new StringBuilder();
+			for (ICFBamTableTweakObj tweak: arrTweaks) {
+				if (tweak.getRequiredReplacesInherited()) {
+					buff.setLength(0);
+				}
+				buff.append(tweak.getRequiredTweakGelText());
+			}
+
+			if(! buff.isEmpty()) {
+				StringBuilder execName = new StringBuilder( genDef.getGenDefName() );
+				execName.append( "::" );
+				execName.append(	genDef.getObjFullName() );
+				execName.append( "::" );
+				execName.append( tweakName );
+				try {
+					ICFGenKbGelExecutableObj bin = genContext.getGenEngine().getGelCompiler().compileExecutable( execName.toString(), buff.toString(), null );
+					ret = bin.expand( genContext );
+				}
+				catch (Throwable th) {
+					genContext.getGenEngine().getLog().message("ERROR: Could not compile " + genDef.getObjFullName() + " tabletweak " + execName.toString() + " text='" + buff.toString() + "' - " + th.getMessage());
+					ret = "";
+				}
+			}
+			else {
+				ret = "";
+			}
+
+			return (ret);
+		}
+	}
+
 	protected ICFGenKbGelInstructionObj compileMacro( String macro )
 	{
 		boolean noSuperCompiler = true;
@@ -559,6 +753,73 @@ extends MssCFGelCompiler
 			ret = super.compileMacro( macro );
 			noSuperCompiler = false;
 		}
+		else if( macro.startsWith( _BUILTIN_SCHEMATWEAK)) {
+			String afterKeyword = macro.substring(_BUILTIN_SCHEMATWEAK.length());
+			int afterWhite = 0;
+			while (afterWhite < afterKeyword.length() && Character.isWhitespace(afterKeyword.charAt(afterWhite))) {
+				afterWhite ++;
+			}
+			if (afterWhite > 0 && afterWhite < afterKeyword.length()) {
+				afterKeyword = afterKeyword.substring(afterWhite);
+			}
+			else if(afterWhite > 0) {
+				afterKeyword = "";
+			}
+			if (!afterKeyword.isEmpty() && !afterKeyword.isBlank()) {
+				ICFGenKbGelBuiltinObj builtinObj = new MssCFBuiltinSchemaTweak( genEngine, afterKeyword ); 
+				ICFGenKbGelBuiltinEditObj builtinEdit = (ICFGenKbGelBuiltinEditObj)builtinObj.beginEdit();
+				builtinEdit.setRequiredOwnerTenant( myGelCache.getRequiredOwnerTenant() );
+				builtinEdit.setRequiredContainerGelCache( myGelCache );
+				builtinEdit.setRequiredSourceText( macro );
+				builtinObj = (ICFGenKbGelBuiltinObj)builtinEdit.create();
+				ret = builtinObj;
+			}
+			else {
+				ICFGenKbGelErrorObj errObj = new CFGenKbGelErrorObj(genEngine);
+				ICFGenKbGelErrorEditObj errEdit = (ICFGenKbGelErrorEditObj)errObj.beginEdit();
+				errEdit.setRequiredOwnerTenant( myGelCache.getRequiredOwnerTenant() );
+				errEdit.setRequiredContainerGelCache( myGelCache );
+				errEdit.setRequiredSourceText( macro );
+				errObj = (ICFGenKbGelErrorObj)errEdit.create();
+				ret = errObj;
+			}
+		}
+		else if( macro.startsWith( _BUILTIN_TABLETWEAK)) {
+			String afterKeyword = macro.substring(_BUILTIN_TABLETWEAK.length());
+			int afterWhite = 0;
+			while (afterWhite < afterKeyword.length() && Character.isWhitespace(afterKeyword.charAt(afterWhite))) {
+				afterWhite ++;
+			}
+			if (afterWhite > 0) {
+				if (afterWhite < afterKeyword.length()) {
+					afterKeyword = afterKeyword.substring(afterWhite);
+				}
+				else {
+					afterKeyword = "";
+				}
+			}
+			else {
+				afterKeyword = "";
+			}
+			if (!afterKeyword.isEmpty() && !afterKeyword.isBlank()) {
+				ICFGenKbGelBuiltinObj builtinObj = new MssCFBuiltinTableTweak( genEngine, afterKeyword ); 
+				ICFGenKbGelBuiltinEditObj builtinEdit = (ICFGenKbGelBuiltinEditObj)builtinObj.beginEdit();
+				builtinEdit.setRequiredOwnerTenant( myGelCache.getRequiredOwnerTenant() );
+				builtinEdit.setRequiredContainerGelCache( myGelCache );
+				builtinEdit.setRequiredSourceText( macro );
+				builtinObj = (ICFGenKbGelBuiltinObj)builtinEdit.create();
+				ret = builtinObj;
+			}
+			else {
+				ICFGenKbGelErrorObj errObj = new CFGenKbGelErrorObj(genEngine);
+				ICFGenKbGelErrorEditObj errEdit = (ICFGenKbGelErrorEditObj)errObj.beginEdit();
+				errEdit.setRequiredOwnerTenant( myGelCache.getRequiredOwnerTenant() );
+				errEdit.setRequiredContainerGelCache( myGelCache );
+				errEdit.setRequiredSourceText( macro );
+				errObj = (ICFGenKbGelErrorObj)errEdit.create();
+				ret = errObj;
+			}
+		}
 		else if( macro.equals( _BUILTIN_CODEFACTORYVERSION ) ) {
 			ICFGenKbGelBuiltinObj builtinObj = new MssCFBuiltinCodeFactoryVersion( genEngine ); 
 			ICFGenKbGelBuiltinEditObj builtinEdit = (ICFGenKbGelBuiltinEditObj)builtinObj.beginEdit();
@@ -566,7 +827,6 @@ extends MssCFGelCompiler
 			builtinEdit.setRequiredContainerGelCache( myGelCache );
 			builtinEdit.setRequiredSourceText( macro );
 			builtinObj = (ICFGenKbGelBuiltinObj)builtinEdit.create();
-			builtinEdit = null;
 			ret = builtinObj;
 		}
 		else if( macro.equals( _BUILTIN_PROJECTNAME ) ) {
@@ -576,7 +836,6 @@ extends MssCFGelCompiler
 			builtinEdit.setRequiredContainerGelCache( myGelCache );
 			builtinEdit.setRequiredSourceText( macro );
 			builtinObj = (ICFGenKbGelBuiltinObj)builtinEdit.create();
-			builtinEdit = null;
 			ret = builtinObj;
 		}
 		else if (macro.equals(_BUILTIN_JAVAPACKAGE)) {
@@ -586,7 +845,6 @@ extends MssCFGelCompiler
 			builtinEdit.setRequiredContainerGelCache( myGelCache );
 			builtinEdit.setRequiredSourceText( macro );
 			builtinObj = (ICFGenKbGelBuiltinObj)builtinEdit.create();
-			builtinEdit = null;
 			ret = builtinObj;
 		}
 		else if (macro.equals(_BUILTIN_JAVADEFPACKAGE)) {
@@ -596,7 +854,6 @@ extends MssCFGelCompiler
 			builtinEdit.setRequiredContainerGelCache( myGelCache );
 			builtinEdit.setRequiredSourceText( macro );
 			builtinObj = (ICFGenKbGelBuiltinObj)builtinEdit.create();
-			builtinEdit = null;
 			ret = builtinObj;
 		}
 		else if (macro.equals(_BUILTIN_GENPACKAGE)) {
@@ -606,7 +863,6 @@ extends MssCFGelCompiler
 			builtinEdit.setRequiredContainerGelCache( myGelCache );
 			builtinEdit.setRequiredSourceText( macro );
 			builtinObj = (ICFGenKbGelBuiltinObj)builtinEdit.create();
-			builtinEdit = null;
 			ret = builtinObj;
 		}
 		else if( macro.equals( _BUILTIN_GENBASEPACKAGE ) ) {
@@ -616,7 +872,6 @@ extends MssCFGelCompiler
 			builtinEdit.setRequiredContainerGelCache( myGelCache );
 			builtinEdit.setRequiredSourceText( macro );
 			builtinObj = (ICFGenKbGelBuiltinObj)builtinEdit.create();
-			builtinEdit = null;
 			ret = builtinObj;
 		}
 		else if( macro.equals( _BUILTIN_GENFULLPACKAGE ) ) {
@@ -626,7 +881,6 @@ extends MssCFGelCompiler
 			builtinEdit.setRequiredContainerGelCache( myGelCache );
 			builtinEdit.setRequiredSourceText( macro );
 			builtinObj = (ICFGenKbGelBuiltinObj)builtinEdit.create();
-			builtinEdit = null;
 			ret = builtinObj;
 		}
 		else if( macro.equals( _BUILTIN_GENPACKAGEDIR ) ) {
@@ -636,7 +890,6 @@ extends MssCFGelCompiler
 			builtinEdit.setRequiredContainerGelCache( myGelCache );
 			builtinEdit.setRequiredSourceText( macro );
 			builtinObj = (ICFGenKbGelBuiltinObj)builtinEdit.create();
-			builtinEdit = null;
 			ret = builtinObj;
 		}
 		else if( macro.equals( _BUILTIN_GENPACKAGEFULLDIR ) ) {
@@ -646,7 +899,6 @@ extends MssCFGelCompiler
 			builtinEdit.setRequiredContainerGelCache( myGelCache );
 			builtinEdit.setRequiredSourceText( macro );
 			builtinObj = (ICFGenKbGelBuiltinObj)builtinEdit.create();
-			builtinEdit = null;
 			ret = builtinObj;
 		}
 		else if( macro.equals( _BUILTIN_SCHEMAHOSTNAME )) {
@@ -656,7 +908,6 @@ extends MssCFGelCompiler
 			builtinEdit.setRequiredContainerGelCache( myGelCache );
 			builtinEdit.setRequiredSourceText( macro );
 			builtinObj = (ICFGenKbGelBuiltinObj)builtinEdit.create();
-			builtinEdit = null;
 			ret = builtinObj;
 		}
 		else {
