@@ -129,18 +129,18 @@ public class MSSBamCFGenBindIsSuperiorNonCandidateRelation
 				if (MSSBamCFGenBindIsSuperiorCandidateRelation.inheritsMutable(toTable)) {
 					return true;
 				}
-				ICFBamRelationObj reversed = MSSBamCFAnyObj.derefReverseRelation(relnToCheck);
-				if (reversed == null) {
-					if (relnToCheck.getRequiredRelationType() == ICFBamSchema.RelationTypeEnum.Lookup) {
-						return false;
-					}
-					else {
-						return true;
-					}
-				}
-				else {
+//				ICFBamRelationObj reversed = MSSBamCFAnyObj.derefReverseRelation(relnToCheck);
+//				if (reversed == null) {
+//					if (relnToCheck.getRequiredRelationType() == ICFBamSchema.RelationTypeEnum.Lookup) {
+//						return false;
+//					}
+//					else {
+//						return true;
+//					}
+//				}
+//				else {
 					return false;
-				}
+//				}
 			case Superclass:
 				return false;
 			default:

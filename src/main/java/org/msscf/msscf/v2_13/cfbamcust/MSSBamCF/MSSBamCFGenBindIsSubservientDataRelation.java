@@ -124,7 +124,7 @@ public class MSSBamCFGenBindIsSubservientDataRelation
 				return false;
 			case Children:
 			case Components:
-					return( true );
+				return( !MSSBamCFGenBindIsRelationInPrimaryIndex.isRelationInPrimaryIndex(relnToCheck) );
 			case Superclass:
 				return false;
 			default:

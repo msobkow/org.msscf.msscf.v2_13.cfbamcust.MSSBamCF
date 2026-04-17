@@ -132,13 +132,13 @@ public class MSSBamCFGenBindIsSubservientCandidateRelation
 				return false;
 			case Children:
 			case Components:
-				ICFBamRelationObj reversed = MSSBamCFAnyObj.derefReverseRelation(relnToCheck);
-				if (reversed == null) {
-					return false;
-				}
-				else {
+//				ICFBamRelationObj reversed = MSSBamCFAnyObj.derefReverseRelation(relnToCheck);
+//				if (reversed == null) {
+//					return false;
+//				}
+//				else {
 					return true;
-				}
+//				}
 			case Superclass:
 				return false;
 			default:

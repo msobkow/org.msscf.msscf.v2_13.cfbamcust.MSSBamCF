@@ -114,8 +114,30 @@ public class MSSBamCFGenBindIsRelationInPrimaryIndex
 		if (relnToCheck == null) {
 			return false;
 		}
+
+		// Check all the inherited defintions of the primary index, not just the one in the base table
 		ICFBamTableObj tbl = relnToCheck.getRequiredContainerFromTable();
 		do {
+			ICFBamIndexObj pidx = tbl.getPrimaryKeyIndex();
+			boolean anyColsMissing = false;
+			for (ICFBamRelationColObj col: relnToCheck.getOptionalComponentsColumns()) {
+				ICFBamValueObj fromcol = col.getRequiredLookupFromCol().getRequiredLookupColumn();
+				boolean colNotInList = true;
+				for (ICFBamIndexColObj idxcol: pidx.getOptionalComponentsColumns()) {
+					ICFBamValueObj rcol = idxcol.getRequiredLookupColumn();
+					if (fromcol == rcol) {
+						colNotInList = false;
+						break;
+					}
+				}
+				if (colNotInList) {
+					anyColsMissing = true;
+					break;
+				}
+			}
+			if (!anyColsMissing) {
+				return true;
+			}
 			ICFBamRelationObj superRelation = tbl.getSuperClassRelation();
 			if (superRelation != null) {
 				tbl = superRelation.getRequiredLookupToTable();
@@ -124,22 +146,7 @@ public class MSSBamCFGenBindIsRelationInPrimaryIndex
 				break;
 			}
 		} while (true);
-		ICFBamIndexObj pidx = tbl.getPrimaryKeyIndex();
-		for (ICFBamRelationColObj col: relnToCheck.getOptionalComponentsColumns()) {
-			ICFBamValueObj fromcol = col.getRequiredLookupFromCol().getRequiredLookupColumn();
-			boolean colNotInList = true;
-			for (ICFBamIndexColObj idxcol: pidx.getOptionalComponentsColumns()) {
-				ICFBamValueObj rcol = idxcol.getRequiredLookupColumn();
-				if (fromcol == rcol) {
-					colNotInList = false;
-					break;
-				}
-			}
-			if (colNotInList) {
-				return( false );
-			}
-		}
-		return( true );
+		return( false );
 	}
 
 }

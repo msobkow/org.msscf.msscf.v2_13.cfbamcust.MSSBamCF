@@ -143,13 +143,13 @@ public class MSSBamCFGenBindIsSuperiorCandidateRelation
 			case Container:
 			case Owner:
 			case Parent:
-				ICFBamRelationObj reversed = MSSBamCFAnyObj.derefReverseRelation(relnToCheck);
-				if (reversed == null) {
-					return false;
-				}
-				else {
+//				ICFBamRelationObj reversed = MSSBamCFAnyObj.derefReverseRelation(relnToCheck);
+//				if (reversed == null) {
+//					return false;
+//				}
+//				else {
 					return true;
-				}
+//				}
 			case Superclass:
 				return false;
 			default:
