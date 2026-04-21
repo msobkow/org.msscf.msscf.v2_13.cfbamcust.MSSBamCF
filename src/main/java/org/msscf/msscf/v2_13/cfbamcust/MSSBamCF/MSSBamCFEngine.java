@@ -70,6 +70,7 @@ public class MSSBamCFEngine
 
 	protected final HashMap<String,String> schemaTweakNames = new HashMap<>();
 	protected final HashMap<String,String> tableTweakNames = new HashMap<>();
+	protected final HashMap<String,String> indexTweakNames = new HashMap<>();
 
 	public void resetSchemaTweakNames() {
 		schemaTweakNames.clear();
@@ -101,6 +102,24 @@ public class MSSBamCFEngine
 
 	public List<String> getTableTweakNames() {
 		ArrayList<String> tweakNames = new ArrayList<>(tableTweakNames.keySet());
+		tweakNames.sort((o1, o2) -> {
+			return o1.compareTo(o2);
+		});
+		return tweakNames;
+	}
+
+	public void resetIndexTweakNames() {
+		indexTweakNames.clear();
+	}
+
+	public void defineIndexTweakName(String tweakName) {
+		if (!indexTweakNames.containsKey(tweakName)) {
+			indexTweakNames.put(tweakName, tweakName);
+		}
+	}
+
+	public List<String> getIndexTweakNames() {
+		ArrayList<String> tweakNames = new ArrayList<>(indexTweakNames.keySet());
 		tweakNames.sort((o1, o2) -> {
 			return o1.compareTo(o2);
 		});
