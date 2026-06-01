@@ -148,19 +148,19 @@ public class MSSBamCFGenIterateSchemaSchemaOrderedRoles
 				else {
 					String lhsName = lhs.getRequiredName();
 					String rhsName = rhs.getRequiredName();
-					String lhsMembershipString = lhs.getRequiredMembershipString();
-					String rhsMembershipString = rhs.getRequiredMembershipString();
+					String lhsEnables = lhs.getRequiredEnables();
+					String rhsEnables = rhs.getRequiredEnables();
 					boolean rhsEnablesLhs = false;
-					String lhsMembers[] = lhsMembershipString.split(" ");
-					String rhsMembers[] = rhsMembershipString.split(" ");
+					String lhsEnableArr[] = lhsEnables.split(" ");
+					String rhsEnableArr[] = rhsEnables.split(" ");
 					boolean lhsEnablesRhs = false;
-					for (String v: lhsMembers) {
+					for (String v: lhsEnableArr) {
 						if (rhsName.equals(v)) {
 							lhsEnablesRhs = true;
 							break;
 						}
 					}
-					for (String v: rhsMembers) {
+					for (String v: rhsEnableArr) {
 						if (lhsName.equals(v)) {
 							rhsEnablesLhs = true;
 							break;
