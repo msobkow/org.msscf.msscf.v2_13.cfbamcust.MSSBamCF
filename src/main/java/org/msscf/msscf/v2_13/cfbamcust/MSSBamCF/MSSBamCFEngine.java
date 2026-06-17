@@ -3931,6 +3931,13 @@ public class MSSBamCFEngine
         editIterator.create();
         editIterator = null;
 
+        iterator = new MSSBamCFGenIterateDefSchemaRootTables(this,  "any", null, "SchemaDef", "DefSchemaRootTables" );
+        editIterator = (ICFGenKbGenIteratorEditObj)iterator.beginEdit();
+		((ICFGenKbGenItemEditObj)editIterator).setRequiredContainerCartridge( ruleCart );
+		((ICFGenKbGenItemEditObj)editIterator).setRequiredLookupRuleType( ruleTypeIterator );
+        editIterator.create();
+        editIterator = null;
+
         iterator = new MSSBamCFGenIterateId16Generators(this,  "any", null, "SchemaDef", "Id16Generators" );
         editIterator = (ICFGenKbGenIteratorEditObj)iterator.beginEdit();
 		((ICFGenKbGenItemEditObj)editIterator).setRequiredContainerCartridge( ruleCart );
