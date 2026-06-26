@@ -47,11 +47,137 @@ import java.util.*;
 import org.msscf.msscf.v2_13.cfbam.CFBam.ICFBamSchema.RelationTypeEnum;
 
 import org.msscf.msscf.v2_13.cflib.CFLib.*;
+import org.msscf.msscf.v2_13.cfbam.CFBam.ICFBamSchema;
 import org.msscf.msscf.v2_13.cfbam.CFBamObj.*;
 
 public class MSSBamCFAnyObj
 {
 	public MSSBamCFAnyObj() {
+	}
+
+	public static boolean isPublic(ICFLibAnyObj what) {
+		if (what == null) {
+			return(false);
+		}
+		if (what instanceof ICFBamAtomObj) {
+			ICFBamAtomObj atom = (ICFBamAtomObj)what;
+			switch (atom.getRequiredCodeVis()) {
+				case ICFBamSchema.CodeVisibilityEnum.Public:
+					return(isPublic(atom.getRequiredContainerScope()));
+				default:
+					return(false);
+			}
+		}
+		else if (what instanceof ICFBamTableColObj) {
+			ICFBamTableColObj col = (ICFBamTableColObj)what;
+			switch (col.getRequiredCodeVis()) {
+				case ICFBamSchema.CodeVisibilityEnum.Public:
+					return(isPublic(col.getRequiredContainerTable()));
+				default:
+					return(false);
+			}
+		}
+		else if(what instanceof ICFBamEnumDefObj) {
+			ICFBamEnumDefObj cur = (CFBamEnumDefObj)what;
+			while (cur.getRequiredCodeVis() == ICFBamSchema.CodeVisibilityEnum.Public) {
+				return(isPublic(cur.getRequiredContainerScope()));
+			}
+			return(false);
+		}
+		else if(what instanceof ICFBamIndexColObj) {
+			ICFBamIndexColObj col = (ICFBamIndexColObj)what;
+			return(isPublic(col.getRequiredLookupColumn()));
+		}
+		else if(what instanceof ICFBamRelationColObj) {
+			ICFBamRelationColObj col = (ICFBamRelationColObj)what;
+			return(isPublic(col.getRequiredLookupFromCol()) && isPublic(col.getRequiredLookupToCol()));
+		}
+		else if(what instanceof ICFBamIndexObj) {
+			ICFBamIndexObj idx = (ICFBamIndexObj)what;
+			if (idx.getRequiredCodeVis() == ICFBamSchema.CodeVisibilityEnum.Public) {
+				if (!isPublic(idx.getRequiredContainerTable())) {
+					return(false);
+				}
+				else {
+					for (ICFBamIndexColObj col: idx.getOptionalComponentsColumns()) {
+						if (!isPublic(col)) {
+							return(false);
+						}
+					}
+					return(true);
+				}
+			}
+			else {
+				return(false);
+			}
+		}
+		else if(what instanceof ICFBamRelationObj) {
+			ICFBamRelationObj reln = (ICFBamRelationObj)what;
+			if (reln.getRequiredCodeVis() == ICFBamSchema.CodeVisibilityEnum.Public) {
+				if(isPublic(reln.getRequiredContainerFromTable()) && isPublic(reln.getRequiredLookupToTable()) && isPublic(reln.getRequiredLookupFromIndex()) && isPublic(reln.getRequiredLookupToIndex())) {
+					for (ICFBamRelationColObj col: reln.getOptionalComponentsColumns()) {
+						if (!isPublic(col)) {
+							return(false);
+						}
+					}
+					return(true);
+				}
+				else {
+					return(false);
+				}
+			}
+			else {
+				return(false);
+			}
+		}
+		else if(what instanceof ICFBamParamObj) {
+			ICFBamParamObj p = (ICFBamParamObj)what;
+			return(true);
+		}
+		else if(what instanceof ICFBamServerMethodObj) {
+			ICFBamServerMethodObj meth = (CFBamServerMethodObj)what;
+			if (meth.getRequiredCodeVis() == ICFBamSchema.CodeVisibilityEnum.Public) {
+				if (!isPublic(meth.getRequiredContainerForTable())) {
+					return(false);
+				}
+				for(ICFBamParamObj p: meth.getOptionalComponentsParams()) {
+					if(!isPublic(p)) {
+						return(false);
+					}
+				}
+				if (meth instanceof ICFBamServerObjFuncObj) {
+					ICFBamServerObjFuncObj of = (ICFBamServerObjFuncObj)meth;
+					if (!isPublic(of.getOptionalLookupRetTable())) {
+						return(false);
+					}
+					else {
+						return(true);
+					}
+				}
+				else if (meth instanceof ICFBamServerListFuncObj) {
+					ICFBamServerListFuncObj of = (ICFBamServerListFuncObj)meth;
+					if (!isPublic(of.getOptionalLookupRetTable())) {
+						return(false);
+					}
+					else {
+						return(true);
+					}
+				}
+				else if (meth instanceof ICFBamServerProcObj) {
+					return(true);
+				}
+				else {
+					return(false);
+				}
+			}
+			else {
+				return(false);
+			}
+		}
+		else {
+			// anything which isn't recognizable is automatically public
+			return(true);
+		}
 	}
 
     public static boolean inSuperiorCandidateRelation(ICFBamValueObj valueDef) {
