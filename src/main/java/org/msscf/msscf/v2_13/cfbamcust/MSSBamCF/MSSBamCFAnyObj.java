@@ -55,283 +55,324 @@ public class MSSBamCFAnyObj
 	public MSSBamCFAnyObj() {
 	}
 
+	public static boolean inPrimaryIndexKey(ICFBamTableObj tbl, ICFBamValueObj value) {
+		ICFBamIndexObj idx = tbl.getOptionalLookupPrimaryIndex();
+		if (idx == null) {
+			idx = tbl.getPrimaryKeyIndex();
+		}
+		for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
+			if (xcol.getRequiredLookupColumn() == value) {
+				return(true);
+			}
+		}
+		return(false);
+	}
+
 	public static boolean isPublic(ICFLibAnyObj what) {
 		if (what == null) {
 			return(false);
 		}
 		if (what instanceof ICFBamAtomObj atom) {
 			switch (atom.getRequiredCodeVis()) {
+				case null:
 				case ICFBamSchema.CodeVisibilityEnum.Public:
 					ICFBamTableObj tbl;
 					if (atom instanceof ICFBamBlobColObj col) {
 						tbl = col.getRequiredContainerTable();
-						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
-						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
-							if (xcol.getRequiredLookupColumn() == col) {
-								return(true);
-							}
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
 						}
+					}
+					else if (atom instanceof ICFBamBlobTypeObj) {
+						return(true);
 					}
 					else if (atom instanceof ICFBamBoolColObj col) {
 						tbl = col.getRequiredContainerTable();
-						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
-						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
-							if (xcol.getRequiredLookupColumn() == col) {
-								return(true);
-							}
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
 						}
+					}
+					else if (atom instanceof ICFBamBoolTypeObj) {
+						return(true);
 					}
 					else if (atom instanceof ICFBamDateColObj col) {
 						tbl = col.getRequiredContainerTable();
-						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
-						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
-							if (xcol.getRequiredLookupColumn() == col) {
-								return(true);
-							}
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
 						}
+					}
+					else if (atom instanceof ICFBamDateTypeObj) {
+						return(true);
 					}
 					else if (atom instanceof ICFBamDbKeyHash128ColObj col) {
 						tbl = col.getRequiredContainerTable();
-						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
-						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
-							if (xcol.getRequiredLookupColumn() == col) {
-								return(true);
-							}
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
 						}
+					}
+					else if (atom instanceof ICFBamDbKeyHash128GenObj) {
+						return(true);
+					}
+					else if (atom instanceof ICFBamDbKeyHash128TypeObj) {
+						return(true);
 					}
 					else if (atom instanceof ICFBamDbKeyHash160ColObj col) {
 						tbl = col.getRequiredContainerTable();
-						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
-						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
-							if (xcol.getRequiredLookupColumn() == col) {
-								return(true);
-							}
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
 						}
+					}
+					else if (atom instanceof ICFBamDbKeyHash160GenObj) {
+						return(true);
+					}
+					else if (atom instanceof ICFBamDbKeyHash160TypeObj) {
+						return(true);
 					}
 					else if (atom instanceof ICFBamDbKeyHash224ColObj col) {
 						tbl = col.getRequiredContainerTable();
-						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
-						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
-							if (xcol.getRequiredLookupColumn() == col) {
-								return(true);
-							}
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
 						}
+					}
+					else if (atom instanceof ICFBamDbKeyHash224GenObj) {
+						return(true);
+					}
+					else if (atom instanceof ICFBamDbKeyHash224TypeObj) {
+						return(true);
 					}
 					else if (atom instanceof ICFBamDbKeyHash256ColObj col) {
 						tbl = col.getRequiredContainerTable();
-						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
-						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
-							if (xcol.getRequiredLookupColumn() == col) {
-								return(true);
-							}
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
 						}
+					}
+					else if (atom instanceof ICFBamDbKeyHash256GenObj) {
+						return(true);
+					}
+					else if (atom instanceof ICFBamDbKeyHash256TypeObj) {
+						return(true);
 					}
 					else if (atom instanceof ICFBamDbKeyHash384ColObj col) {
 						tbl = col.getRequiredContainerTable();
-						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
-						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
-							if (xcol.getRequiredLookupColumn() == col) {
-								return(true);
-							}
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
 						}
+					}
+					else if (atom instanceof ICFBamDbKeyHash384GenObj) {
+						return(true);
+					}
+					else if (atom instanceof ICFBamDbKeyHash384TypeObj) {
+						return(true);
 					}
 					else if (atom instanceof ICFBamDbKeyHash512ColObj col) {
 						tbl = col.getRequiredContainerTable();
-						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
-						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
-							if (xcol.getRequiredLookupColumn() == col) {
-								return(true);
-							}
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
 						}
+					}
+					else if (atom instanceof ICFBamDbKeyHash512GenObj) {
+						return(true);
+					}
+					else if (atom instanceof ICFBamDbKeyHash512TypeObj) {
+						return(true);
 					}
 					else if (atom instanceof ICFBamDoubleColObj col) {
 						tbl = col.getRequiredContainerTable();
-						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
-						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
-							if (xcol.getRequiredLookupColumn() == col) {
-								return(true);
-							}
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
 						}
+					}
+					else if (atom instanceof ICFBamDoubleTypeObj) {
+						return(true);
 					}
 					else if (atom instanceof ICFBamFloatColObj col) {
 						tbl = col.getRequiredContainerTable();
-						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
-						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
-							if (xcol.getRequiredLookupColumn() == col) {
-								return(true);
-							}
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
 						}
+					}
+					else if (atom instanceof ICFBamFloatTypeObj) {
+						return(true);
 					}
 					else if (atom instanceof ICFBamInt16ColObj col) {
 						tbl = col.getRequiredContainerTable();
-						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
-						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
-							if (xcol.getRequiredLookupColumn() == col) {
-								return(true);
-							}
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
 						}
+					}
+					else if (atom instanceof ICFBamId16GenObj) {
+						return(true);
+					}
+					else if (atom instanceof ICFBamInt16TypeObj) {
+						return(true);
 					}
 					else if (atom instanceof ICFBamInt32ColObj col) {
 						tbl = col.getRequiredContainerTable();
-						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
-						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
-							if (xcol.getRequiredLookupColumn() == col) {
-								return(true);
-							}
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
 						}
+					}
+					else if (atom instanceof ICFBamId32GenObj) {
+						return(true);
+					}
+					else if (atom instanceof ICFBamInt32TypeObj) {
+						return(true);
 					}
 					else if (atom instanceof ICFBamInt64ColObj col) {
 						tbl = col.getRequiredContainerTable();
-						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
-						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
-							if (xcol.getRequiredLookupColumn() == col) {
-								return(true);
-							}
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
 						}
+					}
+					else if (atom instanceof ICFBamId64GenObj) {
+						return(true);
+					}
+					else if (atom instanceof ICFBamInt64TypeObj) {
+						return(true);
 					}
 					else if (atom instanceof ICFBamNmTokenColObj col) {
 						tbl = col.getRequiredContainerTable();
-						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
-						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
-							if (xcol.getRequiredLookupColumn() == col) {
-								return(true);
-							}
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
 						}
+					}
+					else if (atom instanceof ICFBamNmTokenTypeObj) {
+						return(true);
 					}
 					else if (atom instanceof ICFBamNmTokensColObj col) {
 						tbl = col.getRequiredContainerTable();
-						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
-						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
-							if (xcol.getRequiredLookupColumn() == col) {
-								return(true);
-							}
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
 						}
+					}
+					else if (atom instanceof ICFBamNmTokensTypeObj) {
+						return(true);
 					}
 					else if (atom instanceof ICFBamNumberColObj col) {
 						tbl = col.getRequiredContainerTable();
-						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
-						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
-							if (xcol.getRequiredLookupColumn() == col) {
-								return(true);
-							}
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
 						}
+					}
+					else if (atom instanceof ICFBamNumberTypeObj) {
+						return(true);
 					}
 					else if (atom instanceof ICFBamStringColObj col) {
 						tbl = col.getRequiredContainerTable();
-						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
-						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
-							if (xcol.getRequiredLookupColumn() == col) {
-								return(true);
-							}
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
 						}
+					}
+					else if (atom instanceof ICFBamStringTypeObj) {
+						return(true);
 					}
 					else if (atom instanceof ICFBamTZDateColObj col) {
 						tbl = col.getRequiredContainerTable();
-						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
-						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
-							if (xcol.getRequiredLookupColumn() == col) {
-								return(true);
-							}
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
 						}
+					}
+					else if (atom instanceof ICFBamTZDateTypeObj) {
+						return(true);
 					}
 					else if (atom instanceof ICFBamTZTimeColObj col) {
 						tbl = col.getRequiredContainerTable();
-						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
-						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
-							if (xcol.getRequiredLookupColumn() == col) {
-								return(true);
-							}
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
 						}
+					}
+					else if (atom instanceof ICFBamTZTimeTypeObj) {
+						return(true);
 					}
 					else if (atom instanceof ICFBamTZTimestampColObj col) {
 						tbl = col.getRequiredContainerTable();
-						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
-						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
-							if (xcol.getRequiredLookupColumn() == col) {
-								return(true);
-							}
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
 						}
+					}
+					else if (atom instanceof ICFBamTZTimestampTypeObj) {
+						return(true);
 					}
 					else if (atom instanceof ICFBamTextColObj col) {
 						tbl = col.getRequiredContainerTable();
-						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
-						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
-							if (xcol.getRequiredLookupColumn() == col) {
-								return(true);
-							}
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
 						}
+					}
+					else if (atom instanceof ICFBamTextTypeObj) {
+						return(true);
 					}
 					else if (atom instanceof ICFBamTimeColObj col) {
 						tbl = col.getRequiredContainerTable();
-						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
-						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
-							if (xcol.getRequiredLookupColumn() == col) {
-								return(true);
-							}
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
 						}
+					}
+					else if (atom instanceof ICFBamTimeTypeObj) {
+						return(true);
 					}
 					else if (atom instanceof ICFBamTimestampColObj col) {
 						tbl = col.getRequiredContainerTable();
-						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
-						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
-							if (xcol.getRequiredLookupColumn() == col) {
-								return(true);
-							}
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
 						}
+					}
+					else if (atom instanceof ICFBamTimestampTypeObj) {
+						return(true);
 					}
 					else if (atom instanceof ICFBamTokenColObj col) {
 						tbl = col.getRequiredContainerTable();
-						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
-						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
-							if (xcol.getRequiredLookupColumn() == col) {
-								return(true);
-							}
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
 						}
+					}
+					else if (atom instanceof ICFBamTokenTypeObj) {
+						return(true);
 					}
 					else if (atom instanceof ICFBamUInt16ColObj col) {
 						tbl = col.getRequiredContainerTable();
-						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
-						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
-							if (xcol.getRequiredLookupColumn() == col) {
-								return(true);
-							}
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
 						}
+					}
+					else if (atom instanceof ICFBamUInt16TypeObj) {
+						return(true);
 					}
 					else if (atom instanceof ICFBamUInt32ColObj col) {
 						tbl = col.getRequiredContainerTable();
-						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
-						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
-							if (xcol.getRequiredLookupColumn() == col) {
-								return(true);
-							}
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
 						}
+					}
+					else if (atom instanceof ICFBamUInt32TypeObj) {
+						return(true);
 					}
 					else if (atom instanceof ICFBamUInt64ColObj col) {
 						tbl = col.getRequiredContainerTable();
-						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
-						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
-							if (xcol.getRequiredLookupColumn() == col) {
-								return(true);
-							}
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
 						}
+					}
+					else if (atom instanceof ICFBamUInt64TypeObj) {
+						return(true);
 					}
 					else if (atom instanceof ICFBamUuid6ColObj col) {
 						tbl = col.getRequiredContainerTable();
-						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
-						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
-							if (xcol.getRequiredLookupColumn() == col) {
-								return(true);
-							}
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
 						}
+					}
+					else if (atom instanceof ICFBamUuid6TypeObj) {
+						return(true);
 					}
 					else if (atom instanceof ICFBamUuidColObj col) {
 						tbl = col.getRequiredContainerTable();
-						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
-						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
-							if (xcol.getRequiredLookupColumn() == col) {
-								return(true);
-							}
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
 						}
+					}
+					else if (atom instanceof ICFBamUuidTypeObj) {
+						return(true);
 					}
 					else {
 						return(true);
@@ -343,24 +384,26 @@ public class MSSBamCFAnyObj
 		}
 		else if (what instanceof ICFBamTableColObj col) {
 			switch (col.getRequiredCodeVis()) {
+				case null:
 				case ICFBamSchema.CodeVisibilityEnum.Public:
 					ICFBamTableObj tbl = col.getRequiredContainerTable();
-					ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
-					for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
-						if (xcol.getRequiredLookupColumn() == col) {
-							return(true);
-						}
+					if (inPrimaryIndexKey(tbl, col)) {
+						return(true);
 					}
 					return(isPublic(tbl));
 				default:
 					return(false);
 			}
 		}
+		else if(what instanceof ICFBamEnumTypeObj) {
+			return(true);
+		}
 		else if(what instanceof ICFBamEnumDefObj cur) {
-			if (cur.getRequiredCodeVis() == ICFBamSchema.CodeVisibilityEnum.Public) {
-				return(isPublic(cur.getRequiredContainerScope()));
-			}
-			return(false);
+			return switch(cur.getRequiredCodeVis()) {
+				case null -> true;
+				case ICFBamSchema.CodeVisibilityEnum.Public -> isPublic(cur.getRequiredContainerScope());
+				default -> false;
+			};
 		}
 		else if(what instanceof ICFBamIndexColObj col) {
 			return(isPublic(col.getRequiredLookupColumn()));
@@ -373,84 +416,542 @@ public class MSSBamCFAnyObj
 			if( idx == tbl.getPrimaryKeyIndex()) {
 				return(isPublic(tbl));
 			}
-			if (idx.getRequiredCodeVis() == ICFBamSchema.CodeVisibilityEnum.Public) {
-				if (!isPublic(tbl)) {
-					return(false);
-				}
-				else {
-					for (ICFBamIndexColObj col: idx.getOptionalComponentsColumns()) {
-						if (!isPublic(col.getRequiredLookupColumn())) {
-							return(false);
-						}
+			switch (idx.getRequiredCodeVis()) {
+				case null:
+				case ICFBamSchema.CodeVisibilityEnum.Public:
+					if (!isPublic(tbl)) {
+						return(false);
 					}
-					return(true);
-				}
-			}
-			else {
-				return(false);
+					else {
+						for (ICFBamIndexColObj col: idx.getOptionalComponentsColumns()) {
+							if (!isPublic(col.getRequiredLookupColumn())) {
+								return(false);
+							}
+						}
+						return(true);
+					}
+				default:
+					return(false);
 			}
 		}
 		else if(what instanceof ICFBamRelationObj reln) {
-			if (reln.getRequiredCodeVis() == ICFBamSchema.CodeVisibilityEnum.Public) {
-				if(isPublic(reln.getRequiredContainerFromTable()) && isPublic(reln.getRequiredLookupToTable()) && isPublic(reln.getRequiredLookupFromIndex()) && isPublic(reln.getRequiredLookupToIndex())) {
-					for (ICFBamRelationColObj col: reln.getOptionalComponentsColumns()) {
-						if (!isPublic(col)) {
-							return(false);
+			switch (reln.getRequiredCodeVis()) {
+				case null:
+				case ICFBamSchema.CodeVisibilityEnum.Public:
+					if(isPublic(reln.getRequiredContainerFromTable()) && isPublic(reln.getRequiredLookupToTable()) && isPublic(reln.getRequiredLookupFromIndex()) && isPublic(reln.getRequiredLookupToIndex())) {
+						for (ICFBamRelationColObj col: reln.getOptionalComponentsColumns()) {
+							if (!isPublic(col)) {
+								return(false);
+							}
 						}
+						return(true);
 					}
-					return(true);
-				}
-				else {
+					else {
+						return(false);
+					}
+				default:
 					return(false);
-				}
-			}
-			else {
-				return(false);
 			}
 		}
 		else if(what instanceof ICFBamParamObj) {
 			return(true);
 		}
 		else if(what instanceof ICFBamServerMethodObj meth) {
-			if (meth.getRequiredCodeVis() == ICFBamSchema.CodeVisibilityEnum.Public) {
-				if (!isPublic(meth.getRequiredContainerForTable())) {
-					return(false);
-				}
-				for(ICFBamParamObj p: meth.getOptionalComponentsParams()) {
-					if(!isPublic(p)) {
+			switch (meth.getRequiredCodeVis()) {
+				case null:
+				case ICFBamSchema.CodeVisibilityEnum.Public:
+					if (!isPublic(meth.getRequiredContainerForTable())) {
 						return(false);
 					}
-				}
-				if (meth instanceof ICFBamServerObjFuncObj of) {
-					if (!isPublic(of.getOptionalLookupRetTable())) {
-						return(false);
+					for(ICFBamParamObj p: meth.getOptionalComponentsParams()) {
+						if(!isPublic(p)) {
+							return(false);
+						}
 					}
-					else {
+					if (meth instanceof ICFBamServerObjFuncObj of) {
+						if (!isPublic(of.getOptionalLookupRetTable())) {
+							return(false);
+						}
+						else {
+							return(true);
+						}
+					}
+					else if (meth instanceof ICFBamServerListFuncObj of) {
+						if (!isPublic(of.getOptionalLookupRetTable())) {
+							return(false);
+						}
+						else {
+							return(true);
+						}
+					}
+					else if (meth instanceof ICFBamServerProcObj) {
 						return(true);
 					}
-				}
-				else if (meth instanceof ICFBamServerListFuncObj of) {
-					if (!isPublic(of.getOptionalLookupRetTable())) {
+					else {
 						return(false);
 					}
-					else {
-						return(true);
-					}
-				}
-				else if (meth instanceof ICFBamServerProcObj) {
-					return(true);
-				}
-				else {
+				default:
 					return(false);
-				}
-			}
-			else {
-				return(false);
 			}
 		}
 		else {
 			// anything which isn't recognizable is automatically public
 			return(true);
+		}
+	}
+
+	public static boolean isProtected(ICFLibAnyObj what) {
+		if (what == null) {
+			return(false);
+		}
+		if (what instanceof ICFBamAtomObj atom) {
+			switch (atom.getRequiredCodeVis()) {
+				case null:
+				case ICFBamSchema.CodeVisibilityEnum.Public:
+				case ICFBamSchema.CodeVisibilityEnum.Protected:
+					ICFBamTableObj tbl;
+					if (atom instanceof ICFBamBlobColObj col) {
+						tbl = col.getRequiredContainerTable();
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
+						}
+					}
+					else if (atom instanceof ICFBamBlobTypeObj) {
+						return(true);
+					}
+					else if (atom instanceof ICFBamBoolColObj col) {
+						tbl = col.getRequiredContainerTable();
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
+						}
+					}
+					else if (atom instanceof ICFBamBoolTypeObj) {
+						return(true);
+					}
+					else if (atom instanceof ICFBamDateColObj col) {
+						tbl = col.getRequiredContainerTable();
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
+						}
+					}
+					else if (atom instanceof ICFBamDateTypeObj) {
+						return(true);
+					}
+					else if (atom instanceof ICFBamDbKeyHash128ColObj col) {
+						tbl = col.getRequiredContainerTable();
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
+						}
+					}
+					else if (atom instanceof ICFBamDbKeyHash128GenObj) {
+						return(true);
+					}
+					else if (atom instanceof ICFBamDbKeyHash128TypeObj) {
+						return(true);
+					}
+					else if (atom instanceof ICFBamDbKeyHash160ColObj col) {
+						tbl = col.getRequiredContainerTable();
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
+						}
+					}
+					else if (atom instanceof ICFBamDbKeyHash160GenObj) {
+						return(true);
+					}
+					else if (atom instanceof ICFBamDbKeyHash160TypeObj) {
+						return(true);
+					}
+					else if (atom instanceof ICFBamDbKeyHash224ColObj col) {
+						tbl = col.getRequiredContainerTable();
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
+						}
+					}
+					else if (atom instanceof ICFBamDbKeyHash224GenObj) {
+						return(true);
+					}
+					else if (atom instanceof ICFBamDbKeyHash224TypeObj) {
+						return(true);
+					}
+					else if (atom instanceof ICFBamDbKeyHash256ColObj col) {
+						tbl = col.getRequiredContainerTable();
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
+						}
+					}
+					else if (atom instanceof ICFBamDbKeyHash256GenObj) {
+						return(true);
+					}
+					else if (atom instanceof ICFBamDbKeyHash256TypeObj) {
+						return(true);
+					}
+					else if (atom instanceof ICFBamDbKeyHash384ColObj col) {
+						tbl = col.getRequiredContainerTable();
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
+						}
+					}
+					else if (atom instanceof ICFBamDbKeyHash384GenObj) {
+						return(true);
+					}
+					else if (atom instanceof ICFBamDbKeyHash384TypeObj) {
+						return(true);
+					}
+					else if (atom instanceof ICFBamDbKeyHash512ColObj col) {
+						tbl = col.getRequiredContainerTable();
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
+						}
+					}
+					else if (atom instanceof ICFBamDbKeyHash512GenObj) {
+						return(true);
+					}
+					else if (atom instanceof ICFBamDbKeyHash512TypeObj) {
+						return(true);
+					}
+					else if (atom instanceof ICFBamDoubleColObj col) {
+						tbl = col.getRequiredContainerTable();
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
+						}
+					}
+					else if (atom instanceof ICFBamDoubleTypeObj) {
+						return(true);
+					}
+					else if (atom instanceof ICFBamFloatColObj col) {
+						tbl = col.getRequiredContainerTable();
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
+						}
+					}
+					else if (atom instanceof ICFBamFloatTypeObj) {
+						return(true);
+					}
+					else if (atom instanceof ICFBamInt16ColObj col) {
+						tbl = col.getRequiredContainerTable();
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
+						}
+					}
+					else if (atom instanceof ICFBamId16GenObj) {
+						return(true);
+					}
+					else if (atom instanceof ICFBamInt16TypeObj) {
+						return(true);
+					}
+					else if (atom instanceof ICFBamInt32ColObj col) {
+						tbl = col.getRequiredContainerTable();
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
+						}
+					}
+					else if (atom instanceof ICFBamId32GenObj) {
+						return(true);
+					}
+					else if (atom instanceof ICFBamInt32TypeObj) {
+						return(true);
+					}
+					else if (atom instanceof ICFBamInt64ColObj col) {
+						tbl = col.getRequiredContainerTable();
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
+						}
+					}
+					else if (atom instanceof ICFBamId64GenObj) {
+						return(true);
+					}
+					else if (atom instanceof ICFBamInt64TypeObj) {
+						return(true);
+					}
+					else if (atom instanceof ICFBamNmTokenColObj col) {
+						tbl = col.getRequiredContainerTable();
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
+						}
+					}
+					else if (atom instanceof ICFBamNmTokenTypeObj) {
+						return(true);
+					}
+					else if (atom instanceof ICFBamNmTokensColObj col) {
+						tbl = col.getRequiredContainerTable();
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
+						}
+					}
+					else if (atom instanceof ICFBamNmTokensTypeObj) {
+						return(true);
+					}
+					else if (atom instanceof ICFBamNumberColObj col) {
+						tbl = col.getRequiredContainerTable();
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
+						}
+					}
+					else if (atom instanceof ICFBamNumberTypeObj) {
+						return(true);
+					}
+					else if (atom instanceof ICFBamStringColObj col) {
+						tbl = col.getRequiredContainerTable();
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
+						}
+					}
+					else if (atom instanceof ICFBamStringTypeObj) {
+						return(true);
+					}
+					else if (atom instanceof ICFBamTZDateColObj col) {
+						tbl = col.getRequiredContainerTable();
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
+						}
+					}
+					else if (atom instanceof ICFBamTZDateTypeObj) {
+						return(true);
+					}
+					else if (atom instanceof ICFBamTZTimeColObj col) {
+						tbl = col.getRequiredContainerTable();
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
+						}
+					}
+					else if (atom instanceof ICFBamTZTimeTypeObj) {
+						return(true);
+					}
+					else if (atom instanceof ICFBamTZTimestampColObj col) {
+						tbl = col.getRequiredContainerTable();
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
+						}
+					}
+					else if (atom instanceof ICFBamTZTimestampTypeObj) {
+						return(true);
+					}
+					else if (atom instanceof ICFBamTextColObj col) {
+						tbl = col.getRequiredContainerTable();
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
+						}
+					}
+					else if (atom instanceof ICFBamTextTypeObj) {
+						return(true);
+					}
+					else if (atom instanceof ICFBamTimeColObj col) {
+						tbl = col.getRequiredContainerTable();
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
+						}
+					}
+					else if (atom instanceof ICFBamTimeTypeObj) {
+						return(true);
+					}
+					else if (atom instanceof ICFBamTimestampColObj col) {
+						tbl = col.getRequiredContainerTable();
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
+						}
+					}
+					else if (atom instanceof ICFBamTimestampTypeObj) {
+						return(true);
+					}
+					else if (atom instanceof ICFBamTokenColObj col) {
+						tbl = col.getRequiredContainerTable();
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
+						}
+					}
+					else if (atom instanceof ICFBamTokenTypeObj) {
+						return(true);
+					}
+					else if (atom instanceof ICFBamUInt16ColObj col) {
+						tbl = col.getRequiredContainerTable();
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
+						}
+					}
+					else if (atom instanceof ICFBamUInt16TypeObj) {
+						return(true);
+					}
+					else if (atom instanceof ICFBamUInt32ColObj col) {
+						tbl = col.getRequiredContainerTable();
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
+						}
+					}
+					else if (atom instanceof ICFBamUInt32TypeObj) {
+						return(true);
+					}
+					else if (atom instanceof ICFBamUInt64ColObj col) {
+						tbl = col.getRequiredContainerTable();
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
+						}
+					}
+					else if (atom instanceof ICFBamUInt64TypeObj) {
+						return(true);
+					}
+					else if (atom instanceof ICFBamUuid6ColObj col) {
+						tbl = col.getRequiredContainerTable();
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
+						}
+					}
+					else if (atom instanceof ICFBamUuid6TypeObj) {
+						return(true);
+					}
+					else if (atom instanceof ICFBamUuidColObj col) {
+						tbl = col.getRequiredContainerTable();
+						if (inPrimaryIndexKey(tbl, col)) {
+							return(true);
+						}
+					}
+					else if (atom instanceof ICFBamUuidTypeObj) {
+						return(true);
+					}
+					else {
+						return(true);
+					}
+					return(isProtected(tbl));
+				default:
+					return(false);
+			}
+		}
+		else if (what instanceof ICFBamTableColObj col) {
+			switch (col.getRequiredCodeVis()) {
+				case null:
+				case ICFBamSchema.CodeVisibilityEnum.Public:
+				case ICFBamSchema.CodeVisibilityEnum.Protected:
+					ICFBamTableObj tbl = col.getRequiredContainerTable();
+					if (inPrimaryIndexKey(tbl, col)) {
+						return(true);
+					}
+					return(isProtected(tbl));
+				default:
+					return(false);
+			}
+		}
+		else if(what instanceof ICFBamEnumTypeObj) {
+			return(true);
+		}
+		else if(what instanceof ICFBamEnumDefObj cur) {
+			return switch(cur.getRequiredCodeVis()) {
+				case null -> true;
+				case ICFBamSchema.CodeVisibilityEnum.Public -> isProtected(cur.getRequiredContainerScope());
+				case ICFBamSchema.CodeVisibilityEnum.Protected -> isProtected(cur.getRequiredContainerScope());
+				default -> false;
+			};
+		}
+		else if(what instanceof ICFBamIndexColObj col) {
+			return(isProtected(col.getRequiredLookupColumn()));
+		}
+		else if(what instanceof ICFBamRelationColObj col) {
+			return(isProtected(col.getRequiredLookupFromCol()) && isProtected(col.getRequiredLookupToCol()));
+		}
+		else if(what instanceof ICFBamIndexObj idx) {
+			ICFBamTableObj tbl = idx.getRequiredContainerTable();
+			if( idx == tbl.getPrimaryKeyIndex()) {
+				return(isProtected(tbl));
+			}
+			switch(idx.getRequiredCodeVis()) {
+				case null:
+				case ICFBamSchema.CodeVisibilityEnum.Public:
+				case ICFBamSchema.CodeVisibilityEnum.Protected:
+					if (!isProtected(tbl)) {
+						return(false);
+					}
+					else {
+						for (ICFBamIndexColObj col: idx.getOptionalComponentsColumns()) {
+							if (!isProtected(col.getRequiredLookupColumn())) {
+								return(false);
+							}
+						}
+						return(true);
+					}
+				default:
+					return(false);
+			}
+		}
+		else if(what instanceof ICFBamRelationObj reln) {
+			switch (reln.getRequiredCodeVis()) {
+				case null:
+				case ICFBamSchema.CodeVisibilityEnum.Public:
+				case ICFBamSchema.CodeVisibilityEnum.Protected:
+					if(isProtected(reln.getRequiredContainerFromTable()) && isProtected(reln.getRequiredLookupToTable()) && isProtected(reln.getRequiredLookupFromIndex()) && isProtected(reln.getRequiredLookupToIndex())) {
+						for (ICFBamRelationColObj col: reln.getOptionalComponentsColumns()) {
+							if (!isProtected(col)) {
+								return(false);
+							}
+						}
+						return(true);
+					}
+					else {
+						return(false);
+					}
+				default:
+					return(false);
+			}
+		}
+		else if(what instanceof ICFBamParamObj) {
+			return(true);
+		}
+		else if(what instanceof ICFBamServerMethodObj meth) {
+			switch (meth.getRequiredCodeVis()) {
+				case null:
+				case ICFBamSchema.CodeVisibilityEnum.Public:
+				case ICFBamSchema.CodeVisibilityEnum.Protected:
+					if (!isProtected(meth.getRequiredContainerForTable())) {
+						return(false);
+					}
+					for(ICFBamParamObj p: meth.getOptionalComponentsParams()) {
+						if(!isProtected(p)) {
+							return(false);
+						}
+					}
+					if (meth instanceof ICFBamServerObjFuncObj of) {
+						if (!isProtected(of.getOptionalLookupRetTable())) {
+							return(false);
+						}
+						else {
+							return(true);
+						}
+					}
+					else if (meth instanceof ICFBamServerListFuncObj of) {
+						if (!isProtected(of.getOptionalLookupRetTable())) {
+							return(false);
+						}
+						else {
+							return(true);
+						}
+					}
+					else if (meth instanceof ICFBamServerProcObj) {
+						return(true);
+					}
+					else {
+						return(false);
+					}
+				default:
+					return(false);
+			}
+		}
+		else {
+			// anything which isn't recognizable is automatically protected
+			return(true);
+		}
+	}
+
+	public static boolean isPrivate(ICFLibAnyObj what) {
+		if (what == null) {
+			return(false);
+		}
+		else {
+			if (isProtected(what)) {
+				return(false);
+			}
+			else if(isPublic(what)) {
+				return(false);
+			}
+			else {
+				return(true);
+			}
 		}
 	}
 
