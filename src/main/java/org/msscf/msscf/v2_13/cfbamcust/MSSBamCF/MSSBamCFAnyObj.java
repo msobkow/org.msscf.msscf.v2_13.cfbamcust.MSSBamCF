@@ -59,48 +59,327 @@ public class MSSBamCFAnyObj
 		if (what == null) {
 			return(false);
 		}
-		if (what instanceof ICFBamAtomObj) {
-			ICFBamAtomObj atom = (ICFBamAtomObj)what;
+		if (what instanceof ICFBamAtomObj atom) {
 			switch (atom.getRequiredCodeVis()) {
 				case ICFBamSchema.CodeVisibilityEnum.Public:
-					return(isPublic(atom.getRequiredContainerScope()));
+					ICFBamTableObj tbl;
+					if (atom instanceof ICFBamBlobColObj col) {
+						tbl = col.getRequiredContainerTable();
+						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
+						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
+							if (xcol.getRequiredLookupColumn() == col) {
+								return(true);
+							}
+						}
+					}
+					else if (atom instanceof ICFBamBoolColObj col) {
+						tbl = col.getRequiredContainerTable();
+						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
+						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
+							if (xcol.getRequiredLookupColumn() == col) {
+								return(true);
+							}
+						}
+					}
+					else if (atom instanceof ICFBamDateColObj col) {
+						tbl = col.getRequiredContainerTable();
+						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
+						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
+							if (xcol.getRequiredLookupColumn() == col) {
+								return(true);
+							}
+						}
+					}
+					else if (atom instanceof ICFBamDbKeyHash128ColObj col) {
+						tbl = col.getRequiredContainerTable();
+						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
+						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
+							if (xcol.getRequiredLookupColumn() == col) {
+								return(true);
+							}
+						}
+					}
+					else if (atom instanceof ICFBamDbKeyHash160ColObj col) {
+						tbl = col.getRequiredContainerTable();
+						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
+						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
+							if (xcol.getRequiredLookupColumn() == col) {
+								return(true);
+							}
+						}
+					}
+					else if (atom instanceof ICFBamDbKeyHash224ColObj col) {
+						tbl = col.getRequiredContainerTable();
+						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
+						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
+							if (xcol.getRequiredLookupColumn() == col) {
+								return(true);
+							}
+						}
+					}
+					else if (atom instanceof ICFBamDbKeyHash256ColObj col) {
+						tbl = col.getRequiredContainerTable();
+						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
+						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
+							if (xcol.getRequiredLookupColumn() == col) {
+								return(true);
+							}
+						}
+					}
+					else if (atom instanceof ICFBamDbKeyHash384ColObj col) {
+						tbl = col.getRequiredContainerTable();
+						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
+						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
+							if (xcol.getRequiredLookupColumn() == col) {
+								return(true);
+							}
+						}
+					}
+					else if (atom instanceof ICFBamDbKeyHash512ColObj col) {
+						tbl = col.getRequiredContainerTable();
+						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
+						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
+							if (xcol.getRequiredLookupColumn() == col) {
+								return(true);
+							}
+						}
+					}
+					else if (atom instanceof ICFBamDoubleColObj col) {
+						tbl = col.getRequiredContainerTable();
+						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
+						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
+							if (xcol.getRequiredLookupColumn() == col) {
+								return(true);
+							}
+						}
+					}
+					else if (atom instanceof ICFBamFloatColObj col) {
+						tbl = col.getRequiredContainerTable();
+						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
+						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
+							if (xcol.getRequiredLookupColumn() == col) {
+								return(true);
+							}
+						}
+					}
+					else if (atom instanceof ICFBamInt16ColObj col) {
+						tbl = col.getRequiredContainerTable();
+						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
+						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
+							if (xcol.getRequiredLookupColumn() == col) {
+								return(true);
+							}
+						}
+					}
+					else if (atom instanceof ICFBamInt32ColObj col) {
+						tbl = col.getRequiredContainerTable();
+						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
+						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
+							if (xcol.getRequiredLookupColumn() == col) {
+								return(true);
+							}
+						}
+					}
+					else if (atom instanceof ICFBamInt64ColObj col) {
+						tbl = col.getRequiredContainerTable();
+						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
+						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
+							if (xcol.getRequiredLookupColumn() == col) {
+								return(true);
+							}
+						}
+					}
+					else if (atom instanceof ICFBamNmTokenColObj col) {
+						tbl = col.getRequiredContainerTable();
+						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
+						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
+							if (xcol.getRequiredLookupColumn() == col) {
+								return(true);
+							}
+						}
+					}
+					else if (atom instanceof ICFBamNmTokensColObj col) {
+						tbl = col.getRequiredContainerTable();
+						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
+						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
+							if (xcol.getRequiredLookupColumn() == col) {
+								return(true);
+							}
+						}
+					}
+					else if (atom instanceof ICFBamNumberColObj col) {
+						tbl = col.getRequiredContainerTable();
+						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
+						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
+							if (xcol.getRequiredLookupColumn() == col) {
+								return(true);
+							}
+						}
+					}
+					else if (atom instanceof ICFBamStringColObj col) {
+						tbl = col.getRequiredContainerTable();
+						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
+						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
+							if (xcol.getRequiredLookupColumn() == col) {
+								return(true);
+							}
+						}
+					}
+					else if (atom instanceof ICFBamTZDateColObj col) {
+						tbl = col.getRequiredContainerTable();
+						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
+						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
+							if (xcol.getRequiredLookupColumn() == col) {
+								return(true);
+							}
+						}
+					}
+					else if (atom instanceof ICFBamTZTimeColObj col) {
+						tbl = col.getRequiredContainerTable();
+						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
+						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
+							if (xcol.getRequiredLookupColumn() == col) {
+								return(true);
+							}
+						}
+					}
+					else if (atom instanceof ICFBamTZTimestampColObj col) {
+						tbl = col.getRequiredContainerTable();
+						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
+						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
+							if (xcol.getRequiredLookupColumn() == col) {
+								return(true);
+							}
+						}
+					}
+					else if (atom instanceof ICFBamTextColObj col) {
+						tbl = col.getRequiredContainerTable();
+						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
+						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
+							if (xcol.getRequiredLookupColumn() == col) {
+								return(true);
+							}
+						}
+					}
+					else if (atom instanceof ICFBamTimeColObj col) {
+						tbl = col.getRequiredContainerTable();
+						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
+						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
+							if (xcol.getRequiredLookupColumn() == col) {
+								return(true);
+							}
+						}
+					}
+					else if (atom instanceof ICFBamTimestampColObj col) {
+						tbl = col.getRequiredContainerTable();
+						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
+						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
+							if (xcol.getRequiredLookupColumn() == col) {
+								return(true);
+							}
+						}
+					}
+					else if (atom instanceof ICFBamTokenColObj col) {
+						tbl = col.getRequiredContainerTable();
+						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
+						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
+							if (xcol.getRequiredLookupColumn() == col) {
+								return(true);
+							}
+						}
+					}
+					else if (atom instanceof ICFBamUInt16ColObj col) {
+						tbl = col.getRequiredContainerTable();
+						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
+						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
+							if (xcol.getRequiredLookupColumn() == col) {
+								return(true);
+							}
+						}
+					}
+					else if (atom instanceof ICFBamUInt32ColObj col) {
+						tbl = col.getRequiredContainerTable();
+						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
+						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
+							if (xcol.getRequiredLookupColumn() == col) {
+								return(true);
+							}
+						}
+					}
+					else if (atom instanceof ICFBamUInt64ColObj col) {
+						tbl = col.getRequiredContainerTable();
+						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
+						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
+							if (xcol.getRequiredLookupColumn() == col) {
+								return(true);
+							}
+						}
+					}
+					else if (atom instanceof ICFBamUuid6ColObj col) {
+						tbl = col.getRequiredContainerTable();
+						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
+						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
+							if (xcol.getRequiredLookupColumn() == col) {
+								return(true);
+							}
+						}
+					}
+					else if (atom instanceof ICFBamUuidColObj col) {
+						tbl = col.getRequiredContainerTable();
+						ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
+						for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
+							if (xcol.getRequiredLookupColumn() == col) {
+								return(true);
+							}
+						}
+					}
+					else {
+						return(true);
+					}
+					return(isPublic(tbl));
 				default:
 					return(false);
 			}
 		}
-		else if (what instanceof ICFBamTableColObj) {
-			ICFBamTableColObj col = (ICFBamTableColObj)what;
+		else if (what instanceof ICFBamTableColObj col) {
 			switch (col.getRequiredCodeVis()) {
 				case ICFBamSchema.CodeVisibilityEnum.Public:
-					return(isPublic(col.getRequiredContainerTable()));
+					ICFBamTableObj tbl = col.getRequiredContainerTable();
+					ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
+					for (ICFBamIndexColObj xcol: idx.getOptionalComponentsColumns()) {
+						if (xcol.getRequiredLookupColumn() == col) {
+							return(true);
+						}
+					}
+					return(isPublic(tbl));
 				default:
 					return(false);
 			}
 		}
-		else if(what instanceof ICFBamEnumDefObj) {
-			ICFBamEnumDefObj cur = (CFBamEnumDefObj)what;
-			while (cur.getRequiredCodeVis() == ICFBamSchema.CodeVisibilityEnum.Public) {
+		else if(what instanceof ICFBamEnumDefObj cur) {
+			if (cur.getRequiredCodeVis() == ICFBamSchema.CodeVisibilityEnum.Public) {
 				return(isPublic(cur.getRequiredContainerScope()));
 			}
 			return(false);
 		}
-		else if(what instanceof ICFBamIndexColObj) {
-			ICFBamIndexColObj col = (ICFBamIndexColObj)what;
+		else if(what instanceof ICFBamIndexColObj col) {
 			return(isPublic(col.getRequiredLookupColumn()));
 		}
-		else if(what instanceof ICFBamRelationColObj) {
-			ICFBamRelationColObj col = (ICFBamRelationColObj)what;
+		else if(what instanceof ICFBamRelationColObj col) {
 			return(isPublic(col.getRequiredLookupFromCol()) && isPublic(col.getRequiredLookupToCol()));
 		}
-		else if(what instanceof ICFBamIndexObj) {
-			ICFBamIndexObj idx = (ICFBamIndexObj)what;
+		else if(what instanceof ICFBamIndexObj idx) {
+			ICFBamTableObj tbl = idx.getRequiredContainerTable();
+			if( idx == tbl.getPrimaryKeyIndex()) {
+				return(isPublic(tbl));
+			}
 			if (idx.getRequiredCodeVis() == ICFBamSchema.CodeVisibilityEnum.Public) {
-				if (!isPublic(idx.getRequiredContainerTable())) {
+				if (!isPublic(tbl)) {
 					return(false);
 				}
 				else {
 					for (ICFBamIndexColObj col: idx.getOptionalComponentsColumns()) {
-						if (!isPublic(col)) {
+						if (!isPublic(col.getRequiredLookupColumn())) {
 							return(false);
 						}
 					}
@@ -111,8 +390,7 @@ public class MSSBamCFAnyObj
 				return(false);
 			}
 		}
-		else if(what instanceof ICFBamRelationObj) {
-			ICFBamRelationObj reln = (ICFBamRelationObj)what;
+		else if(what instanceof ICFBamRelationObj reln) {
 			if (reln.getRequiredCodeVis() == ICFBamSchema.CodeVisibilityEnum.Public) {
 				if(isPublic(reln.getRequiredContainerFromTable()) && isPublic(reln.getRequiredLookupToTable()) && isPublic(reln.getRequiredLookupFromIndex()) && isPublic(reln.getRequiredLookupToIndex())) {
 					for (ICFBamRelationColObj col: reln.getOptionalComponentsColumns()) {
@@ -131,11 +409,9 @@ public class MSSBamCFAnyObj
 			}
 		}
 		else if(what instanceof ICFBamParamObj) {
-			ICFBamParamObj p = (ICFBamParamObj)what;
 			return(true);
 		}
-		else if(what instanceof ICFBamServerMethodObj) {
-			ICFBamServerMethodObj meth = (CFBamServerMethodObj)what;
+		else if(what instanceof ICFBamServerMethodObj meth) {
 			if (meth.getRequiredCodeVis() == ICFBamSchema.CodeVisibilityEnum.Public) {
 				if (!isPublic(meth.getRequiredContainerForTable())) {
 					return(false);
@@ -145,8 +421,7 @@ public class MSSBamCFAnyObj
 						return(false);
 					}
 				}
-				if (meth instanceof ICFBamServerObjFuncObj) {
-					ICFBamServerObjFuncObj of = (ICFBamServerObjFuncObj)meth;
+				if (meth instanceof ICFBamServerObjFuncObj of) {
 					if (!isPublic(of.getOptionalLookupRetTable())) {
 						return(false);
 					}
@@ -154,8 +429,7 @@ public class MSSBamCFAnyObj
 						return(true);
 					}
 				}
-				else if (meth instanceof ICFBamServerListFuncObj) {
-					ICFBamServerListFuncObj of = (ICFBamServerListFuncObj)meth;
+				else if (meth instanceof ICFBamServerListFuncObj of) {
 					if (!isPublic(of.getOptionalLookupRetTable())) {
 						return(false);
 					}
@@ -198,8 +472,7 @@ public class MSSBamCFAnyObj
             0,
             "valueDef.scopeDef" );
         }
-        else if(scopeDef instanceof ICFBamTableObj) {
-            ICFBamTableObj tableDef = (ICFBamTableObj)scopeDef;
+        else if(scopeDef instanceof ICFBamTableObj tableDef) {
             List<ICFLibAnyObj> candidateRelations = MSSBamCFGenIterateSuperiorCandidateRelations.getSuperiorCandidateRelations(tableDef);
             if (candidateRelations != null) {
                 for(ICFLibAnyObj curObj : candidateRelations) {
@@ -236,8 +509,7 @@ public class MSSBamCFAnyObj
             0,
             "valueDef.scopeDef" );
         }
-        else if(scopeDef instanceof ICFBamTableObj) {
-            ICFBamTableObj tableDef = (ICFBamTableObj)scopeDef;
+        else if(scopeDef instanceof ICFBamTableObj tableDef) {
             List<ICFLibAnyObj> relations = MSSBamCFGenIterateSuperiorRelations.getSuperiorRelations(tableDef);
             if (relations != null) {
                 for(ICFLibAnyObj curObj : relations) {
@@ -274,8 +546,7 @@ public class MSSBamCFAnyObj
             0,
             "valueDef.scopeDef" );
         }
-        else if(scopeDef instanceof ICFBamTableObj) {
-            ICFBamTableObj tableDef = (ICFBamTableObj)scopeDef;
+        else if(scopeDef instanceof ICFBamTableObj tableDef) {
             List<ICFLibAnyObj> relations = MSSBamCFGenIterateDataRelations.getDataRelations(tableDef);
             if (relations != null) {
                 for(ICFLibAnyObj curObj : relations) {
@@ -312,8 +583,7 @@ public class MSSBamCFAnyObj
             0,
             "valueDef.scopeDef" );
         }
-        else if(scopeDef instanceof ICFBamTableObj) {
-            ICFBamTableObj tableDef = (ICFBamTableObj)scopeDef;
+        else if(scopeDef instanceof ICFBamTableObj tableDef) {
             List<ICFLibAnyObj> relations = MSSBamCFGenIteratePrimaryKeyRelations.getPrimaryKeyRelations(tableDef);
             if (relations != null) {
                 for(ICFLibAnyObj curObj : relations) {
@@ -350,8 +620,7 @@ public class MSSBamCFAnyObj
             0,
             "valueDef.scopeDef" );
         }
-        else if(scopeDef instanceof ICFBamTableObj) {
-            ICFBamTableObj tableDef = (ICFBamTableObj)scopeDef;
+        else if(scopeDef instanceof ICFBamTableObj tableDef) {
             List<ICFLibAnyObj> relations = MSSBamCFGenIterateSuperiorRelations.getSuperiorRelations(tableDef);
             if (relations != null) {
                 for(ICFLibAnyObj curObj : relations) {
@@ -390,8 +659,7 @@ public class MSSBamCFAnyObj
             0,
             "valueDef.scopeDef" );
         }
-        else if(scopeDef instanceof ICFBamTableObj) {
-            ICFBamTableObj tableDef = (ICFBamTableObj)scopeDef;
+        else if(scopeDef instanceof ICFBamTableObj tableDef) {
             List<ICFLibAnyObj> candidateRelations = MSSBamCFGenIterateSuperiorCandidateRelations.getSuperiorCandidateRelations(tableDef);
             if (candidateRelations != null) {
                 for(ICFLibAnyObj curObj : candidateRelations) {
@@ -430,8 +698,7 @@ public class MSSBamCFAnyObj
             0,
             "valueDef.scopeDef" );
         }
-        else if(scopeDef instanceof ICFBamTableObj) {
-            ICFBamTableObj tableDef = (ICFBamTableObj)scopeDef;
+        else if(scopeDef instanceof ICFBamTableObj tableDef) {
             List<ICFLibAnyObj> nonCandidateRelations = MSSBamCFGenIterateSuperiorNonCandidateRelations.getSuperiorNonCandidateRelations(tableDef);
             if (nonCandidateRelations != null) {
                 for(ICFLibAnyObj curObj : nonCandidateRelations) {
@@ -470,8 +737,7 @@ public class MSSBamCFAnyObj
             0,
             "valueDef.scopeDef" );
         }
-        else if(scopeDef instanceof ICFBamTableObj) {
-            ICFBamTableObj tableDef = (ICFBamTableObj)scopeDef;
+        else if(scopeDef instanceof ICFBamTableObj tableDef) {
             List<ICFLibAnyObj> relations = MSSBamCFGenIterateSuperiorRelations.getSuperiorRelations(tableDef);
             if (relations != null) {
                 for(ICFLibAnyObj curObj : relations) {
@@ -510,8 +776,7 @@ public class MSSBamCFAnyObj
             0,
             "valueDef.scopeDef" );
         }
-        else if(scopeDef instanceof ICFBamTableObj) {
-            ICFBamTableObj tableDef = (ICFBamTableObj)scopeDef;
+        else if(scopeDef instanceof ICFBamTableObj tableDef) {
             List<ICFLibAnyObj> candidateRelations = MSSBamCFGenIterateSuperiorCandidateRelations.getSuperiorCandidateRelations(tableDef);
             if (candidateRelations != null) {
                 for(ICFLibAnyObj curObj : candidateRelations) {
@@ -550,8 +815,7 @@ public class MSSBamCFAnyObj
             0,
             "valueDef.scopeDef" );
         }
-        else if(scopeDef instanceof ICFBamTableObj) {
-            ICFBamTableObj tableDef = (ICFBamTableObj)scopeDef;
+        else if(scopeDef instanceof ICFBamTableObj tableDef) {
             List<ICFLibAnyObj> nonCandidateRelations = MSSBamCFGenIterateSuperiorNonCandidateRelations.getSuperiorNonCandidateRelations(tableDef);
             if (nonCandidateRelations != null) {
                 for(ICFLibAnyObj curObj : nonCandidateRelations) {
@@ -590,8 +854,7 @@ public class MSSBamCFAnyObj
             0,
             "valueDef.scopeDef" );
         }
-        else if(scopeDef instanceof ICFBamTableObj) {
-            ICFBamTableObj tableDef = (ICFBamTableObj)scopeDef;
+        else if(scopeDef instanceof ICFBamTableObj tableDef) {
             List<ICFLibAnyObj> candidateRelations = MSSBamCFGenIterateSuperiorRelations.getSuperiorRelations(tableDef);
             if (candidateRelations != null) {
                 for(ICFLibAnyObj curObj : candidateRelations) {
@@ -628,8 +891,7 @@ public class MSSBamCFAnyObj
             0,
             "valueDef.scopeDef" );
         }
-        else if(scopeDef instanceof ICFBamTableObj) {
-            ICFBamTableObj tableDef = (ICFBamTableObj)scopeDef;
+        else if(scopeDef instanceof ICFBamTableObj tableDef) {
             List<ICFLibAnyObj> candidateRelations = MSSBamCFGenIterateSuperiorCandidateRelations.getSuperiorCandidateRelations(tableDef);
             if (candidateRelations != null) {
                 for(ICFLibAnyObj curObj : candidateRelations) {
@@ -666,8 +928,7 @@ public class MSSBamCFAnyObj
             0,
             "valueDef.scopeDef" );
         }
-        else if(scopeDef instanceof ICFBamTableObj) {
-            ICFBamTableObj tableDef = (ICFBamTableObj)scopeDef;
+        else if(scopeDef instanceof ICFBamTableObj tableDef) {
             List<ICFLibAnyObj> candidateRelations = MSSBamCFGenIterateSuperiorCandidateRelations.getSuperiorCandidateRelations(tableDef);
 			ICFBamRelationColObj retval = null;
             if (candidateRelations != null) {
@@ -710,8 +971,7 @@ public class MSSBamCFAnyObj
             0,
             "valueDef.scopeDef" );
         }
-        else if(scopeDef instanceof ICFBamTableObj) {
-            ICFBamTableObj tableDef = (ICFBamTableObj)scopeDef;
+        else if(scopeDef instanceof ICFBamTableObj tableDef) {
             List<ICFLibAnyObj> relations = MSSBamCFGenIterateSuperiorRelations.getSuperiorRelations(tableDef);
 			ICFBamRelationColObj retval = null;
             if (relations != null) {
@@ -754,8 +1014,7 @@ public class MSSBamCFAnyObj
             0,
             "valueDef.scopeDef" );
         }
-        else if(scopeDef instanceof ICFBamTableObj) {
-            ICFBamTableObj tableDef = (ICFBamTableObj)scopeDef;
+        else if(scopeDef instanceof ICFBamTableObj tableDef) {
             List<ICFLibAnyObj> relations = MSSBamCFGenIterateSuperiorRelations.getSuperiorRelations(tableDef);
 			ICFBamRelationColObj retval = null;
             if (relations != null) {
@@ -800,8 +1059,7 @@ public class MSSBamCFAnyObj
             0,
             "valueDef.scopeDef" );
         }
-        else if(scopeDef instanceof ICFBamTableObj) {
-            ICFBamTableObj tableDef = (ICFBamTableObj)scopeDef;
+        else if(scopeDef instanceof ICFBamTableObj tableDef) {
             List<ICFLibAnyObj> relations = MSSBamCFGenIterateSuperiorCandidateRelations.getSuperiorCandidateRelations(tableDef);
 			ICFBamRelationColObj retval = null;
             if (relations != null) {
@@ -846,8 +1104,7 @@ public class MSSBamCFAnyObj
             0,
             "valueDef.scopeDef" );
         }
-        else if(scopeDef instanceof ICFBamTableObj) {
-            ICFBamTableObj tableDef = (ICFBamTableObj)scopeDef;
+        else if(scopeDef instanceof ICFBamTableObj tableDef) {
             List<ICFLibAnyObj> relations = MSSBamCFGenIterateSuperiorNonCandidateRelations.getSuperiorNonCandidateRelations(tableDef);
 			ICFBamRelationColObj retval = null;
             if (relations != null) {
@@ -892,8 +1149,7 @@ public class MSSBamCFAnyObj
             0,
             "valueDef.scopeDef" );
         }
-        else if(scopeDef instanceof ICFBamTableObj) {
-            ICFBamTableObj tableDef = (ICFBamTableObj)scopeDef;
+        else if(scopeDef instanceof ICFBamTableObj tableDef) {
             List<ICFLibAnyObj> relations = MSSBamCFGenIterateSuperiorRelations.getSuperiorRelations(tableDef);
 			ICFBamRelationColObj retval = null;
             if (relations != null) {
@@ -938,8 +1194,7 @@ public class MSSBamCFAnyObj
             0,
             "valueDef.scopeDef" );
         }
-        else if(scopeDef instanceof ICFBamTableObj) {
-            ICFBamTableObj tableDef = (ICFBamTableObj)scopeDef;
+        else if(scopeDef instanceof ICFBamTableObj tableDef) {
             List<ICFLibAnyObj> relations = MSSBamCFGenIterateSuperiorCandidateRelations.getSuperiorCandidateRelations(tableDef);
 			ICFBamRelationColObj retval = null;
             if (relations != null) {
@@ -984,8 +1239,7 @@ public class MSSBamCFAnyObj
             0,
             "valueDef.scopeDef" );
         }
-        else if(scopeDef instanceof ICFBamTableObj) {
-            ICFBamTableObj tableDef = (ICFBamTableObj)scopeDef;
+        else if(scopeDef instanceof ICFBamTableObj tableDef) {
             List<ICFLibAnyObj> relations = MSSBamCFGenIterateSuperiorNonCandidateRelations.getSuperiorNonCandidateRelations(tableDef);
 			ICFBamRelationColObj retval = null;
             if (relations != null) {
@@ -1150,8 +1404,7 @@ public class MSSBamCFAnyObj
             0,
             "valueDef.scopeDef" );
         }
-        else if(scopeDef instanceof ICFBamTableObj) {
-            ICFBamTableObj tableDef = (ICFBamTableObj)scopeDef;
+        else if(scopeDef instanceof ICFBamTableObj tableDef) {
             List<ICFLibAnyObj> relations = MSSBamCFGenIterateSubservientRelations.getSubservientRelations(tableDef);
             if (relations != null) {
                 for(ICFLibAnyObj curObj : relations) {
@@ -1188,8 +1441,7 @@ public class MSSBamCFAnyObj
             0,
             "valueDef.scopeDef" );
         }
-        else if(scopeDef instanceof ICFBamTableObj) {
-            ICFBamTableObj tableDef = (ICFBamTableObj)scopeDef;
+        else if(scopeDef instanceof ICFBamTableObj tableDef) {
             List<ICFLibAnyObj> relations = MSSBamCFGenIterateSubservientDataRelations.getSubservientDataRelations(tableDef);
             if (relations != null) {
                 for(ICFLibAnyObj curObj : relations) {
@@ -1226,8 +1478,7 @@ public class MSSBamCFAnyObj
             0,
             "valueDef.scopeDef" );
         }
-        else if(scopeDef instanceof ICFBamTableObj) {
-            ICFBamTableObj tableDef = (ICFBamTableObj)scopeDef;
+        else if(scopeDef instanceof ICFBamTableObj tableDef) {
             List<ICFLibAnyObj> relations = MSSBamCFGenIterateSubservientPrimaryKeyRelations.getSubservientPrimaryKeyRelations(tableDef);
             if (relations != null) {
                 for(ICFLibAnyObj curObj : relations) {
@@ -1264,8 +1515,7 @@ public class MSSBamCFAnyObj
             0,
             "valueDef.scopeDef" );
         }
-        else if(scopeDef instanceof ICFBamTableObj) {
-            ICFBamTableObj tableDef = (ICFBamTableObj)scopeDef;
+        else if(scopeDef instanceof ICFBamTableObj tableDef) {
             List<ICFLibAnyObj> nonCandidateRelations = MSSBamCFGenIterateSuperiorNonCandidateRelations.getSuperiorNonCandidateRelations(tableDef);
             if (nonCandidateRelations != null) {
                 for(ICFLibAnyObj curObj : nonCandidateRelations) {
@@ -1302,8 +1552,7 @@ public class MSSBamCFAnyObj
             0,
             "valueDef.scopeDef" );
         }
-        else if(scopeDef instanceof ICFBamTableObj) {
-            ICFBamTableObj tableDef = (ICFBamTableObj)scopeDef;
+        else if(scopeDef instanceof ICFBamTableObj tableDef) {
             List<ICFLibAnyObj> candidateRelations = MSSBamCFGenIterateSubservientCandidateRelations.getSubservientCandidateRelations(tableDef);
             if (candidateRelations != null) {
                 for(ICFLibAnyObj curObj : candidateRelations) {
@@ -1340,8 +1589,7 @@ public class MSSBamCFAnyObj
             0,
             "valueDef.scopeDef" );
         }
-        else if(scopeDef instanceof ICFBamTableObj) {
-            ICFBamTableObj tableDef = (ICFBamTableObj)scopeDef;
+        else if(scopeDef instanceof ICFBamTableObj tableDef) {
             List<ICFLibAnyObj> candidateRelations = MSSBamCFGenIterateSubservientCandidateDataRelations.getSubservientCandidateDataRelations(tableDef);
             if (candidateRelations != null) {
                 for(ICFLibAnyObj curObj : candidateRelations) {
@@ -1378,8 +1626,7 @@ public class MSSBamCFAnyObj
             0,
             "valueDef.scopeDef" );
         }
-        else if(scopeDef instanceof ICFBamTableObj) {
-            ICFBamTableObj tableDef = (ICFBamTableObj)scopeDef;
+        else if(scopeDef instanceof ICFBamTableObj tableDef) {
             List<ICFLibAnyObj> candidateRelations = MSSBamCFGenIterateSubservientCandidatePrimaryKeyRelations.getSubservientCandidatePrimaryKeyRelations(tableDef);
             if (candidateRelations != null) {
                 for(ICFLibAnyObj curObj : candidateRelations) {
@@ -1416,8 +1663,7 @@ public class MSSBamCFAnyObj
             0,
             "valueDef.scopeDef" );
         }
-        else if(scopeDef instanceof ICFBamTableObj) {
-            ICFBamTableObj tableDef = (ICFBamTableObj)scopeDef;
+        else if(scopeDef instanceof ICFBamTableObj tableDef) {
             List<ICFLibAnyObj> nonCandidateRelations = MSSBamCFGenIterateSubservientNonCandidateRelations.getSubservientNonCandidateRelations(tableDef);
             if (nonCandidateRelations != null) {
                 for(ICFLibAnyObj curObj : nonCandidateRelations) {
@@ -1454,8 +1700,7 @@ public class MSSBamCFAnyObj
             0,
             "valueDef.scopeDef" );
         }
-        else if(scopeDef instanceof ICFBamTableObj) {
-            ICFBamTableObj tableDef = (ICFBamTableObj)scopeDef;
+        else if(scopeDef instanceof ICFBamTableObj tableDef) {
             List<ICFLibAnyObj> nonCandidateRelations = MSSBamCFGenIterateSubservientNonCandidateDataRelations.getSubservientNonCandidateDataRelations(tableDef);
             if (nonCandidateRelations != null) {
                 for(ICFLibAnyObj curObj : nonCandidateRelations) {
@@ -1492,8 +1737,7 @@ public class MSSBamCFAnyObj
             0,
             "valueDef.scopeDef" );
         }
-        else if(scopeDef instanceof ICFBamTableObj) {
-            ICFBamTableObj tableDef = (ICFBamTableObj)scopeDef;
+        else if(scopeDef instanceof ICFBamTableObj tableDef) {
             List<ICFLibAnyObj> nonCandidateRelations = MSSBamCFGenIterateSubservientNonCandidatePrimaryKeyRelations.getSubservientNonCandidatePrimaryKeyRelations(tableDef);
             if (nonCandidateRelations != null) {
                 for(ICFLibAnyObj curObj : nonCandidateRelations) {
@@ -1530,8 +1774,7 @@ public class MSSBamCFAnyObj
             0,
             "valueDef.scopeDef" );
         }
-        else if(scopeDef instanceof ICFBamTableObj) {
-            ICFBamTableObj tableDef = (ICFBamTableObj)scopeDef;
+        else if(scopeDef instanceof ICFBamTableObj tableDef) {
             List<ICFLibAnyObj> nonCandidateRelations = MSSBamCFGenIterateSuperiorNonCandidateRelations.getSuperiorNonCandidateRelations(tableDef);
             if (nonCandidateRelations != null) {
                 for(ICFLibAnyObj curObj : nonCandidateRelations) {
@@ -1568,8 +1811,7 @@ public class MSSBamCFAnyObj
             0,
             "valueDef.scopeDef" );
         }
-        else if(scopeDef instanceof ICFBamTableObj) {
-            ICFBamTableObj tableDef = (ICFBamTableObj)scopeDef;
+        else if(scopeDef instanceof ICFBamTableObj tableDef) {
             List<ICFLibAnyObj> relations = MSSBamCFGenIterateSubservientRelations.getSubservientRelations(tableDef);
 			ICFBamRelationColObj retval = null;
             if (relations != null) {
@@ -1612,8 +1854,7 @@ public class MSSBamCFAnyObj
             0,
             "valueDef.scopeDef" );
         }
-        else if(scopeDef instanceof ICFBamTableObj) {
-            ICFBamTableObj tableDef = (ICFBamTableObj)scopeDef;
+        else if(scopeDef instanceof ICFBamTableObj tableDef) {
             List<ICFLibAnyObj> relations = MSSBamCFGenIterateSubservientDataRelations.getSubservientDataRelations(tableDef);
 			ICFBamRelationColObj retval = null;
             if (relations != null) {
@@ -1658,8 +1899,7 @@ public class MSSBamCFAnyObj
             0,
             "valueDef.scopeDef" );
         }
-        else if(scopeDef instanceof ICFBamTableObj) {
-            ICFBamTableObj tableDef = (ICFBamTableObj)scopeDef;
+        else if(scopeDef instanceof ICFBamTableObj tableDef) {
             List<ICFLibAnyObj> relations = MSSBamCFGenIterateSubservientPrimaryKeyRelations.getSubservientPrimaryKeyRelations(tableDef);
 			ICFBamRelationColObj retval = null;
             if (relations != null) {
@@ -1704,8 +1944,7 @@ public class MSSBamCFAnyObj
             0,
             "valueDef.scopeDef" );
         }
-        else if(scopeDef instanceof ICFBamTableObj) {
-            ICFBamTableObj tableDef = (ICFBamTableObj)scopeDef;
+        else if(scopeDef instanceof ICFBamTableObj tableDef) {
             List<ICFLibAnyObj> relations = MSSBamCFGenIterateSuperiorNonCandidateRelations.getSuperiorNonCandidateRelations(tableDef);
 			ICFBamRelationColObj retval = null;
             if (relations != null) {
@@ -1748,8 +1987,7 @@ public class MSSBamCFAnyObj
             0,
             "valueDef.scopeDef" );
         }
-        else if(scopeDef instanceof ICFBamTableObj) {
-            ICFBamTableObj tableDef = (ICFBamTableObj)scopeDef;
+        else if(scopeDef instanceof ICFBamTableObj tableDef) {
             List<ICFLibAnyObj> relations = MSSBamCFGenIterateSubservientCandidateRelations.getSubservientCandidateRelations(tableDef);
 			ICFBamRelationColObj retval = null;
             if (relations != null) {
@@ -1792,8 +2030,7 @@ public class MSSBamCFAnyObj
             0,
             "valueDef.scopeDef" );
         }
-        else if(scopeDef instanceof ICFBamTableObj) {
-            ICFBamTableObj tableDef = (ICFBamTableObj)scopeDef;
+        else if(scopeDef instanceof ICFBamTableObj tableDef) {
             List<ICFLibAnyObj> relations = MSSBamCFGenIterateSubservientCandidateDataRelations.getSubservientCandidateDataRelations(tableDef);
 			ICFBamRelationColObj retval = null;
             if (relations != null) {
@@ -1838,8 +2075,7 @@ public class MSSBamCFAnyObj
             0,
             "valueDef.scopeDef" );
         }
-        else if(scopeDef instanceof ICFBamTableObj) {
-            ICFBamTableObj tableDef = (ICFBamTableObj)scopeDef;
+        else if(scopeDef instanceof ICFBamTableObj tableDef) {
             List<ICFLibAnyObj> relations = MSSBamCFGenIterateSubservientCandidatePrimaryKeyRelations.getSubservientCandidatePrimaryKeyRelations(tableDef);
 			ICFBamRelationColObj retval = null;
             if (relations != null) {
@@ -1884,8 +2120,7 @@ public class MSSBamCFAnyObj
             0,
             "valueDef.scopeDef" );
         }
-        else if(scopeDef instanceof ICFBamTableObj) {
-            ICFBamTableObj tableDef = (ICFBamTableObj)scopeDef;
+        else if(scopeDef instanceof ICFBamTableObj tableDef) {
             List<ICFLibAnyObj> relations = MSSBamCFGenIterateSubservientNonCandidateRelations.getSubservientNonCandidateRelations(tableDef);
 			ICFBamRelationColObj retval = null;
             if (relations != null) {
@@ -1928,8 +2163,7 @@ public class MSSBamCFAnyObj
             0,
             "valueDef.scopeDef" );
         }
-        else if(scopeDef instanceof ICFBamTableObj) {
-            ICFBamTableObj tableDef = (ICFBamTableObj)scopeDef;
+        else if(scopeDef instanceof ICFBamTableObj tableDef) {
             List<ICFLibAnyObj> relations = MSSBamCFGenIterateSubservientNonCandidateDataRelations.getSubservientNonCandidateDataRelations(tableDef);
 			ICFBamRelationColObj retval = null;
             if (relations != null) {
@@ -1974,8 +2208,7 @@ public class MSSBamCFAnyObj
             0,
             "valueDef.scopeDef" );
         }
-        else if(scopeDef instanceof ICFBamTableObj) {
-            ICFBamTableObj tableDef = (ICFBamTableObj)scopeDef;
+        else if(scopeDef instanceof ICFBamTableObj tableDef) {
             List<ICFLibAnyObj> relations = MSSBamCFGenIterateSubservientNonCandidatePrimaryKeyRelations.getSubservientNonCandidatePrimaryKeyRelations(tableDef);
 			ICFBamRelationColObj retval = null;
             if (relations != null) {
@@ -2020,8 +2253,7 @@ public class MSSBamCFAnyObj
             0,
             "valueDef.scopeDef" );
         }
-        else if(scopeDef instanceof ICFBamTableObj) {
-            ICFBamTableObj tableDef = (ICFBamTableObj)scopeDef;
+        else if(scopeDef instanceof ICFBamTableObj tableDef) {
             ICFBamRelationObj superClassRelation = tableDef.getSuperClassRelation();
             if (superClassRelation == null) {
                 return false;
