@@ -409,11 +409,11 @@ public class MSSBamCFAnyObj
 			return(isPublic(col.getRequiredLookupColumn()));
 		}
 		else if(what instanceof ICFBamRelationColObj col) {
-			return(isPublic(col.getRequiredLookupFromCol()) && isPublic(col.getRequiredLookupToCol()));
+			return(isPublic(col.getRequiredLookupFromCol().getRequiredLookupColumn()) && isPublic(col.getRequiredLookupToCol().getRequiredLookupColumn()));
 		}
 		else if(what instanceof ICFBamIndexObj idx) {
 			ICFBamTableObj tbl = idx.getRequiredContainerTable();
-			if( idx == tbl.getPrimaryKeyIndex()) {
+			if( idx == tbl.getPrimaryKeyIndex() || idx == tbl.get) {
 				return(isPublic(tbl));
 			}
 			switch (idx.getRequiredCodeVis()) {
