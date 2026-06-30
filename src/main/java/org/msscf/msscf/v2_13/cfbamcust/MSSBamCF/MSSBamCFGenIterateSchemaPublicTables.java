@@ -50,16 +50,16 @@ import org.msscf.msscf.v2_13.cfcore.MssCF.*;
 import org.msscf.msscf.v2_13.cfbam.CFBam.*;
 import org.msscf.msscf.v2_13.cfbam.CFBamObj.*;
 
-public class MSSBamCFGenIterateDefSchemaTables
+public class MSSBamCFGenIterateSchemaPublicTables
 	extends MssCFGenIteratorObj
 {
 	private static final long serialVersionUID = 1L;
 
-	public MSSBamCFGenIterateDefSchemaTables() {
+	public MSSBamCFGenIterateSchemaPublicTables() {
 		super();
 	}
 
-	public MSSBamCFGenIterateDefSchemaTables(
+	public MSSBamCFGenIterateSchemaPublicTables(
 		MSSBamCFEngine argSchema,
 		String toolset,
 		String scopeDefClassName,
@@ -100,16 +100,17 @@ public class MSSBamCFGenIterateDefSchemaTables
 		ICFBamSchemaDefObj schemaDefObj = (ICFBamSchemaDefObj)genDef;
 		ICFBamTableFactory tableFactory = ((ICFBamSchema)schemaDefObj.getSchema().getBackingStore()).getFactoryTable();
 
-		List<ICFBamTableObj> optionalChildrenTables = schemaDefObj.getOptionalComponentsTables();
-		List<ICFBamTableObj> filteredTables = new ArrayList<>();
-		for (ICFBamTableObj tbl: optionalChildrenTables) {
-			if (tbl.getOptionalLookupDefSchema() == null) {
-				filteredTables.add(tbl);
+		List<ICFBamTableObj> optionalChildrenTables = new ArrayList<>();
+		for (ICFBamTableObj tbl: schemaDefObj.getOptionalComponentsTables()) {
+			if (tbl != null) {
+				if (MSSBamCFAnyObj.isPublic(tbl)) {
+					optionalChildrenTables.add(tbl);
+				}
 			}
 		}
-		int len = filteredTables.size();
+		int len = optionalChildrenTables.size();
 		ICFBamTableObj[] arr = new ICFBamTableObj[len];
-		Iterator<ICFBamTableObj> iter = filteredTables.iterator();
+		Iterator<ICFBamTableObj> iter = optionalChildrenTables.iterator();
 		int idx = 0;
 		while( ( idx < len ) && ( iter.hasNext() ) ) {
 			arr[idx++] = iter.next();

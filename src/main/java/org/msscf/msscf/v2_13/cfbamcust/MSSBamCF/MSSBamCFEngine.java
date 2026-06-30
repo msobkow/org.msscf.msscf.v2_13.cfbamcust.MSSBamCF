@@ -3759,6 +3759,90 @@ public class MSSBamCFEngine
         ICFGenKbRuleCartObj ruleCart = getInternalRuleCart();
         ICFGenKbRuleTypeObj ruleTypeIterator = getRuleTypeTableObj().readRuleTypeByNameIdx("Iterator");
 
+        iterator = new MSSBamCFGenIterateSchemaProtectedRootTables(this,  "any", null, "SchemaDef", "SchemaProtectedRootTables" );
+        editIterator = (ICFGenKbGenIteratorEditObj)iterator.beginEdit();
+		((ICFGenKbGenItemEditObj)editIterator).setRequiredContainerCartridge( ruleCart );
+		((ICFGenKbGenItemEditObj)editIterator).setRequiredLookupRuleType( ruleTypeIterator );
+        editIterator.create();
+        editIterator = null;
+
+        iterator = new MSSBamCFGenIterateSchemaProtectedTables(this,  "any", null, "SchemaDef", "SchemaProtectedTables" );
+        editIterator = (ICFGenKbGenIteratorEditObj)iterator.beginEdit();
+		((ICFGenKbGenItemEditObj)editIterator).setRequiredContainerCartridge( ruleCart );
+		((ICFGenKbGenItemEditObj)editIterator).setRequiredLookupRuleType( ruleTypeIterator );
+        editIterator.create();
+        editIterator = null;
+
+        iterator = new MSSBamCFGenIterateSchemaSpecificallyProtectedRootTables(this,  "any", null, "SchemaDef", "SchemaSpecificallyProtectedRootTables" );
+        editIterator = (ICFGenKbGenIteratorEditObj)iterator.beginEdit();
+		((ICFGenKbGenItemEditObj)editIterator).setRequiredContainerCartridge( ruleCart );
+		((ICFGenKbGenItemEditObj)editIterator).setRequiredLookupRuleType( ruleTypeIterator );
+        editIterator.create();
+        editIterator = null;
+
+        iterator = new MSSBamCFGenIterateSchemaSpecificallyProtectedTables(this,  "any", null, "SchemaDef", "SchemaSpecificallyProtectedTables" );
+        editIterator = (ICFGenKbGenIteratorEditObj)iterator.beginEdit();
+		((ICFGenKbGenItemEditObj)editIterator).setRequiredContainerCartridge( ruleCart );
+		((ICFGenKbGenItemEditObj)editIterator).setRequiredLookupRuleType( ruleTypeIterator );
+        editIterator.create();
+        editIterator = null;
+
+        iterator = new MSSBamCFGenIterateSchemaPublicRootTables(this,  "any", null, "SchemaDef", "SchemaPublicRootTables" );
+        editIterator = (ICFGenKbGenIteratorEditObj)iterator.beginEdit();
+		((ICFGenKbGenItemEditObj)editIterator).setRequiredContainerCartridge( ruleCart );
+		((ICFGenKbGenItemEditObj)editIterator).setRequiredLookupRuleType( ruleTypeIterator );
+        editIterator.create();
+        editIterator = null;
+
+        iterator = new MSSBamCFGenIterateSchemaPublicTables(this,  "any", null, "SchemaDef", "SchemaPublicTables" );
+        editIterator = (ICFGenKbGenIteratorEditObj)iterator.beginEdit();
+		((ICFGenKbGenItemEditObj)editIterator).setRequiredContainerCartridge( ruleCart );
+		((ICFGenKbGenItemEditObj)editIterator).setRequiredLookupRuleType( ruleTypeIterator );
+        editIterator.create();
+        editIterator = null;
+
+        iterator = new MSSBamCFGenIterateDefSchemaProtectedRootTables(this,  "any", null, "SchemaDef", "DefSchemaProtectedRootTables" );
+        editIterator = (ICFGenKbGenIteratorEditObj)iterator.beginEdit();
+		((ICFGenKbGenItemEditObj)editIterator).setRequiredContainerCartridge( ruleCart );
+		((ICFGenKbGenItemEditObj)editIterator).setRequiredLookupRuleType( ruleTypeIterator );
+        editIterator.create();
+        editIterator = null;
+
+        iterator = new MSSBamCFGenIterateDefSchemaProtectedTables(this,  "any", null, "SchemaDef", "DefSchemaProtectedTables" );
+        editIterator = (ICFGenKbGenIteratorEditObj)iterator.beginEdit();
+		((ICFGenKbGenItemEditObj)editIterator).setRequiredContainerCartridge( ruleCart );
+		((ICFGenKbGenItemEditObj)editIterator).setRequiredLookupRuleType( ruleTypeIterator );
+        editIterator.create();
+        editIterator = null;
+
+        iterator = new MSSBamCFGenIterateDefSchemaSpecificallyProtectedRootTables(this,  "any", null, "SchemaDef", "DefSchemaSpecificallyProtectedRootTables" );
+        editIterator = (ICFGenKbGenIteratorEditObj)iterator.beginEdit();
+		((ICFGenKbGenItemEditObj)editIterator).setRequiredContainerCartridge( ruleCart );
+		((ICFGenKbGenItemEditObj)editIterator).setRequiredLookupRuleType( ruleTypeIterator );
+        editIterator.create();
+        editIterator = null;
+
+        iterator = new MSSBamCFGenIterateDefSchemaSpecificallyProtectedTables(this,  "any", null, "SchemaDef", "DefSchemaSpecificallyProtectedTables" );
+        editIterator = (ICFGenKbGenIteratorEditObj)iterator.beginEdit();
+		((ICFGenKbGenItemEditObj)editIterator).setRequiredContainerCartridge( ruleCart );
+		((ICFGenKbGenItemEditObj)editIterator).setRequiredLookupRuleType( ruleTypeIterator );
+        editIterator.create();
+        editIterator = null;
+
+        iterator = new MSSBamCFGenIterateDefSchemaPublicRootTables(this,  "any", null, "SchemaDef", "DefSchemaPublicRootTables" );
+        editIterator = (ICFGenKbGenIteratorEditObj)iterator.beginEdit();
+		((ICFGenKbGenItemEditObj)editIterator).setRequiredContainerCartridge( ruleCart );
+		((ICFGenKbGenItemEditObj)editIterator).setRequiredLookupRuleType( ruleTypeIterator );
+        editIterator.create();
+        editIterator = null;
+
+        iterator = new MSSBamCFGenIterateDefSchemaPublicTables(this,  "any", null, "SchemaDef", "DefSchemaPublicTables" );
+        editIterator = (ICFGenKbGenIteratorEditObj)iterator.beginEdit();
+		((ICFGenKbGenItemEditObj)editIterator).setRequiredContainerCartridge( ruleCart );
+		((ICFGenKbGenItemEditObj)editIterator).setRequiredLookupRuleType( ruleTypeIterator );
+        editIterator.create();
+        editIterator = null;
+
         iterator = new MSSBamCFGenIterateTableRefs(this,  "any", null, "Table", "TableRefs" );
         editIterator = (ICFGenKbGenIteratorEditObj)iterator.beginEdit();
 		((ICFGenKbGenItemEditObj)editIterator).setRequiredContainerCartridge( ruleCart );

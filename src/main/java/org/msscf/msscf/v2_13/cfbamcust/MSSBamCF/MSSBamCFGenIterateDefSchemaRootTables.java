@@ -100,16 +100,17 @@ public class MSSBamCFGenIterateDefSchemaRootTables
 		ICFBamSchemaDefObj schemaDefObj = (ICFBamSchemaDefObj)genDef;
 		ICFBamTableFactory tableFactory = ((ICFBamSchema)schemaDefObj.getSchema().getBackingStore()).getFactoryTable();
 
-		List<ICFBamTableObj> optionalChildrenTables = schemaDefObj.getOptionalComponentsTables();
-		List<ICFBamTableObj> filteredTables = new ArrayList<>();
-		for (ICFBamTableObj tbl: optionalChildrenTables) {
-			if (tbl.getOptionalDefSchemaId() == null && tbl.getOptionalDefSchemaTenantId() == null && MSSBamCFTableObj.getSuperClassRelation( tbl ) == null) {
-				filteredTables.add(tbl);
+		List<ICFBamTableObj> optionalChildrenTables = new ArrayList<>();
+		for (ICFBamTableObj tbl: schemaDefObj.getOptionalComponentsTables()) {
+			if (tbl != null) {
+				if (tbl.getOptionalLookupDefSchema() == null && MSSBamCFTableObj.getSuperClassRelation(tbl) == null) {
+					optionalChildrenTables.add(tbl);
+				}
 			}
 		}
-		int len = filteredTables.size();
+		int len = optionalChildrenTables.size();
 		ICFBamTableObj[] arr = new ICFBamTableObj[len];
-		Iterator<ICFBamTableObj> iter = filteredTables.iterator();
+		Iterator<ICFBamTableObj> iter = optionalChildrenTables.iterator();
 		int idx = 0;
 		while( ( idx < len ) && ( iter.hasNext() ) ) {
 			arr[idx++] = iter.next();
