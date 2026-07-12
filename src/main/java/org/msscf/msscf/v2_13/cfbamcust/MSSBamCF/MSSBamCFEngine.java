@@ -365,6 +365,22 @@ public class MSSBamCFEngine
         editBind.create();
         editBind = null;
 
+		bind = new MSSBamCFGenBindIsSpecificallyProtected(this,
+			"any", null, "Object", "IsSpecificallyProtected");
+        editBind = (ICFGenKbGenBindEditObj)(bind.beginEdit());
+        editBind.setRequiredContainerCartridge( ruleCart );
+        editBind.setRequiredLookupRuleType( ruleTypeBind );
+        editBind.create();
+        editBind = null;
+
+		bind = new MSSBamCFGenBindIsSpecificallyPrivate(this,
+			"any", null, "Object", "IsSpecificallyPrivate");
+        editBind = (ICFGenKbGenBindEditObj)(bind.beginEdit());
+        editBind.setRequiredContainerCartridge( ruleCart );
+        editBind.setRequiredLookupRuleType( ruleTypeBind );
+        editBind.create();
+        editBind = null;
+
         bind = new MSSBamCFGenBindHasSuperiorRelationCol( this,
             "any", null, "Value", "HasSuperiorRelationCol" );
         editBind = (ICFGenKbGenBindEditObj)(bind.beginEdit());
