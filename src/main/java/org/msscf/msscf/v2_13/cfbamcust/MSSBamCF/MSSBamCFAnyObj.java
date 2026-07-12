@@ -100,6 +100,7 @@ public class MSSBamCFAnyObj
 				case null:
 				case ICFBamSchema.CodeVisibilityEnum.Public:
 					isCurPublic = true;
+					break;
 				default:
 					isCurPublic = false;
 			}
@@ -480,6 +481,7 @@ public class MSSBamCFAnyObj
 				case ICFBamSchema.CodeVisibilityEnum.Public:
 				case ICFBamSchema.CodeVisibilityEnum.Protected:
 					isCurProtected = true;
+					break;
 				default:
 					isCurProtected = false;
 			}
@@ -587,7 +589,6 @@ public class MSSBamCFAnyObj
 			else if (atom instanceof ICFBamInt16TypeObj) {
 				isCurProtected = true;
 			}
-
 			else if (atom instanceof ICFBamInt32ColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
@@ -862,6 +863,7 @@ public class MSSBamCFAnyObj
 			switch (atom.getRequiredCodeVis()) {
 				case ICFBamSchema.CodeVisibilityEnum.Protected:
 					isCurProtected = true;
+					break;
 				default:
 					isCurProtected = false;
 			}
@@ -1199,6 +1201,7 @@ public class MSSBamCFAnyObj
 				case ICFBamSchema.CodeVisibilityEnum.Protected:
 				case ICFBamSchema.CodeVisibilityEnum.Private:
 					isCurPrivate = true;
+					break;
 				default:
 					isCurPrivate = false;
 			}
@@ -1586,6 +1589,7 @@ public class MSSBamCFAnyObj
 			switch (atom.getRequiredCodeVis()) {
 				case ICFBamSchema.CodeVisibilityEnum.Private:
 					isCurPrivate = true;
+					break;
 				default:
 					isCurPrivate = false;
 			}
