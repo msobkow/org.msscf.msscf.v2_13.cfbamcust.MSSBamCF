@@ -108,88 +108,70 @@ public class MSSBamCFAnyObj
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamBlobTypeObj) {
-				isCurPublic = true;
 			}
 			else if (atom instanceof ICFBamBoolColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamBoolTypeObj) {
-				isCurPublic = true;
 			}
 			else if (atom instanceof ICFBamDateColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamDateTypeObj) {
-				isCurPublic = true;
 			}
 			else if (atom instanceof ICFBamDbKeyHash128ColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamDbKeyHash128GenObj) {
-				isCurPublic = true;
 			}
 			else if (atom instanceof ICFBamDbKeyHash128TypeObj) {
-				isCurPublic = true;
 			}
 			else if (atom instanceof ICFBamDbKeyHash160ColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamDbKeyHash160GenObj) {
-				isCurPublic = true;
 			}
 			else if (atom instanceof ICFBamDbKeyHash160TypeObj) {
-				isCurPublic = true;
 			}
 			else if (atom instanceof ICFBamDbKeyHash224ColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamDbKeyHash224GenObj) {
-				isCurPublic = true;
 			}
 			else if (atom instanceof ICFBamDbKeyHash224TypeObj) {
-				isCurPublic = true;
 			}
 			else if (atom instanceof ICFBamDbKeyHash256ColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamDbKeyHash256GenObj) {
-				isCurPublic = true;
 			}
 			else if (atom instanceof ICFBamDbKeyHash256TypeObj) {
-				isCurPublic = true;
 			}
 			else if (atom instanceof ICFBamDbKeyHash384ColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamDbKeyHash384GenObj) {
-				isCurPublic = true;
 			}
 			else if (atom instanceof ICFBamDbKeyHash384TypeObj) {
-				isCurPublic = true;
 			}
 			else if (atom instanceof ICFBamDbKeyHash512ColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamDbKeyHash512GenObj) {
-				isCurPublic = true;
 			}
 			else if (atom instanceof ICFBamDbKeyHash512TypeObj) {
-				isCurPublic = true;
 			}
 			else if (atom instanceof ICFBamDoubleColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamDoubleTypeObj) {
-				isCurPublic = true;
 			}
 			else if (atom instanceof ICFBamFloatColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamFloatTypeObj) {
-				isCurPublic = true;
 			}
 			else if(atom instanceof ICFBamEnumTypeObj) {
-				isCurPublic = true;
 			}
 			else if(what instanceof ICFBamEnumDefObj cur) {
 				return switch(cur.getRequiredCodeVis()) {
@@ -202,127 +184,104 @@ public class MSSBamCFAnyObj
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamId16GenObj) {
-				isCurPublic = true;
 			}
 			else if (atom instanceof ICFBamInt16TypeObj) {
-				isCurPublic = true;
 			}
 			else if (atom instanceof ICFBamInt32ColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamId32GenObj) {
-				isCurPublic = true;
 			}
 			else if (atom instanceof ICFBamInt32TypeObj) {
-				isCurPublic = true;
 			}
 			else if (atom instanceof ICFBamInt64ColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamId64GenObj) {
-				isCurPublic = true;
 			}
 			else if (atom instanceof ICFBamInt64TypeObj) {
-				isCurPublic = true;
 			}
 			else if (atom instanceof ICFBamNmTokenColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamNmTokenTypeObj) {
-				isCurPublic = true;
 			}
 			else if (atom instanceof ICFBamNmTokensColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamNmTokensTypeObj) {
-				isCurPublic = true;
 			}
 			else if (atom instanceof ICFBamNumberColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamNumberTypeObj) {
-				isCurPublic = true;
 			}
 			else if (atom instanceof ICFBamStringColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamStringTypeObj) {
-				isCurPublic = true;
 			}
 			else if (atom instanceof ICFBamTZDateColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamTZDateTypeObj) {
-				isCurPublic = true;
 			}
 			else if (atom instanceof ICFBamTZTimeColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamTZTimeTypeObj) {
-				isCurPublic = true;
 			}
 			else if (atom instanceof ICFBamTZTimestampColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamTZTimestampTypeObj) {
-				isCurPublic = true;
 			}
 			else if (atom instanceof ICFBamTextColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamTextTypeObj) {
-				isCurPublic = true;
 			}
 			else if (atom instanceof ICFBamTimeColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamTimeTypeObj) {
-				isCurPublic = true;
 			}
 			else if (atom instanceof ICFBamTimestampColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamTimestampTypeObj) {
-				isCurPublic = true;
 			}
 			else if (atom instanceof ICFBamTokenColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamTokenTypeObj) {
-				isCurPublic = true;
 			}
 			else if (atom instanceof ICFBamUInt16ColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamUInt16TypeObj) {
-				isCurPublic = true;
 			}
 			else if (atom instanceof ICFBamUInt32ColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamUInt32TypeObj) {
-				isCurPublic = true;
 			}
 			else if (atom instanceof ICFBamUInt64ColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamUInt64TypeObj) {
-				isCurPublic = true;
 			}
 			else if (atom instanceof ICFBamUuid6ColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamUuid6TypeObj) {
-				isCurPublic = true;
 			}
 			else if (atom instanceof ICFBamUuidColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamUuidTypeObj) {
-				isCurPublic = true;
 			}
 			else {
-				isCurPublic = true;
 			}
 			if (tbl != null) {
 				if (inPrimaryIndexKey(tbl, atom)) {
@@ -489,88 +448,70 @@ public class MSSBamCFAnyObj
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamBlobTypeObj) {
-				isCurProtected = true;
 			}
 			else if (atom instanceof ICFBamBoolColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamBoolTypeObj) {
-				isCurProtected = true;
 			}
 			else if (atom instanceof ICFBamDateColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamDateTypeObj) {
-				isCurProtected = true;
 			}
 			else if (atom instanceof ICFBamDbKeyHash128ColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamDbKeyHash128GenObj) {
-				isCurProtected = true;
 			}
 			else if (atom instanceof ICFBamDbKeyHash128TypeObj) {
-				isCurProtected = true;
 			}
 			else if (atom instanceof ICFBamDbKeyHash160ColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamDbKeyHash160GenObj) {
-				isCurProtected = true;
 			}
 			else if (atom instanceof ICFBamDbKeyHash160TypeObj) {
-				isCurProtected = true;
 			}
 			else if (atom instanceof ICFBamDbKeyHash224ColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamDbKeyHash224GenObj) {
-				isCurProtected = true;
 			}
 			else if (atom instanceof ICFBamDbKeyHash224TypeObj) {
-				isCurProtected = true;
 			}
 			else if (atom instanceof ICFBamDbKeyHash256ColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamDbKeyHash256GenObj) {
-				isCurProtected = true;
 			}
 			else if (atom instanceof ICFBamDbKeyHash256TypeObj) {
-				isCurProtected = true;
 			}
 			else if (atom instanceof ICFBamDbKeyHash384ColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamDbKeyHash384GenObj) {
-				isCurProtected = true;
 			}
 			else if (atom instanceof ICFBamDbKeyHash384TypeObj) {
-				isCurProtected = true;
 			}
 			else if (atom instanceof ICFBamDbKeyHash512ColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamDbKeyHash512GenObj) {
-				isCurProtected = true;
 			}
 			else if (atom instanceof ICFBamDbKeyHash512TypeObj) {
-				isCurProtected = true;
 			}
 			else if (atom instanceof ICFBamDoubleColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamDoubleTypeObj) {
-				isCurProtected = true;
 			}
 			else if (atom instanceof ICFBamFloatColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamFloatTypeObj) {
-				isCurProtected = true;
 			}
 			else if(atom instanceof ICFBamEnumTypeObj) {
-				isCurProtected = true;
 			}
 			else if(what instanceof ICFBamEnumDefObj cur) {
 				return switch(cur.getRequiredCodeVis()) {
@@ -584,127 +525,104 @@ public class MSSBamCFAnyObj
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamId16GenObj) {
-				isCurProtected = true;
 			}
 			else if (atom instanceof ICFBamInt16TypeObj) {
-				isCurProtected = true;
 			}
 			else if (atom instanceof ICFBamInt32ColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamId32GenObj) {
-				isCurProtected = true;
 			}
 			else if (atom instanceof ICFBamInt32TypeObj) {
-				isCurProtected = true;
 			}
 			else if (atom instanceof ICFBamInt64ColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamId64GenObj) {
-				isCurProtected = true;
 			}
 			else if (atom instanceof ICFBamInt64TypeObj) {
-				isCurProtected = true;
 			}
 			else if (atom instanceof ICFBamNmTokenColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamNmTokenTypeObj) {
-				isCurProtected = true;
 			}
 			else if (atom instanceof ICFBamNmTokensColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamNmTokensTypeObj) {
-				isCurProtected = true;
 			}
 			else if (atom instanceof ICFBamNumberColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamNumberTypeObj) {
-				isCurProtected = true;
 			}
 			else if (atom instanceof ICFBamStringColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamStringTypeObj) {
-				isCurProtected = true;
 			}
 			else if (atom instanceof ICFBamTZDateColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamTZDateTypeObj) {
-				isCurProtected = true;
 			}
 			else if (atom instanceof ICFBamTZTimeColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamTZTimeTypeObj) {
-				isCurProtected = true;
 			}
 			else if (atom instanceof ICFBamTZTimestampColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamTZTimestampTypeObj) {
-				isCurProtected = true;
 			}
 			else if (atom instanceof ICFBamTextColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamTextTypeObj) {
-				isCurProtected = true;
 			}
 			else if (atom instanceof ICFBamTimeColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamTimeTypeObj) {
-				isCurProtected = true;
 			}
 			else if (atom instanceof ICFBamTimestampColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamTimestampTypeObj) {
-				isCurProtected = true;
 			}
 			else if (atom instanceof ICFBamTokenColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamTokenTypeObj) {
-				isCurProtected = true;
 			}
 			else if (atom instanceof ICFBamUInt16ColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamUInt16TypeObj) {
-				isCurProtected = true;
 			}
 			else if (atom instanceof ICFBamUInt32ColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamUInt32TypeObj) {
-				isCurProtected = true;
 			}
 			else if (atom instanceof ICFBamUInt64ColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamUInt64TypeObj) {
-				isCurProtected = true;
 			}
 			else if (atom instanceof ICFBamUuid6ColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamUuid6TypeObj) {
-				isCurProtected = true;
 			}
 			else if (atom instanceof ICFBamUuidColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamUuidTypeObj) {
-				isCurProtected = true;
 			}
 			else {
-				isCurProtected = true;
 			}
 			if (tbl != null) {
 				if (inPrimaryIndexKey(tbl, atom)) {
@@ -1209,88 +1127,70 @@ public class MSSBamCFAnyObj
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamBlobTypeObj) {
-				isCurPrivate = true;
 			}
 			else if (atom instanceof ICFBamBoolColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamBoolTypeObj) {
-				isCurPrivate = true;
 			}
 			else if (atom instanceof ICFBamDateColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamDateTypeObj) {
-				isCurPrivate = true;
 			}
 			else if (atom instanceof ICFBamDbKeyHash128ColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamDbKeyHash128GenObj) {
-				isCurPrivate = true;
 			}
 			else if (atom instanceof ICFBamDbKeyHash128TypeObj) {
-				isCurPrivate = true;
 			}
 			else if (atom instanceof ICFBamDbKeyHash160ColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamDbKeyHash160GenObj) {
-				isCurPrivate = true;
 			}
 			else if (atom instanceof ICFBamDbKeyHash160TypeObj) {
-				isCurPrivate = true;
 			}
 			else if (atom instanceof ICFBamDbKeyHash224ColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamDbKeyHash224GenObj) {
-				isCurPrivate = true;
 			}
 			else if (atom instanceof ICFBamDbKeyHash224TypeObj) {
-				isCurPrivate = true;
 			}
 			else if (atom instanceof ICFBamDbKeyHash256ColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamDbKeyHash256GenObj) {
-				isCurPrivate = true;
 			}
 			else if (atom instanceof ICFBamDbKeyHash256TypeObj) {
-				isCurPrivate = true;
 			}
 			else if (atom instanceof ICFBamDbKeyHash384ColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamDbKeyHash384GenObj) {
-				isCurPrivate = true;
 			}
 			else if (atom instanceof ICFBamDbKeyHash384TypeObj) {
-				isCurPrivate = true;
 			}
 			else if (atom instanceof ICFBamDbKeyHash512ColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamDbKeyHash512GenObj) {
-				isCurPrivate = true;
 			}
 			else if (atom instanceof ICFBamDbKeyHash512TypeObj) {
-				isCurPrivate = true;
 			}
 			else if (atom instanceof ICFBamDoubleColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamDoubleTypeObj) {
-				isCurPrivate = true;
 			}
 			else if (atom instanceof ICFBamFloatColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamFloatTypeObj) {
-				isCurPrivate = true;
 			}
 			else if(atom instanceof ICFBamEnumTypeObj) {
-				isCurPrivate = true;
 			}
 			else if(what instanceof ICFBamEnumDefObj cur) {
 				return switch(cur.getRequiredCodeVis()) {
@@ -1305,128 +1205,104 @@ public class MSSBamCFAnyObj
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamId16GenObj) {
-				isCurPrivate = true;
 			}
 			else if (atom instanceof ICFBamInt16TypeObj) {
-				isCurPrivate = true;
 			}
-
 			else if (atom instanceof ICFBamInt32ColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamId32GenObj) {
-				isCurPrivate = true;
 			}
 			else if (atom instanceof ICFBamInt32TypeObj) {
-				isCurPrivate = true;
 			}
 			else if (atom instanceof ICFBamInt64ColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamId64GenObj) {
-				isCurPrivate = true;
 			}
 			else if (atom instanceof ICFBamInt64TypeObj) {
-				isCurPrivate = true;
 			}
 			else if (atom instanceof ICFBamNmTokenColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamNmTokenTypeObj) {
-				isCurPrivate = true;
 			}
 			else if (atom instanceof ICFBamNmTokensColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamNmTokensTypeObj) {
-				isCurPrivate = true;
 			}
 			else if (atom instanceof ICFBamNumberColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamNumberTypeObj) {
-				isCurPrivate = true;
 			}
 			else if (atom instanceof ICFBamStringColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamStringTypeObj) {
-				isCurPrivate = true;
 			}
 			else if (atom instanceof ICFBamTZDateColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamTZDateTypeObj) {
-				isCurPrivate = true;
 			}
 			else if (atom instanceof ICFBamTZTimeColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamTZTimeTypeObj) {
-				isCurPrivate = true;
 			}
 			else if (atom instanceof ICFBamTZTimestampColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamTZTimestampTypeObj) {
-				isCurPrivate = true;
 			}
 			else if (atom instanceof ICFBamTextColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamTextTypeObj) {
-				isCurPrivate = true;
 			}
 			else if (atom instanceof ICFBamTimeColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamTimeTypeObj) {
-				isCurPrivate = true;
 			}
 			else if (atom instanceof ICFBamTimestampColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamTimestampTypeObj) {
-				isCurPrivate = true;
 			}
 			else if (atom instanceof ICFBamTokenColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamTokenTypeObj) {
-				isCurPrivate = true;
 			}
 			else if (atom instanceof ICFBamUInt16ColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamUInt16TypeObj) {
-				isCurPrivate = true;
 			}
 			else if (atom instanceof ICFBamUInt32ColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamUInt32TypeObj) {
-				isCurPrivate = true;
 			}
 			else if (atom instanceof ICFBamUInt64ColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamUInt64TypeObj) {
-				isCurPrivate = true;
 			}
 			else if (atom instanceof ICFBamUuid6ColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamUuid6TypeObj) {
-				isCurPrivate = true;
 			}
 			else if (atom instanceof ICFBamUuidColObj col) {
 				tbl = col.getRequiredContainerTable();
 			}
 			else if (atom instanceof ICFBamUuidTypeObj) {
-				isCurPrivate = true;
 			}
 			else {
-				isCurPrivate = true;
 			}
 			if (tbl != null) {
 				if (inPrimaryIndexKey(tbl, atom)) {
