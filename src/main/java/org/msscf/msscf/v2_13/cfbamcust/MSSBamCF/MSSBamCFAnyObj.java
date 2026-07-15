@@ -68,7 +68,7 @@ public class MSSBamCFAnyObj
 		return(false);
 	}
 
-	public static boolean isPublic(ICFLibAnyObj what) {
+	public static boolean isTriviallyPublic(ICFLibAnyObj what) {
 		if (what == null) {
 			return(true);
 		}
@@ -175,8 +175,8 @@ public class MSSBamCFAnyObj
 			}
 			else if(what instanceof ICFBamEnumDefObj cur) {
 				return switch(cur.getRequiredCodeVis()) {
-					case null -> isCurPublic = isPublic(cur.getRequiredContainerScope());
-					case ICFBamSchema.CodeVisibilityEnum.Public -> isCurPublic = isPublic(cur.getRequiredContainerScope());
+					case null -> isCurPublic = isTriviallyPublic(cur.getRequiredContainerScope());
+					case ICFBamSchema.CodeVisibilityEnum.Public -> isCurPublic = isTriviallyPublic(cur.getRequiredContainerScope());
 					default -> isCurPublic = false;
 				};
 			}
@@ -288,7 +288,7 @@ public class MSSBamCFAnyObj
 					isCurPublic = true;
 				}
 				if (isCurPublic) {
-					isCurPublic = isPublic(tbl);
+					isCurPublic = isTriviallyPublic(tbl);
 				}
 			}
 			return(isCurPublic);
@@ -307,30 +307,30 @@ public class MSSBamCFAnyObj
 				isCurPublic = true;
 			}
 			if (isCurPublic) {
-				isCurPublic = isPublic(tbl);
+				isCurPublic = isTriviallyPublic(tbl);
 			}
 			return(isCurPublic);
 		}
 		else if(what instanceof ICFBamIndexColObj col) {
-			return(isPublic(col.getRequiredLookupColumn()));
+			return(isTriviallyPublic(col.getRequiredLookupColumn()));
 		}
 		else if(what instanceof ICFBamRelationColObj col) {
-			return(isPublic(col.getRequiredLookupFromCol()) && isPublic(col.getRequiredLookupToCol()));
+			return(isTriviallyPublic(col.getRequiredLookupFromCol()) && isTriviallyPublic(col.getRequiredLookupToCol()));
 		}
 		else if(what instanceof ICFBamIndexObj idx) {
 			ICFBamTableObj tbl = idx.getRequiredContainerTable();
 			if( idx == tbl.getPrimaryKeyIndex()) {
-				return(isPublic(tbl));
+				return(isTriviallyPublic(tbl));
 			}
 			switch(idx.getRequiredCodeVis()) {
 				case null:
 				case ICFBamSchema.CodeVisibilityEnum.Public:
-					if (!isPublic(tbl)) {
+					if (!isTriviallyPublic(tbl)) {
 						return(false);
 					}
 					else {
 						for (ICFBamIndexColObj col: idx.getOptionalComponentsColumns()) {
-							if (!isPublic(col.getRequiredLookupColumn())) {
+							if (!isTriviallyPublic(col.getRequiredLookupColumn())) {
 								return(false);
 							}
 						}
@@ -344,12 +344,12 @@ public class MSSBamCFAnyObj
 			switch (reln.getRequiredCodeVis()) {
 				case null:
 				case ICFBamSchema.CodeVisibilityEnum.Public:
-					if(isPublic(reln.getRequiredContainerFromTable()) && isPublic(reln.getRequiredLookupToTable()) && isPublic(reln.getRequiredLookupFromIndex()) && isPublic(reln.getRequiredLookupToIndex())) {
-						for (ICFBamRelationColObj col: reln.getOptionalComponentsColumns()) {
-							if (!isPublic(col)) {
-								return(false);
-							}
-						}
+					if(isTriviallyPublic(reln.getRequiredContainerFromTable()) && isTriviallyPublic(reln.getRequiredLookupToTable()) && isTriviallyPublic(reln.getRequiredLookupFromIndex()) && isTriviallyPublic(reln.getRequiredLookupToIndex())) {
+//						for (ICFBamRelationColObj col: reln.getOptionalComponentsColumns()) {
+//							if (!isTriviallyPublic(col)) {
+//								return(false);
+//							}
+//						}
 						return(true);
 					}
 					else {
@@ -366,16 +366,16 @@ public class MSSBamCFAnyObj
 			switch (meth.getRequiredCodeVis()) {
 				case null:
 				case ICFBamSchema.CodeVisibilityEnum.Public:
-					if (!isPublic(meth.getRequiredContainerForTable())) {
+					if (!isTriviallyPublic(meth.getRequiredContainerForTable())) {
 						return(false);
 					}
-					for(ICFBamParamObj p: meth.getOptionalComponentsParams()) {
-						if(!isPublic(p)) {
-							return(false);
-						}
-					}
+//					for(ICFBamParamObj p: meth.getOptionalComponentsParams()) {
+//						if(!isTriviallyPublic(p)) {
+//							return(false);
+//						}
+//					}
 					if (meth instanceof ICFBamServerObjFuncObj of) {
-						if (!isPublic(of.getOptionalLookupRetTable())) {
+						if (!isTriviallyPublic(of.getOptionalLookupRetTable())) {
 							return(false);
 						}
 						else {
@@ -383,7 +383,7 @@ public class MSSBamCFAnyObj
 						}
 					}
 					else if (meth instanceof ICFBamServerListFuncObj of) {
-						if (!isPublic(of.getOptionalLookupRetTable())) {
+						if (!isTriviallyPublic(of.getOptionalLookupRetTable())) {
 							return(false);
 						}
 						else {
@@ -406,7 +406,140 @@ public class MSSBamCFAnyObj
 		}
 	}
 
-	public static boolean isProtected(ICFLibAnyObj what) {
+	public static boolean isPublic(ICFLibAnyObj what) {
+		if (what == null) {
+			return(true);
+		}
+		boolean isCurPublic = isTriviallyPublic(what);
+		if (!isCurPublic) {
+			return(false);
+		}
+		if (what instanceof ICFBamTableObj tbl) {
+			ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
+			if (idx != null) {
+				isCurPublic = isPublic(idx);
+				if(!isCurPublic) {
+					return(false);
+				}
+			}
+			idx = tbl.getOptionalLookupAltIndex();
+			if (idx != null) {
+				isCurPublic = isPublic(idx);
+				if(!isCurPublic) {
+					return(false);
+				}
+			}
+			idx = tbl.getOptionalLookupLookupIndex();
+			if (idx != null) {
+				isCurPublic = isPublic(idx);
+				if(!isCurPublic) {
+					return(false);
+				}
+			}
+			return(true);
+		}
+		else if (what instanceof ICFBamAtomObj atom) {
+			return(isCurPublic);
+		}
+		else if (what instanceof ICFBamTableColObj col) {
+			return(isCurPublic);
+		}
+		else if(what instanceof ICFBamIndexColObj col) {
+			return(isPublic(col.getRequiredLookupColumn()));
+		}
+		else if(what instanceof ICFBamRelationColObj col) {
+			return(isPublic(col.getRequiredLookupFromCol()) && isPublic(col.getRequiredLookupToCol()));
+		}
+		else if(what instanceof ICFBamIndexObj idx) {
+			ICFBamTableObj tbl = idx.getRequiredContainerTable();
+			if( idx == tbl.getPrimaryKeyIndex()) {
+				return(isTriviallyPublic(tbl));
+			}
+			switch(idx.getRequiredCodeVis()) {
+				case null:
+				case ICFBamSchema.CodeVisibilityEnum.Public:
+					if (!isTriviallyPublic(tbl)) {
+						return(false);
+					}
+					else {
+						for (ICFBamIndexColObj col: idx.getOptionalComponentsColumns()) {
+							if (!isPublic(col.getRequiredLookupColumn())) {
+								return(false);
+							}
+						}
+						return(true);
+					}
+				default:
+					return(false);
+			}
+		}
+		else if(what instanceof ICFBamRelationObj reln) {
+			switch (reln.getRequiredCodeVis()) {
+				case null:
+				case ICFBamSchema.CodeVisibilityEnum.Public:
+					if(isTriviallyPublic(reln.getRequiredContainerFromTable()) && isTriviallyPublic(reln.getRequiredLookupToTable()) && isPublic(reln.getRequiredLookupFromIndex()) && isPublic(reln.getRequiredLookupToIndex())) {
+						for (ICFBamRelationColObj col: reln.getOptionalComponentsColumns()) {
+							if (!isPublic(col)) {
+								return(false);
+							}
+						}
+						return(true);
+					}
+					else {
+						return(false);
+					}
+				default:
+					return(false);
+			}
+		}
+		else if(what instanceof ICFBamParamObj) {
+			return(true);
+		}
+		else if(what instanceof ICFBamServerMethodObj meth) {
+			switch (meth.getRequiredCodeVis()) {
+				case null:
+				case ICFBamSchema.CodeVisibilityEnum.Public:
+					if (!isTriviallyPublic(meth.getRequiredContainerForTable())) {
+						return(false);
+					}
+					for(ICFBamParamObj p: meth.getOptionalComponentsParams()) {
+						if(!isPublic(p)) {
+							return(false);
+						}
+					}
+					if (meth instanceof ICFBamServerObjFuncObj of) {
+						if (!isTriviallyPublic(of.getOptionalLookupRetTable())) {
+							return(false);
+						}
+						else {
+							return(true);
+						}
+					}
+					else if (meth instanceof ICFBamServerListFuncObj of) {
+						if (!isTriviallyPublic(of.getOptionalLookupRetTable())) {
+							return(false);
+						}
+						else {
+							return(true);
+						}
+					}
+					else if (meth instanceof ICFBamServerProcObj) {
+						return(true);
+					}
+					else {
+						return(false);
+					}
+				default:
+					return(false);
+			}
+		}
+		else {
+			// anything which isn't recognizable is automatically protected
+			return(true);
+		}
+	}
+
+	public static boolean isTriviallyProtected(ICFLibAnyObj what) {
 		if (what == null) {
 			return(true);
 		}
@@ -515,9 +648,9 @@ public class MSSBamCFAnyObj
 			}
 			else if(what instanceof ICFBamEnumDefObj cur) {
 				return switch(cur.getRequiredCodeVis()) {
-					case null -> isCurProtected = isProtected(cur.getRequiredContainerScope());
-					case ICFBamSchema.CodeVisibilityEnum.Public -> isCurProtected = isProtected(cur.getRequiredContainerScope());
-					case ICFBamSchema.CodeVisibilityEnum.Protected -> isCurProtected = isProtected(cur.getRequiredContainerScope());
+					case null -> isCurProtected = isTriviallyProtected(cur.getRequiredContainerScope());
+					case ICFBamSchema.CodeVisibilityEnum.Public -> isCurProtected = isTriviallyProtected(cur.getRequiredContainerScope());
+					case ICFBamSchema.CodeVisibilityEnum.Protected -> isCurProtected = isTriviallyProtected(cur.getRequiredContainerScope());
 					default -> isCurProtected = false;
 				};
 			}
@@ -629,7 +762,7 @@ public class MSSBamCFAnyObj
 					isCurProtected = true;
 				}
 				if (isCurProtected) {
-					isCurProtected = isProtected(tbl);
+					isCurProtected = isTriviallyProtected(tbl);
 				}
 			}
 			return(isCurProtected);
@@ -649,8 +782,134 @@ public class MSSBamCFAnyObj
 				isCurProtected = true;
 			}
 			if (isCurProtected) {
-				isCurProtected = isProtected(tbl);
+				isCurProtected = isTriviallyProtected(tbl);
 			}
+			return(isCurProtected);
+		}
+		else if(what instanceof ICFBamIndexColObj col) {
+			return(isTriviallyProtected(col.getRequiredLookupColumn()));
+		}
+		else if(what instanceof ICFBamRelationColObj col) {
+			return(isTriviallyProtected(col.getRequiredLookupFromCol()) && isTriviallyProtected(col.getRequiredLookupToCol()));
+		}
+		else if(what instanceof ICFBamIndexObj idx) {
+			ICFBamTableObj tbl = idx.getRequiredContainerTable();
+			if( idx == tbl.getPrimaryKeyIndex()) {
+				return(isTriviallyProtected(tbl));
+			}
+			switch(idx.getRequiredCodeVis()) {
+				case null:
+				case ICFBamSchema.CodeVisibilityEnum.Public:
+				case ICFBamSchema.CodeVisibilityEnum.Protected:
+					if (!isTriviallyProtected(tbl)) {
+						return(false);
+					}
+					else {
+						for (ICFBamIndexColObj col: idx.getOptionalComponentsColumns()) {
+							if (!isTriviallyProtected(col.getRequiredLookupColumn())) {
+								return(false);
+							}
+						}
+						return(true);
+					}
+				default:
+					return(false);
+			}
+		}
+		else if(what instanceof ICFBamRelationObj reln) {
+			switch (reln.getRequiredCodeVis()) {
+				case null:
+				case ICFBamSchema.CodeVisibilityEnum.Public:
+				case ICFBamSchema.CodeVisibilityEnum.Protected:
+					if(isTriviallyProtected(reln.getRequiredContainerFromTable()) && isTriviallyProtected(reln.getRequiredLookupToTable()) && isTriviallyProtected(reln.getRequiredLookupFromIndex()) && isTriviallyProtected(reln.getRequiredLookupToIndex())) {
+						return(true);
+					}
+					else {
+						return(false);
+					}
+				default:
+					return(false);
+			}
+		}
+		else if(what instanceof ICFBamParamObj) {
+			return(true);
+		}
+		else if(what instanceof ICFBamServerMethodObj meth) {
+			switch (meth.getRequiredCodeVis()) {
+				case null:
+				case ICFBamSchema.CodeVisibilityEnum.Public:
+				case ICFBamSchema.CodeVisibilityEnum.Protected:
+					if (!isTriviallyProtected(meth.getRequiredContainerForTable())) {
+						return(false);
+					}
+					if (meth instanceof ICFBamServerObjFuncObj of) {
+						if (!isTriviallyProtected(of.getOptionalLookupRetTable())) {
+							return(false);
+						}
+						else {
+							return(true);
+						}
+					}
+					else if (meth instanceof ICFBamServerListFuncObj of) {
+						if (!isTriviallyProtected(of.getOptionalLookupRetTable())) {
+							return(false);
+						}
+						else {
+							return(true);
+						}
+					}
+					else if (meth instanceof ICFBamServerProcObj) {
+						return(true);
+					}
+					else {
+						return(false);
+					}
+				default:
+					return(false);
+			}
+		}
+		else {
+			// anything which isn't recognizable is automatically protected
+			return(true);
+		}
+	}
+
+	public static boolean isProtected(ICFLibAnyObj what) {
+		if (what == null) {
+			return(true);
+		}
+		boolean isCurProtected = isTriviallyProtected(what);
+		if (!isCurProtected) {
+			return(false);
+		}
+		if (what instanceof ICFBamTableObj tbl) {
+			ICFBamIndexObj idx = tbl.getPrimaryKeyIndex();
+			if (idx != null) {
+				isCurProtected = isProtected(idx);
+				if(!isCurProtected) {
+					return(false);
+				}
+			}
+			idx = tbl.getOptionalLookupAltIndex();
+			if (idx != null) {
+				isCurProtected = isProtected(idx);
+				if(!isCurProtected) {
+					return(false);
+				}
+			}
+			idx = tbl.getOptionalLookupLookupIndex();
+			if (idx != null) {
+				isCurProtected = isProtected(idx);
+				if(!isCurProtected) {
+					return(false);
+				}
+			}
+			return(true);
+		}
+		else if (what instanceof ICFBamAtomObj atom) {
+			return(isCurProtected);
+		}
+		else if (what instanceof ICFBamTableColObj col) {
 			return(isCurProtected);
 		}
 		else if(what instanceof ICFBamIndexColObj col) {
@@ -662,13 +921,13 @@ public class MSSBamCFAnyObj
 		else if(what instanceof ICFBamIndexObj idx) {
 			ICFBamTableObj tbl = idx.getRequiredContainerTable();
 			if( idx == tbl.getPrimaryKeyIndex()) {
-				return(isProtected(tbl));
+				return(isTriviallyProtected(tbl));
 			}
 			switch(idx.getRequiredCodeVis()) {
 				case null:
 				case ICFBamSchema.CodeVisibilityEnum.Public:
 				case ICFBamSchema.CodeVisibilityEnum.Protected:
-					if (!isProtected(tbl)) {
+					if (!isTriviallyProtected(tbl)) {
 						return(false);
 					}
 					else {
@@ -688,7 +947,7 @@ public class MSSBamCFAnyObj
 				case null:
 				case ICFBamSchema.CodeVisibilityEnum.Public:
 				case ICFBamSchema.CodeVisibilityEnum.Protected:
-					if(isProtected(reln.getRequiredContainerFromTable()) && isProtected(reln.getRequiredLookupToTable()) && isProtected(reln.getRequiredLookupFromIndex()) && isProtected(reln.getRequiredLookupToIndex())) {
+					if(isTriviallyProtected(reln.getRequiredContainerFromTable()) && isTriviallyProtected(reln.getRequiredLookupToTable()) && isProtected(reln.getRequiredLookupFromIndex()) && isProtected(reln.getRequiredLookupToIndex())) {
 						for (ICFBamRelationColObj col: reln.getOptionalComponentsColumns()) {
 							if (!isProtected(col)) {
 								return(false);
@@ -711,7 +970,7 @@ public class MSSBamCFAnyObj
 				case null:
 				case ICFBamSchema.CodeVisibilityEnum.Public:
 				case ICFBamSchema.CodeVisibilityEnum.Protected:
-					if (!isProtected(meth.getRequiredContainerForTable())) {
+					if (!isTriviallyProtected(meth.getRequiredContainerForTable())) {
 						return(false);
 					}
 					for(ICFBamParamObj p: meth.getOptionalComponentsParams()) {
@@ -720,7 +979,7 @@ public class MSSBamCFAnyObj
 						}
 					}
 					if (meth instanceof ICFBamServerObjFuncObj of) {
-						if (!isProtected(of.getOptionalLookupRetTable())) {
+						if (!isTriviallyProtected(of.getOptionalLookupRetTable())) {
 							return(false);
 						}
 						else {
@@ -728,7 +987,7 @@ public class MSSBamCFAnyObj
 						}
 					}
 					else if (meth instanceof ICFBamServerListFuncObj of) {
-						if (!isProtected(of.getOptionalLookupRetTable())) {
+						if (!isTriviallyProtected(of.getOptionalLookupRetTable())) {
 							return(false);
 						}
 						else {
