@@ -2133,30 +2133,17 @@ public class MSSBamCFAnyObj
 		if (what == null) {
 			return(false);
 		}
-		boolean isCurProtected = isIntermediatelyProtected(what);
+		boolean isCurProtected = isProtected(what);
 		if (!isCurProtected) {
 			return(false);
 		}
 		if (what instanceof ICFBamTableObj tbl) {
-			ICFBamTableObj curTable = tbl;
-			while( curTable != null ) {
-				switch(curTable.getRequiredCodeVis()) {
-					case ICFBamSchema.CodeVisibilityEnum.Protected: return(true);
-				}
-				ICFBamRelationObj screl = curTable.getSuperClassRelation();
-				if (screl != null) {
-					curTable = screl.getRequiredLookupToTable();
-				}
-				else {
-					return(false);
-				}
-			}
-			return(false);
+			return (tbl.getRequiredCodeVis() == ICFBamSchema.CodeVisibilityEnum.Protected);
 		}
 		else if (what instanceof ICFBamAtomObj atom) {
 			ICFBamTableObj tbl = null;
-			switch (atom.getRequiredCodeVis()) {
-				case ICFBamSchema.CodeVisibilityEnum.Protected: return(true);
+			if (atom.getRequiredCodeVis() == ICFBamSchema.CodeVisibilityEnum.Protected) {
+				return(true);
 			}
 			if (atom instanceof ICFBamBlobColObj col) {
 				tbl = col.getRequiredContainerTable();
@@ -2225,13 +2212,11 @@ public class MSSBamCFAnyObj
 			}
 			else if (atom instanceof ICFBamFloatTypeObj) {
 			}
-			else if(atom instanceof ICFBamEnumTypeObj) {
+			else if(atom instanceof ICFBamEnumTypeObj cur) {
+				return(cur.getRequiredCodeVis() == ICFBamSchema.CodeVisibilityEnum.Protected);
 			}
 			else if(what instanceof ICFBamEnumDefObj cur) {
-				switch(cur.getRequiredCodeVis()) {
-					case ICFBamSchema.CodeVisibilityEnum.Protected: return(true);
-					default: return(false);
-				}
+				return(cur.getRequiredCodeVis() == ICFBamSchema.CodeVisibilityEnum.Protected);
 			}
 			else if (atom instanceof ICFBamInt16ColObj col) {
 				tbl = col.getRequiredContainerTable();
@@ -2337,7 +2322,7 @@ public class MSSBamCFAnyObj
 			else {
 			}
 			if (tbl != null) {
-				return( isSpecificallyProtected(tbl));
+				return(isSpecificallyProtected(tbl));
 			}
 			else {
 				return(false);
@@ -2349,90 +2334,87 @@ public class MSSBamCFAnyObj
 			}
 			ICFBamTableObj tbl = col.getRequiredContainerTable();
 			if (tbl != null) {
-				return( isSpecificallyProtected(tbl));
+				return(isSpecificallyProtected(tbl));
 			}
 			else {
 				return(false);
 			}
 		}
-		else if(what instanceof ICFBamIndexColObj col) {
+		else if (what instanceof ICFBamIndexColObj col) {
 			return(isSpecificallyProtected(col.getRequiredLookupColumn()));
 		}
-		else if(what instanceof ICFBamRelationColObj col) {
+		else if (what instanceof ICFBamRelationColObj col) {
 			return(isSpecificallyProtected(col.getRequiredLookupFromCol()) || isSpecificallyProtected(col.getRequiredLookupToCol()));
 		}
-		else if(what instanceof ICFBamIndexObj idx) {
+		else if (what instanceof ICFBamIndexObj idx) {
 			ICFBamTableObj tbl = idx.getRequiredContainerTable();
-			if( idx == tbl.getPrimaryKeyIndex()) {
-				return(isSpecificallyProtected(tbl));
-			}
-			switch(idx.getRequiredCodeVis()) {
-				case ICFBamSchema.CodeVisibilityEnum.Protected:
-					if (!isIntermediatelyProtected(tbl)) {
-						return(false);
-					}
-					else {
-						for (ICFBamIndexColObj col: idx.getOptionalComponentsColumns()) {
-							if (!isIntermediatelyProtected(col.getRequiredLookupColumn())) {
-								return(false);
-							}
-						}
-						return(true);
-					}
-				default:
+			if (idx.getRequiredCodeVis() == ICFBamSchema.CodeVisibilityEnum.Protected) {
+				if (!isProtected(tbl)) {
 					return(false);
+				}
+				else {
+					for (ICFBamIndexColObj col: idx.getOptionalComponentsColumns()) {
+						if (!isProtected(col.getRequiredLookupColumn())) {
+							return(false);
+						}
+					}
+					return(true);
+				}
+			}
+			else {
+				return(isSpecificallyProtected(tbl));
 			}
 		}
 		else if(what instanceof ICFBamRelationObj reln) {
-			switch (reln.getRequiredCodeVis()) {
-				case ICFBamSchema.CodeVisibilityEnum.Protected:
-					if(isIntermediatelyProtected(reln.getRequiredContainerFromTable()) && isIntermediatelyProtected(reln.getRequiredLookupToTable()) && isIntermediatelyProtected(reln.getRequiredLookupFromIndex()) && isIntermediatelyProtected(reln.getRequiredLookupToIndex())) {
-						return(true);
-					}
-					else {
-						return(false);
-					}
-				default:
+			if (reln.getRequiredCodeVis() == ICFBamSchema.CodeVisibilityEnum.Protected) {
+				if (isProtected(reln.getRequiredContainerFromTable()) && isProtected(reln.getRequiredLookupToTable()) && isProtected(reln.getRequiredLookupFromIndex()) && isProtected(reln.getRequiredLookupToIndex())) {
+					return(true);
+				}
+				else {
 					return(false);
+				}
+			}
+			else {
+				return(isSpecificallyProtected(reln.getRequiredContainerFromTable()));
 			}
 		}
 		else if(what instanceof ICFBamParamObj param) {
 			return(isSpecificallyProtected(param.getRequiredContainerServerMeth()));
 		}
 		else if(what instanceof ICFBamServerMethodObj meth) {
-			switch (meth.getRequiredCodeVis()) {
-				case ICFBamSchema.CodeVisibilityEnum.Protected:
-					if (!isIntermediatelyProtected(meth.getRequiredContainerForTable())) {
+			if (meth.getRequiredCodeVis() == ICFBamSchema.CodeVisibilityEnum.Protected) {
+				if (!isProtected(meth.getRequiredContainerForTable())) {
+					return(false);
+				}
+				if (meth instanceof ICFBamServerObjFuncObj of) {
+					if (!isProtected(of.getOptionalLookupRetTable())) {
 						return(false);
-					}
-					if (meth instanceof ICFBamServerObjFuncObj of) {
-						if (!isIntermediatelyProtected(of.getOptionalLookupRetTable())) {
-							return(false);
-						}
-						else {
-							return(true);
-						}
-					}
-					else if (meth instanceof ICFBamServerListFuncObj of) {
-						if (!isIntermediatelyProtected(of.getOptionalLookupRetTable())) {
-							return(false);
-						}
-						else {
-							return(true);
-						}
-					}
-					else if (meth instanceof ICFBamServerProcObj) {
-						return(true);
 					}
 					else {
+						return(true);
+					}
+				}
+				else if (meth instanceof ICFBamServerListFuncObj of) {
+					if (!isProtected(of.getOptionalLookupRetTable())) {
 						return(false);
 					}
-				default:
+					else {
+						return(true);
+					}
+				}
+				else if (meth instanceof ICFBamServerProcObj) {
+					return(true);
+				}
+				else {
 					return(false);
+				}
+			}
+			else {
+				return(isSpecificallyProtected(meth.getRequiredContainerForTable()));
 			}
 		}
 		else {
-			// anything which isn't recognizable is not specifically protected
+			// anything which isn't recognizable is not specifically private
 			return(false);
 		}
 	}
@@ -3495,25 +3477,12 @@ public class MSSBamCFAnyObj
 		if (what == null) {
 			return(false);
 		}
-		boolean isCurPrivate = isIntermediatelyPrivate(what);
+		boolean isCurPrivate = isPrivate(what);
 		if (!isCurPrivate) {
 			return(false);
 		}
 		if (what instanceof ICFBamTableObj tbl) {
-			ICFBamTableObj curTable = tbl;
-			while( curTable != null ) {
-				switch(curTable.getRequiredCodeVis()) {
-					case ICFBamSchema.CodeVisibilityEnum.Private: return(true);
-				}
-				ICFBamRelationObj screl = curTable.getSuperClassRelation();
-				if (screl != null) {
-					curTable = screl.getRequiredLookupToTable();
-				}
-				else {
-					return(false);
-				}
-			}
-			return(false);
+			return (tbl.getRequiredCodeVis() == ICFBamSchema.CodeVisibilityEnum.Private);
 		}
 		else if (what instanceof ICFBamAtomObj atom) {
 			ICFBamTableObj tbl = null;
@@ -3587,13 +3556,11 @@ public class MSSBamCFAnyObj
 			}
 			else if (atom instanceof ICFBamFloatTypeObj) {
 			}
-			else if(atom instanceof ICFBamEnumTypeObj) {
+			else if(atom instanceof ICFBamEnumTypeObj cur) {
+				return(cur.getRequiredCodeVis() == ICFBamSchema.CodeVisibilityEnum.Private);
 			}
 			else if(what instanceof ICFBamEnumDefObj cur) {
-				switch(cur.getRequiredCodeVis()) {
-					case ICFBamSchema.CodeVisibilityEnum.Private: return(true);
-					default: return(false);
-				}
+				return(cur.getRequiredCodeVis() == ICFBamSchema.CodeVisibilityEnum.Private);
 			}
 			else if (atom instanceof ICFBamInt16ColObj col) {
 				tbl = col.getRequiredContainerTable();
@@ -3699,7 +3666,7 @@ public class MSSBamCFAnyObj
 			else {
 			}
 			if (tbl != null) {
-				return( isSpecificallyPrivate(tbl));
+				return(isSpecificallyPrivate(tbl));
 			}
 			else {
 				return(false);
@@ -3711,86 +3678,83 @@ public class MSSBamCFAnyObj
 			}
 			ICFBamTableObj tbl = col.getRequiredContainerTable();
 			if (tbl != null) {
-				return( isSpecificallyPrivate(tbl));
+				return(isSpecificallyPrivate(tbl));
 			}
 			else {
 				return(false);
 			}
 		}
-		else if(what instanceof ICFBamIndexColObj col) {
+		else if (what instanceof ICFBamIndexColObj col) {
 			return(isSpecificallyPrivate(col.getRequiredLookupColumn()));
 		}
-		else if(what instanceof ICFBamRelationColObj col) {
+		else if (what instanceof ICFBamRelationColObj col) {
 			return(isSpecificallyPrivate(col.getRequiredLookupFromCol()) || isSpecificallyPrivate(col.getRequiredLookupToCol()));
 		}
-		else if(what instanceof ICFBamIndexObj idx) {
+		else if (what instanceof ICFBamIndexObj idx) {
 			ICFBamTableObj tbl = idx.getRequiredContainerTable();
-			if( idx == tbl.getPrimaryKeyIndex()) {
-				return(isSpecificallyPrivate(tbl));
-			}
-			switch(idx.getRequiredCodeVis()) {
-				case ICFBamSchema.CodeVisibilityEnum.Private:
-					if (!isIntermediatelyPrivate(tbl)) {
-						return(false);
-					}
-					else {
-						for (ICFBamIndexColObj col: idx.getOptionalComponentsColumns()) {
-							if (!isIntermediatelyPrivate(col.getRequiredLookupColumn())) {
-								return(false);
-							}
-						}
-						return(true);
-					}
-				default:
+			if (idx.getRequiredCodeVis() == ICFBamSchema.CodeVisibilityEnum.Private) {
+				if (!isPrivate(tbl)) {
 					return(false);
+				}
+				else {
+					for (ICFBamIndexColObj col: idx.getOptionalComponentsColumns()) {
+						if (!isPrivate(col.getRequiredLookupColumn())) {
+							return(false);
+						}
+					}
+					return(true);
+				}
+			}
+			else {
+				return(isSpecificallyPrivate(tbl));
 			}
 		}
 		else if(what instanceof ICFBamRelationObj reln) {
-			switch (reln.getRequiredCodeVis()) {
-				case ICFBamSchema.CodeVisibilityEnum.Private:
-					if(isIntermediatelyPrivate(reln.getRequiredContainerFromTable()) && isIntermediatelyPrivate(reln.getRequiredLookupToTable()) && isIntermediatelyPrivate(reln.getRequiredLookupFromIndex()) && isIntermediatelyPrivate(reln.getRequiredLookupToIndex())) {
-						return(true);
-					}
-					else {
-						return(false);
-					}
-				default:
+			if (reln.getRequiredCodeVis() == ICFBamSchema.CodeVisibilityEnum.Private) {
+				if (isPrivate(reln.getRequiredContainerFromTable()) && isPrivate(reln.getRequiredLookupToTable()) && isPrivate(reln.getRequiredLookupFromIndex()) && isPrivate(reln.getRequiredLookupToIndex())) {
+					return(true);
+				}
+				else {
 					return(false);
+				}
+			}
+			else {
+				return(isSpecificallyPrivate(reln.getRequiredContainerFromTable()));
 			}
 		}
 		else if(what instanceof ICFBamParamObj param) {
 			return(isSpecificallyPrivate(param.getRequiredContainerServerMeth()));
 		}
 		else if(what instanceof ICFBamServerMethodObj meth) {
-			switch (meth.getRequiredCodeVis()) {
-				case ICFBamSchema.CodeVisibilityEnum.Private:
-					if (!isIntermediatelyPrivate(meth.getRequiredContainerForTable())) {
+			if (meth.getRequiredCodeVis() == ICFBamSchema.CodeVisibilityEnum.Private) {
+				if (!isPrivate(meth.getRequiredContainerForTable())) {
+					return(false);
+				}
+				if (meth instanceof ICFBamServerObjFuncObj of) {
+					if (!isPrivate(of.getOptionalLookupRetTable())) {
 						return(false);
-					}
-					if (meth instanceof ICFBamServerObjFuncObj of) {
-						if (!isIntermediatelyPrivate(of.getOptionalLookupRetTable())) {
-							return(false);
-						}
-						else {
-							return(true);
-						}
-					}
-					else if (meth instanceof ICFBamServerListFuncObj of) {
-						if (!isIntermediatelyPrivate(of.getOptionalLookupRetTable())) {
-							return(false);
-						}
-						else {
-							return(true);
-						}
-					}
-					else if (meth instanceof ICFBamServerProcObj) {
-						return(true);
 					}
 					else {
+						return(true);
+					}
+				}
+				else if (meth instanceof ICFBamServerListFuncObj of) {
+					if (!isPrivate(of.getOptionalLookupRetTable())) {
 						return(false);
 					}
-				default:
+					else {
+						return(true);
+					}
+				}
+				else if (meth instanceof ICFBamServerProcObj) {
+					return(true);
+				}
+				else {
 					return(false);
+				}
+			}
+			else {
+				return(isSpecificallyPrivate(meth.getRequiredContainerForTable()));
 			}
 		}
 		else {
