@@ -117,8 +117,13 @@ public class MSSBamCFGenBindIsRelationInPrimaryIndex
 
 		// Check all the inherited defintions of the primary index, not just the one in the base table
 		ICFBamTableObj tbl = relnToCheck.getRequiredContainerFromTable();
+		ICFBamRelationObj superRelation = tbl.getSuperClassRelation();
+		while (superRelation != null) {
+			tbl = superRelation.getRequiredLookupToTable();
+		}
+		ICFBamIndexObj pidx = tbl.getPrimaryKeyIndex();
+		tbl = relnToCheck.getRequiredContainerFromTable();
 		do {
-			ICFBamIndexObj pidx = tbl.getPrimaryKeyIndex();
 			boolean anyColsMissing = false;
 			for (ICFBamRelationColObj col: relnToCheck.getOptionalComponentsColumns()) {
 				ICFBamValueObj fromcol = col.getRequiredLookupFromCol().getRequiredLookupColumn();
@@ -138,7 +143,7 @@ public class MSSBamCFGenBindIsRelationInPrimaryIndex
 			if (!anyColsMissing) {
 				return true;
 			}
-			ICFBamRelationObj superRelation = tbl.getSuperClassRelation();
+			superRelation = tbl.getSuperClassRelation();
 			if (superRelation != null) {
 				tbl = superRelation.getRequiredLookupToTable();
 			}
