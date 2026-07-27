@@ -120,6 +120,12 @@ public class MSSBamCFGenBindIsRelationInPrimaryIndex
 		ICFBamRelationObj superRelation = tbl.getSuperClassRelation();
 		while (superRelation != null) {
 			tbl = superRelation.getRequiredLookupToTable();
+			if (tbl != null) {
+				superRelation = tbl.getSuperClassRelation();
+			}
+			else {
+				superRelation = null;
+			}
 		}
 		ICFBamIndexObj pidx = tbl.getPrimaryKeyIndex();
 		tbl = relnToCheck.getRequiredContainerFromTable();
@@ -148,10 +154,9 @@ public class MSSBamCFGenBindIsRelationInPrimaryIndex
 				tbl = superRelation.getRequiredLookupToTable();
 			}
 			else {
-				break;
+				tbl = null;
 			}
-		} while (true);
+		} while (tbl != null);
 		return( false );
 	}
-
 }
