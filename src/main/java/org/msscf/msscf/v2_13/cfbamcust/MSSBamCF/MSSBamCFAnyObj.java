@@ -173,12 +173,7 @@ public class MSSBamCFAnyObj
 			}
 			else if(atom instanceof ICFBamEnumTypeObj) {
 			}
-			else if(what instanceof ICFBamEnumDefObj cur) {
-				return switch(cur.getRequiredCodeVis()) {
-					case null -> isCurPublic = isTriviallyPublic(cur.getRequiredContainerScope());
-					case ICFBamSchema.CodeVisibilityEnum.Public -> isCurPublic = isTriviallyPublic(cur.getRequiredContainerScope());
-					default -> isCurPublic = false;
-				};
+			else if(atom instanceof ICFBamEnumDefObj cur) {
 			}
 			else if (atom instanceof ICFBamInt16ColObj col) {
 				tbl = col.getRequiredContainerTable();
@@ -511,12 +506,7 @@ public class MSSBamCFAnyObj
 			}
 			else if(atom instanceof ICFBamEnumTypeObj) {
 			}
-			else if(what instanceof ICFBamEnumDefObj cur) {
-				return switch(cur.getRequiredCodeVis()) {
-					case null -> isCurPublic = isIntermediatelyPublic(cur.getRequiredContainerScope());
-					case ICFBamSchema.CodeVisibilityEnum.Public -> isCurPublic = isIntermediatelyPublic(cur.getRequiredContainerScope());
-					default -> isCurPublic = false;
-				};
+			else if(atom instanceof ICFBamEnumDefObj cur) {
 			}
 			else if (atom instanceof ICFBamInt16ColObj col) {
 				tbl = col.getRequiredContainerTable();
@@ -849,12 +839,7 @@ public class MSSBamCFAnyObj
 			}
 			else if(atom instanceof ICFBamEnumTypeObj) {
 			}
-			else if(what instanceof ICFBamEnumDefObj cur) {
-				return switch(cur.getRequiredCodeVis()) {
-					case null -> isCurPublic = isPublic(cur.getRequiredContainerScope());
-					case ICFBamSchema.CodeVisibilityEnum.Public -> isCurPublic = isPublic(cur.getRequiredContainerScope());
-					default -> isCurPublic = false;
-				};
+			else if(atom instanceof ICFBamEnumDefObj cur) {
 			}
 			else if (atom instanceof ICFBamInt16ColObj col) {
 				tbl = col.getRequiredContainerTable();
@@ -1183,13 +1168,7 @@ public class MSSBamCFAnyObj
 			}
 			else if(atom instanceof ICFBamEnumTypeObj) {
 			}
-			else if(what instanceof ICFBamEnumDefObj cur) {
-				return switch(cur.getRequiredCodeVis()) {
-					case null -> isCurProtected = isTriviallyProtected(cur.getRequiredContainerScope());
-					case ICFBamSchema.CodeVisibilityEnum.Public -> isCurProtected = isTriviallyProtected(cur.getRequiredContainerScope());
-					case ICFBamSchema.CodeVisibilityEnum.Protected -> isCurProtected = isTriviallyProtected(cur.getRequiredContainerScope());
-					default -> isCurProtected = false;
-				};
+			else if(atom instanceof ICFBamEnumDefObj cur) {
 			}
 			else if (atom instanceof ICFBamInt16ColObj col) {
 				tbl = col.getRequiredContainerTable();
@@ -1517,13 +1496,7 @@ public class MSSBamCFAnyObj
 			}
 			else if(atom instanceof ICFBamEnumTypeObj) {
 			}
-			else if(what instanceof ICFBamEnumDefObj cur) {
-				return switch(cur.getRequiredCodeVis()) {
-					case null -> isCurProtected = isIntermediatelyProtected(cur.getRequiredContainerScope());
-					case ICFBamSchema.CodeVisibilityEnum.Public -> isCurProtected = isIntermediatelyProtected(cur.getRequiredContainerScope());
-					case ICFBamSchema.CodeVisibilityEnum.Protected -> isCurProtected = isIntermediatelyProtected(cur.getRequiredContainerScope());
-					default -> isCurProtected = false;
-				};
+			else if(atom instanceof ICFBamEnumDefObj cur) {
 			}
 			else if (atom instanceof ICFBamInt16ColObj col) {
 				tbl = col.getRequiredContainerTable();
@@ -1861,13 +1834,7 @@ public class MSSBamCFAnyObj
 			}
 			else if(atom instanceof ICFBamEnumTypeObj) {
 			}
-			else if(what instanceof ICFBamEnumDefObj cur) {
-				return switch(cur.getRequiredCodeVis()) {
-					case null -> isCurProtected = isProtected(cur.getRequiredContainerScope());
-					case ICFBamSchema.CodeVisibilityEnum.Public -> isCurProtected = isProtected(cur.getRequiredContainerScope());
-					case ICFBamSchema.CodeVisibilityEnum.Protected -> isCurProtected = isProtected(cur.getRequiredContainerScope());
-					default -> isCurProtected = false;
-				};
+			else if(atom instanceof ICFBamEnumDefObj cur) {
 			}
 			else if (atom instanceof ICFBamInt16ColObj col) {
 				tbl = col.getRequiredContainerTable();
@@ -2179,8 +2146,7 @@ public class MSSBamCFAnyObj
 			else if(atom instanceof ICFBamEnumTypeObj cur) {
 				return(cur.getRequiredCodeVis() == ICFBamSchema.CodeVisibilityEnum.Protected);
 			}
-			else if(what instanceof ICFBamEnumDefObj cur) {
-				return(cur.getRequiredCodeVis() == ICFBamSchema.CodeVisibilityEnum.Protected);
+			else if(atom instanceof ICFBamEnumDefObj cur) {
 			}
 			else if (atom instanceof ICFBamInt16ColObj col) {
 				tbl = col.getRequiredContainerTable();
@@ -2502,8 +2468,7 @@ public class MSSBamCFAnyObj
 			else if(atom instanceof ICFBamEnumTypeObj cur) {
 				return(cur.getRequiredCodeVis() == ICFBamSchema.CodeVisibilityEnum.Private);
 			}
-			else if(what instanceof ICFBamEnumDefObj cur) {
-				return(cur.getRequiredCodeVis() == ICFBamSchema.CodeVisibilityEnum.Private);
+			else if(atom instanceof ICFBamEnumDefObj cur) {
 			}
 			else if (atom instanceof ICFBamInt16ColObj col) {
 				tbl = col.getRequiredContainerTable();
