@@ -284,9 +284,6 @@ public class MSSBamCFAnyObj
 			else {
 			}
 			if (tbl != null) {
-				if (inPrimaryIndexKey(tbl, atom)) {
-					isCurPublic = true;
-				}
 				if (isCurPublic) {
 					isCurPublic = isTriviallyPublic(tbl);
 				}
@@ -303,9 +300,6 @@ public class MSSBamCFAnyObj
 					isCurPublic = false;
 			}
 			ICFBamTableObj tbl = col.getRequiredContainerTable();
-			if (inPrimaryIndexKey(tbl, col)) {
-				isCurPublic = true;
-			}
 			if (isCurPublic) {
 				isCurPublic = isTriviallyPublic(tbl);
 			}
@@ -628,9 +622,6 @@ public class MSSBamCFAnyObj
 			else {
 			}
 			if (tbl != null) {
-				if (inPrimaryIndexKey(tbl, atom)) {
-					isCurPublic = true;
-				}
 				if (isCurPublic) {
 					isCurPublic = isTriviallyPublic(tbl);
 				}
@@ -647,9 +638,6 @@ public class MSSBamCFAnyObj
 					isCurPublic = false;
 			}
 			ICFBamTableObj tbl = col.getRequiredContainerTable();
-			if (inPrimaryIndexKey(tbl, col)) {
-				isCurPublic = true;
-			}
 			if (isCurPublic) {
 				isCurPublic = isTriviallyPublic(tbl);
 			}
@@ -972,9 +960,6 @@ public class MSSBamCFAnyObj
 			else {
 			}
 			if (tbl != null) {
-				if (inPrimaryIndexKey(tbl, atom)) {
-					isCurPublic = true;
-				}
 				if (isCurPublic) {
 					isCurPublic = isIntermediatelyPublic(tbl);
 				}
@@ -991,9 +976,6 @@ public class MSSBamCFAnyObj
 					isCurPublic = false;
 			}
 			ICFBamTableObj tbl = col.getRequiredContainerTable();
-			if (inPrimaryIndexKey(tbl, col)) {
-				isCurPublic = true;
-			}
 			if (isCurPublic) {
 				isCurPublic = isIntermediatelyPublic(tbl);
 			}
@@ -1313,9 +1295,6 @@ public class MSSBamCFAnyObj
 			else {
 			}
 			if (tbl != null) {
-				if (inPrimaryIndexKey(tbl, atom)) {
-					isCurProtected = true;
-				}
 				if (isCurProtected) {
 					isCurProtected = isTriviallyProtected(tbl);
 				}
@@ -1333,9 +1312,6 @@ public class MSSBamCFAnyObj
 					isCurProtected = false;
 			}
 			ICFBamTableObj tbl = col.getRequiredContainerTable();
-			if (inPrimaryIndexKey(tbl, col)) {
-				isCurProtected = true;
-			}
 			if (isCurProtected) {
 				isCurProtected = isTriviallyProtected(tbl);
 			}
@@ -1653,9 +1629,6 @@ public class MSSBamCFAnyObj
 			else {
 			}
 			if (tbl != null) {
-				if (inPrimaryIndexKey(tbl, atom)) {
-					isCurProtected = true;
-				}
 				if (isCurProtected) {
 					isCurProtected = isTriviallyProtected(tbl);
 				}
@@ -1673,9 +1646,6 @@ public class MSSBamCFAnyObj
 					isCurProtected = false;
 			}
 			ICFBamTableObj tbl = col.getRequiredContainerTable();
-			if (inPrimaryIndexKey(tbl, col)) {
-				isCurProtected = true;
-			}
 			if (isCurProtected) {
 				isCurProtected = isTriviallyProtected(tbl);
 			}
@@ -2003,9 +1973,6 @@ public class MSSBamCFAnyObj
 			else {
 			}
 			if (tbl != null) {
-				if (inPrimaryIndexKey(tbl, atom)) {
-					isCurProtected = true;
-				}
 				if (isCurProtected) {
 					isCurProtected = isIntermediatelyProtected(tbl);
 				}
@@ -2023,9 +1990,6 @@ public class MSSBamCFAnyObj
 					isCurProtected = false;
 			}
 			ICFBamTableObj tbl = col.getRequiredContainerTable();
-			if (inPrimaryIndexKey(tbl, col)) {
-				isCurProtected = true;
-			}
 			if (isCurProtected) {
 				isCurProtected = isIntermediatelyProtected(tbl);
 			}
