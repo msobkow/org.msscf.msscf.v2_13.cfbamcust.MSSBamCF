@@ -698,7 +698,7 @@ extends MssCFGelCompiler
 					ICFBamTableTweakObj rtweak = (ICFBamTableTweakObj)tweak;
 					if (rtweak.getRequiredName().equals(tweakName)) {
 						if (!arrTweaks.contains(rtweak)) {
-							arrTweaks.addFirst(rtweak);
+							arrTweaks.add(0,rtweak);
 						}
 					}
 				}
@@ -797,7 +797,7 @@ extends MssCFGelCompiler
 					ICFBamIndexTweakObj rtweak = (ICFBamIndexTweakObj)tweak;
 					if (rtweak.getRequiredName().equals(tweakName)) {
 						if (!arrTweaks.contains(rtweak)) {
-							arrTweaks.addFirst(rtweak);
+							arrTweaks.add(0,rtweak);
 						}
 					}
 				}
