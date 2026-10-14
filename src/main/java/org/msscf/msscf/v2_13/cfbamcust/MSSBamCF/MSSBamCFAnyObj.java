@@ -77,8 +77,7 @@ public class MSSBamCFAnyObj
 			ICFBamTableObj curTable = tbl;
 			while( curTable != null ) {
 				switch(curTable.getRequiredCodeVis()) {
-					case null:
-					case ICFBamSchema.CodeVisibilityEnum.Public: isCurPublic = true; break;
+					case Public: isCurPublic = true; break;
 					default: isCurPublic = false;
 				}
 				if (!isCurPublic) {
@@ -97,8 +96,7 @@ public class MSSBamCFAnyObj
 		else if (what instanceof ICFBamAtomObj atom) {
 			ICFBamTableObj tbl = null;
 			switch (atom.getRequiredCodeVis()) {
-				case null:
-				case ICFBamSchema.CodeVisibilityEnum.Public:
+				case Public:
 					isCurPublic = true;
 					break;
 				default:
@@ -287,8 +285,7 @@ public class MSSBamCFAnyObj
 		}
 		else if (what instanceof ICFBamTableColObj col) {
 			switch (col.getRequiredCodeVis()) {
-				case null:
-				case ICFBamSchema.CodeVisibilityEnum.Public:
+				case Public:
 					isCurPublic = true;
 					break;
 				default:
@@ -312,8 +309,7 @@ public class MSSBamCFAnyObj
 				return(isTriviallyPublic(tbl));
 			}
 			switch(idx.getRequiredCodeVis()) {
-				case null:
-				case ICFBamSchema.CodeVisibilityEnum.Public:
+				case Public:
 					if (!isTriviallyPublic(tbl)) {
 						return(false);
 					}
@@ -331,8 +327,7 @@ public class MSSBamCFAnyObj
 		}
 		else if(what instanceof ICFBamRelationObj reln) {
 			switch (reln.getRequiredCodeVis()) {
-				case null:
-				case ICFBamSchema.CodeVisibilityEnum.Public:
+				case Public:
 					if(isTriviallyPublic(reln.getRequiredContainerFromTable()) && isTriviallyPublic(reln.getRequiredLookupToTable()) && isTriviallyPublic(reln.getRequiredLookupFromIndex()) && isTriviallyPublic(reln.getRequiredLookupToIndex())) {
 //						for (ICFBamRelationColObj col: reln.getOptionalComponentsColumns()) {
 //							if (!isTriviallyPublic(col)) {
@@ -353,8 +348,7 @@ public class MSSBamCFAnyObj
 		}
 		else if(what instanceof ICFBamServerMethodObj meth) {
 			switch (meth.getRequiredCodeVis()) {
-				case null:
-				case ICFBamSchema.CodeVisibilityEnum.Public:
+				case Public:
 					if (!isTriviallyPublic(meth.getRequiredContainerForTable())) {
 						return(false);
 					}
@@ -430,8 +424,7 @@ public class MSSBamCFAnyObj
 		else if (what instanceof ICFBamAtomObj atom) {
 			ICFBamTableObj tbl = null;
 			switch (atom.getRequiredCodeVis()) {
-				case null:
-				case ICFBamSchema.CodeVisibilityEnum.Public:
+				case Public:
 					isCurPublic = true;
 					break;
 				default:
@@ -620,8 +613,7 @@ public class MSSBamCFAnyObj
 		}
 		else if (what instanceof ICFBamTableColObj col) {
 			switch (col.getRequiredCodeVis()) {
-				case null:
-				case ICFBamSchema.CodeVisibilityEnum.Public:
+				case Public:
 					isCurPublic = true;
 					break;
 				default:
@@ -645,8 +637,7 @@ public class MSSBamCFAnyObj
 				return(isTriviallyPublic(tbl));
 			}
 			switch(idx.getRequiredCodeVis()) {
-				case null:
-				case ICFBamSchema.CodeVisibilityEnum.Public:
+				case Public:
 					if (!isTriviallyPublic(tbl)) {
 						return(false);
 					}
@@ -664,8 +655,7 @@ public class MSSBamCFAnyObj
 		}
 		else if(what instanceof ICFBamRelationObj reln) {
 			switch (reln.getRequiredCodeVis()) {
-				case null:
-				case ICFBamSchema.CodeVisibilityEnum.Public:
+				case Public:
 					if(isTriviallyPublic(reln.getRequiredContainerFromTable()) && isTriviallyPublic(reln.getRequiredLookupToTable()) && isPublic(reln.getRequiredLookupFromIndex()) && isPublic(reln.getRequiredLookupToIndex())) {
 						for (ICFBamRelationColObj col: reln.getOptionalComponentsColumns()) {
 							if (!isIntermediatelyPublic(col)) {
@@ -686,8 +676,7 @@ public class MSSBamCFAnyObj
 		}
 		else if(what instanceof ICFBamServerMethodObj meth) {
 			switch (meth.getRequiredCodeVis()) {
-				case null:
-				case ICFBamSchema.CodeVisibilityEnum.Public:
+				case Public:
 					if (!isIntermediatelyPublic(meth.getRequiredContainerForTable())) {
 						return(false);
 					}
@@ -763,8 +752,7 @@ public class MSSBamCFAnyObj
 		else if (what instanceof ICFBamAtomObj atom) {
 			ICFBamTableObj tbl = null;
 			switch (atom.getRequiredCodeVis()) {
-				case null:
-				case ICFBamSchema.CodeVisibilityEnum.Public:
+				case Public:
 					isCurPublic = true;
 					break;
 				default:
@@ -953,8 +941,7 @@ public class MSSBamCFAnyObj
 		}
 		else if (what instanceof ICFBamTableColObj col) {
 			switch (col.getRequiredCodeVis()) {
-				case null:
-				case ICFBamSchema.CodeVisibilityEnum.Public:
+				case Public:
 					isCurPublic = true;
 					break;
 				default:
@@ -978,8 +965,7 @@ public class MSSBamCFAnyObj
 				return(isIntermediatelyPublic(tbl));
 			}
 			switch(idx.getRequiredCodeVis()) {
-				case null:
-				case ICFBamSchema.CodeVisibilityEnum.Public:
+				case Public:
 					if (!isIntermediatelyPublic(tbl)) {
 						return(false);
 					}
@@ -997,8 +983,7 @@ public class MSSBamCFAnyObj
 		}
 		else if(what instanceof ICFBamRelationObj reln) {
 			switch (reln.getRequiredCodeVis()) {
-				case null:
-				case ICFBamSchema.CodeVisibilityEnum.Public:
+				case Public:
 					if(isIntermediatelyPublic(reln.getRequiredContainerFromTable()) && isIntermediatelyPublic(reln.getRequiredLookupToTable()) && isPublic(reln.getRequiredLookupFromIndex()) && isPublic(reln.getRequiredLookupToIndex())) {
 						for (ICFBamRelationColObj col: reln.getOptionalComponentsColumns()) {
 							if (!isPublic(col)) {
@@ -1019,8 +1004,7 @@ public class MSSBamCFAnyObj
 		}
 		else if(what instanceof ICFBamServerMethodObj meth) {
 			switch (meth.getRequiredCodeVis()) {
-				case null:
-				case ICFBamSchema.CodeVisibilityEnum.Public:
+				case Public:
 					if (!isPublic(meth.getRequiredContainerForTable())) {
 						return(false);
 					}
@@ -1070,9 +1054,8 @@ public class MSSBamCFAnyObj
 			ICFBamTableObj curTable = tbl;
 			while( curTable != null ) {
 				switch(curTable.getRequiredCodeVis()) {
-					case null:
-					case ICFBamSchema.CodeVisibilityEnum.Public:
-					case ICFBamSchema.CodeVisibilityEnum.Protected: isCurProtected = true; break;
+					case Public:
+					case Protected: isCurProtected = true; break;
 					default: isCurProtected = false;
 				}
 				if (!isCurProtected) {
@@ -1091,9 +1074,8 @@ public class MSSBamCFAnyObj
 		else if (what instanceof ICFBamAtomObj atom) {
 			ICFBamTableObj tbl = null;
 			switch (atom.getRequiredCodeVis()) {
-				case null:
-				case ICFBamSchema.CodeVisibilityEnum.Public:
-				case ICFBamSchema.CodeVisibilityEnum.Protected:
+				case Public:
+				case Protected:
 					isCurProtected = true;
 					break;
 				default:
@@ -1282,9 +1264,8 @@ public class MSSBamCFAnyObj
 		}
 		else if (what instanceof ICFBamTableColObj col) {
 			switch (col.getRequiredCodeVis()) {
-				case null:
-				case ICFBamSchema.CodeVisibilityEnum.Public:
-				case ICFBamSchema.CodeVisibilityEnum.Protected:
+				case Public:
+				case Protected:
 					isCurProtected = true;
 					break;
 				default:
@@ -1308,9 +1289,8 @@ public class MSSBamCFAnyObj
 				return(isTriviallyProtected(tbl));
 			}
 			switch(idx.getRequiredCodeVis()) {
-				case null:
-				case ICFBamSchema.CodeVisibilityEnum.Public:
-				case ICFBamSchema.CodeVisibilityEnum.Protected:
+				case Public:
+				case Protected:
 					if (!isTriviallyProtected(tbl)) {
 						return(false);
 					}
@@ -1328,9 +1308,8 @@ public class MSSBamCFAnyObj
 		}
 		else if(what instanceof ICFBamRelationObj reln) {
 			switch (reln.getRequiredCodeVis()) {
-				case null:
-				case ICFBamSchema.CodeVisibilityEnum.Public:
-				case ICFBamSchema.CodeVisibilityEnum.Protected:
+				case Public:
+				case Protected:
 					if(isTriviallyProtected(reln.getRequiredContainerFromTable()) && isTriviallyProtected(reln.getRequiredLookupToTable()) && isTriviallyProtected(reln.getRequiredLookupFromIndex()) && isTriviallyProtected(reln.getRequiredLookupToIndex())) {
 						return(true);
 					}
@@ -1346,9 +1325,8 @@ public class MSSBamCFAnyObj
 		}
 		else if(what instanceof ICFBamServerMethodObj meth) {
 			switch (meth.getRequiredCodeVis()) {
-				case null:
-				case ICFBamSchema.CodeVisibilityEnum.Public:
-				case ICFBamSchema.CodeVisibilityEnum.Protected:
+				case Public:
+				case Protected:
 					if (!isTriviallyProtected(meth.getRequiredContainerForTable())) {
 						return(false);
 					}
@@ -1419,9 +1397,8 @@ public class MSSBamCFAnyObj
 		else if (what instanceof ICFBamAtomObj atom) {
 			ICFBamTableObj tbl = null;
 			switch (atom.getRequiredCodeVis()) {
-				case null:
-				case ICFBamSchema.CodeVisibilityEnum.Public:
-				case ICFBamSchema.CodeVisibilityEnum.Protected:
+				case Public:
+				case Protected:
 					isCurProtected = true;
 					break;
 				default:
@@ -1610,9 +1587,8 @@ public class MSSBamCFAnyObj
 		}
 		else if (what instanceof ICFBamTableColObj col) {
 			switch (col.getRequiredCodeVis()) {
-				case null:
-				case ICFBamSchema.CodeVisibilityEnum.Public:
-				case ICFBamSchema.CodeVisibilityEnum.Protected:
+				case Public:
+				case Protected:
 					isCurProtected = true;
 					break;
 				default:
@@ -1636,9 +1612,8 @@ public class MSSBamCFAnyObj
 				return(isTriviallyProtected(tbl));
 			}
 			switch(idx.getRequiredCodeVis()) {
-				case null:
-				case ICFBamSchema.CodeVisibilityEnum.Public:
-				case ICFBamSchema.CodeVisibilityEnum.Protected:
+				case Public:
+				case Protected:
 					if (!isTriviallyProtected(tbl)) {
 						return(false);
 					}
@@ -1656,9 +1631,8 @@ public class MSSBamCFAnyObj
 		}
 		else if(what instanceof ICFBamRelationObj reln) {
 			switch (reln.getRequiredCodeVis()) {
-				case null:
-				case ICFBamSchema.CodeVisibilityEnum.Public:
-				case ICFBamSchema.CodeVisibilityEnum.Protected:
+				case Public:
+				case Protected:
 					if(isTriviallyProtected(reln.getRequiredContainerFromTable()) && isTriviallyProtected(reln.getRequiredLookupToTable()) && isProtected(reln.getRequiredLookupFromIndex()) && isProtected(reln.getRequiredLookupToIndex())) {
 						for (ICFBamRelationColObj col: reln.getOptionalComponentsColumns()) {
 							if (!isIntermediatelyProtected(col)) {
@@ -1679,9 +1653,8 @@ public class MSSBamCFAnyObj
 		}
 		else if(what instanceof ICFBamServerMethodObj meth) {
 			switch (meth.getRequiredCodeVis()) {
-				case null:
-				case ICFBamSchema.CodeVisibilityEnum.Public:
-				case ICFBamSchema.CodeVisibilityEnum.Protected:
+				case Public:
+				case Protected:
 					if (!isIntermediatelyProtected(meth.getRequiredContainerForTable())) {
 						return(false);
 					}
@@ -1757,9 +1730,8 @@ public class MSSBamCFAnyObj
 		else if (what instanceof ICFBamAtomObj atom) {
 			ICFBamTableObj tbl = null;
 			switch (atom.getRequiredCodeVis()) {
-				case null:
-				case ICFBamSchema.CodeVisibilityEnum.Public:
-				case ICFBamSchema.CodeVisibilityEnum.Protected:
+				case Public:
+				case Protected:
 					isCurProtected = true;
 					break;
 				default:
@@ -1948,9 +1920,8 @@ public class MSSBamCFAnyObj
 		}
 		else if (what instanceof ICFBamTableColObj col) {
 			switch (col.getRequiredCodeVis()) {
-				case null:
-				case ICFBamSchema.CodeVisibilityEnum.Public:
-				case ICFBamSchema.CodeVisibilityEnum.Protected:
+				case Public:
+				case Protected:
 					isCurProtected = true;
 					break;
 				default:
@@ -1974,9 +1945,8 @@ public class MSSBamCFAnyObj
 				return(isIntermediatelyProtected(tbl));
 			}
 			switch(idx.getRequiredCodeVis()) {
-				case null:
-				case ICFBamSchema.CodeVisibilityEnum.Public:
-				case ICFBamSchema.CodeVisibilityEnum.Protected:
+				case Public:
+				case Protected:
 					if (!isIntermediatelyProtected(tbl)) {
 						return(false);
 					}
@@ -1994,9 +1964,8 @@ public class MSSBamCFAnyObj
 		}
 		else if(what instanceof ICFBamRelationObj reln) {
 			switch (reln.getRequiredCodeVis()) {
-				case null:
-				case ICFBamSchema.CodeVisibilityEnum.Public:
-				case ICFBamSchema.CodeVisibilityEnum.Protected:
+				case Public:
+				case Protected:
 					if(isIntermediatelyProtected(reln.getRequiredContainerFromTable()) && isIntermediatelyProtected(reln.getRequiredLookupToTable()) && isProtected(reln.getRequiredLookupFromIndex()) && isProtected(reln.getRequiredLookupToIndex())) {
 						for (ICFBamRelationColObj col: reln.getOptionalComponentsColumns()) {
 							if (!isProtected(col)) {
@@ -2017,9 +1986,8 @@ public class MSSBamCFAnyObj
 		}
 		else if(what instanceof ICFBamServerMethodObj meth) {
 			switch (meth.getRequiredCodeVis()) {
-				case null:
-				case ICFBamSchema.CodeVisibilityEnum.Public:
-				case ICFBamSchema.CodeVisibilityEnum.Protected:
+				case Public:
+				case Protected:
 					if (!isProtected(meth.getRequiredContainerForTable())) {
 						return(false);
 					}
