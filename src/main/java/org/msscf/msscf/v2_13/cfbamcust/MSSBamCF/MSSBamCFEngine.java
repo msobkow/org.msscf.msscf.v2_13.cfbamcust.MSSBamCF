@@ -59,7 +59,7 @@ public class MSSBamCFEngine
 	extends CFBamMssCFEngine
 {
 	public final static String		LinkName = "MSSBamCF";
-	public final static String		LinkVersion = "2.13.11195";
+	public final static String		LinkVersion = "2.13.42-alpha14-202610250200";
 
 	public final static String		GeneratorName = "MSS Code Factory";
 	public final static String		GeneratorVersion = LinkVersion;
