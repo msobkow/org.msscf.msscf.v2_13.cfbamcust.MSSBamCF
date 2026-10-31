@@ -341,8 +341,24 @@ public class MSSBamCFEngine
         ICFGenKbRuleCartObj ruleCart = getInternalRuleCart();
         ICFGenKbRuleTypeObj ruleTypeBind = getRuleTypeTableObj().readRuleTypeByNameIdx("Bind");
 
-		bind = new MSSBamCFGenBindIsPublic(this,
-			"any", null, "Object", "IsPublic");
+		bind = new MSSBamCFGenBindSchemaProjectName(this,
+			"any", null, "Object", "SchemaProjectName");
+        editBind = (ICFGenKbGenBindEditObj)(bind.beginEdit());
+        editBind.setRequiredContainerCartridge( ruleCart );
+        editBind.setRequiredLookupRuleType( ruleTypeBind );
+        editBind.create();
+        editBind = null;
+
+		bind = new MSSBamCFGenBindTopProjectMfgVersion(this,
+			"any", null, "Object", "TopProjectMfgVersion");
+        editBind = (ICFGenKbGenBindEditObj)(bind.beginEdit());
+        editBind.setRequiredContainerCartridge( ruleCart );
+        editBind.setRequiredLookupRuleType( ruleTypeBind );
+        editBind.create();
+        editBind = null;
+
+		bind = new MSSBamCFGenBindTopProjectDomainName(this,
+			"any", null, "Object", "TopProjectDomainName");
         editBind = (ICFGenKbGenBindEditObj)(bind.beginEdit());
         editBind.setRequiredContainerCartridge( ruleCart );
         editBind.setRequiredLookupRuleType( ruleTypeBind );
@@ -669,7 +685,7 @@ public class MSSBamCFEngine
         editBind.create();
         editBind = null;
 
-        bind = new MSSBamCFGenBindTopDomainName( this, 
+        bind = new MSSBamCFGenBindTopProjectDomainName( this, 
 	        "any", null, "Object", "TopDomainName" );
         editBind = (ICFGenKbGenBindEditObj)(bind.beginEdit());
         editBind.setRequiredContainerCartridge( ruleCart );

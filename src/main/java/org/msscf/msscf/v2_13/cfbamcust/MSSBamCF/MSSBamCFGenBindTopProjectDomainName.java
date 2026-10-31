@@ -46,17 +46,17 @@ package org.msscf.msscf.v2_13.cfbamcust.MSSBamCF;
 import org.msscf.msscf.v2_13.cflib.CFLib.*;
 import org.msscf.msscf.v2_13.cfcore.MssCF.*;
 
-public class MSSBamCFGenBindTopDomainName
+public class MSSBamCFGenBindTopProjectDomainName
 	extends MssCFGenBindObj
 {
 	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
 
-	public MSSBamCFGenBindTopDomainName() {
+	public MSSBamCFGenBindTopProjectDomainName() {
 		super();
 	}
 
-	public MSSBamCFGenBindTopDomainName(
+	public MSSBamCFGenBindTopProjectDomainName(
 		MSSBamCFEngine argSchema,
 		String toolset,
 		String scopeDefClassName,
@@ -85,12 +85,12 @@ public class MSSBamCFGenBindTopDomainName
 				"genContext.GenDef" );
 		}
 
-		String retval = MSSBamCFAnyObj.getTopDomainName(genDef);
+		String retval = MSSBamCFAnyObj.getTopProjectDomainName(genDef);
 		if (retval == null || retval.isEmpty() || retval.isBlank()) {
 			throw new CFLibNullArgumentException( getClass(),
 				S_ProcName,
 				0,
-				"getTopDomainName(genContext.GenDef)" );
+				"getTopProjectDomainName(genContext.GenDef)" );
 		}
 
 		return (retval);

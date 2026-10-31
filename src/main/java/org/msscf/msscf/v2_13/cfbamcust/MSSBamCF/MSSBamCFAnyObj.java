@@ -49,10 +49,163 @@ import org.msscf.msscf.v2_13.cfbam.CFBam.ICFBamSchema.RelationTypeEnum;
 import org.msscf.msscf.v2_13.cflib.CFLib.*;
 import org.msscf.msscf.v2_13.cfbam.CFBam.ICFBamSchema;
 import org.msscf.msscf.v2_13.cfbam.CFBamObj.*;
+import org.msscf.msscf.v2_13.cfint.CFIntObj.ICFIntMajorVersionObj;
+import org.msscf.msscf.v2_13.cfint.CFIntObj.ICFIntMinorVersionObj;
+import org.msscf.msscf.v2_13.cfint.CFIntObj.ICFIntSubProjectObj;
+import org.msscf.msscf.v2_13.cfint.CFIntObj.ICFIntTldObj;
+import org.msscf.msscf.v2_13.cfint.CFIntObj.ICFIntTopDomainObj;
+import org.msscf.msscf.v2_13.cfint.CFIntObj.ICFIntTopProjectObj;
 
 public class MSSBamCFAnyObj
 {
 	public MSSBamCFAnyObj() {
+	}
+
+	public static String getTopProjectDomainName(ICFLibAnyObj obj) {
+		if (obj == null) {
+			return(null);
+		}
+		while (!(obj instanceof ICFBamTopProjectObj)) {
+			if (obj instanceof ICFBamTenantObj) {
+				return(null);
+			}
+			obj = obj.getObjScope();
+			if (obj == null) {
+				return(null);
+			}
+		}
+		ICFBamTopProjectObj tproj = (ICFBamTopProjectObj)obj;
+		ICFIntTopDomainObj tdom = tproj.getRequiredContainerParentSDom();
+		if (tdom == null) {
+			return(null);
+		}
+		ICFIntTldObj tld = tdom.getRequiredContainerParentTld();
+		if (tld == null) {
+			return(null);
+		}
+		String tprojName = tproj.getRequiredName();
+		if (tprojName == null || tprojName.isEmpty() || tprojName.isBlank()) {
+			return(null);
+		}
+		String tdomName = tdom.getRequiredName();
+		if (tdomName == null || tdomName.isEmpty() || tdomName.isBlank()) {
+			return(null);
+		}
+		String tldName = tld.getRequiredName();
+		if (tldName == null || tldName.isEmpty() || tldName.isBlank()) {
+			return(null);
+		}
+		StringBuilder bldr = new StringBuilder();
+		bldr.append(tldName.toLowerCase());
+		bldr.append('.');
+		bldr.append(tdomName.toLowerCase());
+		bldr.append('.');
+		bldr.append(tprojName.toLowerCase());
+		return(bldr.toString());
+	}
+
+	public static String getTopProjectMfgVersion(ICFLibAnyObj obj) {
+		if (obj == null) {
+			return(null);
+		}
+		while (!(obj instanceof ICFBamMinorVersionObj)) {
+			if (obj instanceof ICFBamTenantObj) {
+				return(null);
+			}
+			obj = obj.getObjScope();
+			if (obj == null) {
+				return(null);
+			}
+		}
+		ICFBamMinorVersionObj minor = (ICFBamMinorVersionObj)obj;
+		ICFIntMajorVersionObj major = minor.getRequiredContainerParentMajVer();
+		if (major == null) {
+			return(null);
+		}
+		ICFIntSubProjectObj sproj = major.getRequiredContainerParentSPrj();
+		if (sproj == null) {
+			return(null);
+		}
+		ICFIntTopProjectObj tproj = sproj.getRequiredContainerParentTPrj();
+		if (tproj == null) {
+			return(null);
+		}
+		String minorName = minor.getRequiredName();
+		if (minorName == null || minorName.isEmpty() || minorName.isBlank()) {
+			return(null);
+		}
+		String majorName = major.getRequiredName();
+		if (majorName == null || majorName.isEmpty() || majorName.isBlank()) {
+			return(null);
+		}
+		String tprojName = tproj.getRequiredName();
+		if (tprojName == null || tprojName.isEmpty() || tprojName.isBlank()) {
+			return(null);
+		}
+		StringBuilder bldr = new StringBuilder();
+		bldr.append(tprojName.toLowerCase());
+		bldr.append("-v");
+		bldr.append(majorName.toLowerCase());
+		bldr.append('_');
+		bldr.append(minorName.toLowerCase());
+		return(bldr.toString());
+	}
+
+	public static String getSchemaProjectName(ICFLibAnyObj obj) {
+		if (obj == null) {
+			return(null);
+		}
+		while (!(obj instanceof ICFBamSchemaDefObj)) {
+			if (obj instanceof ICFBamTenantObj) {
+				return(null);
+			}
+			obj = obj.getObjScope();
+			if (obj == null) {
+				return(null);
+			}
+		}
+		ICFBamSchemaDefObj schema = (ICFBamSchemaDefObj)obj;
+		ICFIntMinorVersionObj minor = schema.getRequiredContainerMinorVersion();
+		if (minor == null) {
+			return(null);
+		}
+		ICFIntMajorVersionObj major = minor.getRequiredContainerParentMajVer();
+		if (major == null) {
+			return(null);
+		}
+		ICFIntSubProjectObj sproj = major.getRequiredContainerParentSPrj();
+		if (sproj == null) {
+			return(null);
+		}
+		ICFIntTopProjectObj tproj = sproj.getRequiredContainerParentTPrj();
+		if (tproj == null) {
+			return(null);
+		}
+		String schemaName = schema.getRequiredName();
+		if (schemaName == null || schemaName.isEmpty() || schemaName.isBlank()) {
+			return(null);
+		}
+		String minorName = minor.getRequiredName();
+		if (minorName == null || minorName.isEmpty() || minorName.isBlank()) {
+			return(null);
+		}
+		String majorName = major.getRequiredName();
+		if (majorName == null || majorName.isEmpty() || majorName.isBlank()) {
+			return(null);
+		}
+		String tprojName = tproj.getRequiredName();
+		if (tprojName == null || tprojName.isEmpty() || tprojName.isBlank()) {
+			return(null);
+		}
+		StringBuilder bldr = new StringBuilder();
+		bldr.append(tprojName.toLowerCase());
+		bldr.append("-v");
+		bldr.append(majorName.toLowerCase());
+		bldr.append('_');
+		bldr.append(minorName.toLowerCase());
+		bldr.append('-');
+		bldr.append(schemaName.toLowerCase());
+		return(bldr.toString());
 	}
 
 	public static boolean inPrimaryIndexKey(ICFBamTableObj tbl, ICFBamValueObj value) {
